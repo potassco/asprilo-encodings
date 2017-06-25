@@ -17,14 +17,13 @@ deliverAfter(R,S,t) :- deliverAfter(R,S,t+1).
 :- pickup(R,S,t),  not deliverAfter(R,S,t  ).                                           % works because pickup cannot be last action ;)
 *%
 %% :- deliver(R,P,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0, carries(R,S,T).
+%% :-  pickup(R,S,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0.
 #external      putdown(R,S,t+1) : isRobot(R), isShelf(S).
 #external putdownAfter(R,S,t+1) : isRobot(R), isShelf(S).
 
 putdownAfter(R,S,t) :-      putdown(R,S,t+1).
 putdownAfter(R,S,t) :- putdownAfter(R,S,t+1).
-:- deliver(R,P,t), carries(R,S,t), not putdownAfter(R,S,t).                                 % works because deliver cannot be last action ;)
-%*
-%% :-  pickup(R,S,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0.
 
-TODO
-*%
+ :- deliver(R,P,t), carries(R,S,t), not putdownAfter(R,S,t).                             % works because deliver cannot be last action ;)
+%:-  pickup(R,S,t),                 not putdownAfter(R,S,t).
+
