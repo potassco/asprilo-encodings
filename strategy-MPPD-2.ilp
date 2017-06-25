@@ -7,14 +7,14 @@
  :- putdown(R,t), { deliver(R,T') : T' < t, T' > 0 } = 0.	
 %% :-    move(R,t), { deliver(R,T') : T'!= t, time(T') } = 0.
 
-#external deliver(R,t+1) : isRobot(R).
-#external deliverAfter(t+1).
-deliverAfter(t) :- deliver(R,t+1).
-deliverAfter(t) :- deliverAfter(t+1).
-:- pickup(R,t), not deliverAfter(t). % works because pickup cannot be last action ;)
+#external deliver(R,t+1)      : isRobot(R).
+#external deliverAfter(R,t+1) : isRobot(R).
+deliverAfter(R,t) :- deliver(R,t+1).
+deliverAfter(R,t) :- deliverAfter(R,t+1).
+:- pickup(R,t), not deliverAfter(R,t). % works because pickup cannot be last action ;)
 
-#external putdown(R,t+1) : isRobot(R).
-#external putdownAfter(t+1).
-putdownAfter(t) :- putdown(R,t+1).
-putdownAfter(t) :- putdownAfter(t+1).
-:- deliver(R,t), not putdownAfter(t). % works because pickup cannot be last action ;)
+#external putdown(R,t+1)      : isRobot(R).
+#external putdownAfter(R,t+1) : isRobot(R).
+putdownAfter(R,t) :- putdown(R,t+1).
+putdownAfter(R,t) :- putdownAfter(R,t+1).
+:- deliver(R,t), not putdownAfter(R,t). % works because pickup cannot be last action ;)

@@ -1,20 +1,30 @@
 
 #program step(t).
 
-%% :-  pickup(R,_,t), { deliver(R,_,T') : T' > t, time(T') } = 0. % external chaining, see below
- :- deliver(R,_,t), {  pickup(R,_,T') : T' < t, T' > 0 } = 0.
-%% :- deliver(R,_,t), { putdown(R,_,T') : T' > t, time(T') } = 0. % external chaining, see below
- :- putdown(R,_,t), { deliver(R,_,T') : T' < t, T' > 0 } = 0.	
-%% :-    move(R,_,t), { deliver(R,_,T') : T'!= t, time(T') } = 0.
 
-#external deliver(R,P,t+1) : isRobot(R), isStation(P).
-#external deliverAfter(t+1).
-deliverAfter(t) :- deliver(R,_,t+1).
-deliverAfter(t) :- deliverAfter(t+1).
-:- pickup(R,_,t), not deliverAfter(t). % works because pickup cannot be last action ;)
+ :- deliver(R,P,t), {  pickup(R,S,T') : T' < t, T' > 0                  } = 0, carries(R,S,T).
+ :- putdown(R,S,t), { deliver(R,P,T') : T' < t, T' > 0, carries(R,S,T') } = 0.	
+ :- putdown(R,S,t), {  pickup(R,S,T') : T' < t, T' > 0                  } = 0.
 
-#external putdown(R,S,t+1) : isRobot(R), isShelf(S).
-#external putdownAfter(t+1).
-putdownAfter(t) :- putdown(R,_,t+1).
-putdownAfter(t) :- putdownAfter(t+1).
-:- deliver(R,_,t), not putdownAfter(t). % works because deliver cannot be last action ;)
+%*
+%% :-  pickup(R,S,T), { deliver(R,P,T') : T' > T, carries(R,S,T'), time(T') } = 0.
+#external      deliver(R,P,t+1) : isRobot(R), isStation(P).
+#external deliverAfter(R,S,t+1) : isRobot(R), isShelf(S).
+#external      carries(R,S,t+1) : isRobot(R), isShelf(S).
+
+deliverAfter(R,S,t) :-      deliver(R,P,t+1), carries(R,S,t+1).
+deliverAfter(R,S,t) :- deliverAfter(R,S,t+1).
+:- pickup(R,S,t),  not deliverAfter(R,S,t  ).                                           % works because pickup cannot be last action ;)
+*%
+%% :- deliver(R,P,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0, carries(R,S,T).
+#external      putdown(R,S,t+1) : isRobot(R), isShelf(S).
+#external putdownAfter(R,S,t+1) : isRobot(R), isShelf(S).
+
+putdownAfter(R,S,t) :-      putdown(R,S,t+1).
+putdownAfter(R,S,t) :- putdownAfter(R,S,t+1).
+:- deliver(R,P,t), carries(R,S,t), not putdownAfter(R,S,t).                                 % works because deliver cannot be last action ;)
+%*
+%% :-  pickup(R,S,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0.
+
+TODO
+*%
