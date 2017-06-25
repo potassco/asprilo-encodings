@@ -75,10 +75,10 @@ Encodings for asprilo environments
 
 ## _asprilo_ connectivity
 
-	* ~~The bash script **myasprilo** aims at~~
-      * ~~combining compatible files in a systematic way~~
+  * ~~The bash script **myasprilo** aims at~~
+    * ~~combining compatible files in a systematic way~~
 	  * ~~interface with **asprilo**'s visualizer~~
 	  * **broken**
-	* *Examples* connecting to _asprilo_ on the commandline
-	  * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. | head -n1 | visualizer -l examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp`
-	* **asprilo** is available at [github](https://github.com/potassco/asprilo)
+  * *Examples* connecting to _asprilo_ on the commandline
+	* `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. | head -n1 | visualizer -l examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp`
+  * **asprilo** is available at [github](https://github.com/potassco/asprilo)
