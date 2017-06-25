@@ -55,12 +55,19 @@ Encodings for asprilo environments
 
 ## Heuristics
 
-   * Keyword **heuristic** precedes files specifying heuristics with **cling**'s `#heursitic` directive
+   * Keyword **heuristic** precedes files specifying heuristics with **cling**'s `#heuristic` directive
    * *Example* **heuristic.ilp**, **heuristic.lp**
    * **experimental feature**
 
 ## Auxiliaries
+
   * files preceded with **show** provide `#show` statements for use with terminal output
+
+## Examples
+
+   * Some warehouse layouts merged with orders can be found in the directory `examples`
+   * Here are some exemplary calls
+	 * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
 
 ## _asprilo_ connectivity
 
