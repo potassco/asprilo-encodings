@@ -1,0 +1,60 @@
+#!/bin/bash
+
+SOLVER=clingo
+VISUALIZER=visualizer
+
+OPTIONS=""
+EXTENSION="lp"
+PLAN="asprilo.plan"
+REDIRECTION=0
+VISUALIZATION=0
+STRATEGY=0
+HEURISTIC=0
+
+while getopts ":iprvhsl:f:" OPT; do
+ case ${OPT} in
+ i ) echo "% Incremental mode"
+     EXTENSION="ilp"
+     ;;
+ p ) echo "% One plan only"
+     OPTIONS="$OPTIONS --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2"
+     ;;
+ r ) echo "% Redirect output to file"
+     REDIRECTION=1
+     ;;
+ v ) echo "% Visualize plan (from file)"
+     VISUALIZATION=1
+     ;;
+ s ) echo "% Including strategies"
+     STRATEGY=1
+     ;;
+ h ) echo "% Including heuristics"
+     HEURISTIC=1
+     ;;
+ l ) echo "% Setting horizon to $OPTARG"
+     OPTIONS="$OPTIONS -c horizon=$OPTARG"
+     ;;
+ f ) echo "% Set plan file to $OPTARG"
+     PLAN=$OPTARG
+     ;;
+ \?) echo "OOPS: Unknown option"
+     exit 0
+ esac
+done
+shift $(($OPTIND - 1))
+
+DESCRIPTION=asprilo.$EXTENSION
+       GOAL=asprilo-goal.$EXTENSION
+     OUTPUT=asprilo-output.$EXTENSION
+
+if [ "$STRATEGY"  = "0" ]; then STRATEGY="";  else  STRATEGY=asprilo-strategy.$EXTENSION;  fi
+if [ "$HEURISTIC" = "0" ]; then HEURISTIC=""; else HEURISTIC=asprilo-heuristic.$EXTENSION; fi
+if [ "$HEURISTIC" = "1" ]; then OPTIONS="$OPTIONS --heuristic=domain"; fi
+
+CALL="$SOLVER $DESCRIPTION $GOAL $OUTPUT $STRATEGY $HEURISTIC $OPTIONS $@"
+
+echo $CALL
+
+if [ $REDIRECTION   == 0 ]; then $CALL; else $CALL | head -n1 > $PLAN; fi
+
+if [ $VISUALIZATION != 0 ]; then $VISUALIZER -t $1 $PLAN; fi

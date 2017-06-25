@@ -1,0 +1,36 @@
+% --------------------------------------------------------------------------------
+% STRATEGIES
+
+#program step(t).
+
+%*
+#minimize{ t@3,R,t : move(R,t)    ;
+	   t@3,R,t : pickup(R,t)  ;
+ 	   t@3,R,t : putdown(R,t) ;
+ 	   t@3,R,t : deliver(R,t) }.
+
+wait(R,t) :- not pickup(R, t), not putdown(R, t), not deliver(R, t), not move(R, t), isRobot(R).
+
+straight(R,t) :- move(R,D,t), move(R,D,t-1).
+
+% #minimize{ 1@2,R,t : wait(R,t) }.
+#maximize{ 1@1,R,t : straight(R,t) }.
+*%
+
+%% :-  pickup(R,t), { deliver(R,T') : T' > t, time(T') } = 0. % external chaining, see below
+ :- deliver(R,t), {  pickup(R,T') : T' < t, T' > 0 } = 0.
+%% :- deliver(R,t), { putdown(R,T') : T' > t, time(T') } = 0. % external chaining, see below
+ :- putdown(R,t), { deliver(R,T') : T' < t, T' > 0 } = 0.	
+%% :-    move(R,t), { deliver(R,T') : T'!= t, time(T') } = 0.
+
+#external deliver(R,t+1) : isRobot(R).
+#external deliverAfter(t+1).
+deliverAfter(t) :- deliver(R,t+1).
+deliverAfter(t) :- deliverAfter(t+1).
+:- pickup(R,t), not deliverAfter(t). % works because pickup cannot be last action ;)
+
+#external putdown(R,t+1) : isRobot(R).
+#external putdownAfter(t+1).
+putdownAfter(t) :- putdown(R,t+1).
+putdownAfter(t) :- putdownAfter(t+1).
+:- deliver(R,t), not putdownAfter(t). % works because pickup cannot be last action ;)

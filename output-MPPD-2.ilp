@@ -1,0 +1,8 @@
+#show.
+
+#program check(t).
+
+#show occurs(object(robot,R), action(move,D),     t) :    move(robot(R),D,t).
+#show occurs(object(robot,R), action(pickup,()),  t) :  pickup(robot(R),  t).
+#show occurs(object(robot,R), action(putdown,()), t) : putdown(robot(R),  t).
+#show occurs(object(robot,R), action(deliver,()), t) : deliver(robot(R),  t).

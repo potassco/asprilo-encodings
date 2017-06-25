@@ -1,0 +1,5 @@
+#program step(t).
+
+#heuristic move(R,D,t) : position(R,C,t-1), nextto(C,D,C'), highway(C'). [2,factor]
+
+#heuristic move(R,D,t) : move(R,D,t-1). [2,factor]

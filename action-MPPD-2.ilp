@@ -1,0 +1,61 @@
+#include <incmode>.
+#include "./input.lp".
+
+% ================================================================================
+% ACTION DESCRIPTION
+
+
+
+
+direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
+nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
+
+#program step(t).
+
+ {    move(R,D,t) : direction(D);
+    pickup(R,  t)               ;
+   putdown(R,  t)               ;
+   deliver(R,  t)               } 1 :- isRobot(R).
+
+% - move/3 -----------------------------------------------------------------------
+   position(R,C',t) :- move(R,D,t),     position(R,C,t-1),     nextto(C,D,C').
+                    :- move(R,D,t),     position(R,C,t-1), not nextto(C,D,_ ).
+:- position(R,C',t),   move(R,D,t), not position(R,C,t-1),     nextto(C,D,C').
+
+% - pickup/2 ---------------------------------------------------------------------
+   carries(R,S, t) :- pickup(R,t),     position(R,C,t-1),   position(S,C,t-1),  isShelf(S).
+                   :- pickup(R,t),     carrying(R,  t-1).
+                   :- pickup(R,t),     position(R,C,t-1), { position(S,C,t-1) : isShelf(S) } = 0.
+:- carries(R,S, t),   pickup(R,t), not position(R,C,t-1),   position(S,C,t-1),  isShelf(S).
+
+% - putdown/2 --------------------------------------------------------------------
+   position(S,C, t) :- putdown(R,t),     position(R,C,t-1), carries(R,S,t-1).
+                    :- putdown(R,t), not carrying(R,  t-1).
+:- position(S,C, t),   putdown(R,t), not position(R,C,t-1), carries(R,S,t-1).
+
+% - deliver/2 --------------------------------------------------------------------
+   serves(R,P,t) :- deliver(R,t),     position(R,C,t-1),     position(P,C    ), isStation(P).
+                 :- deliver(R,t), not carrying(R,  t  ).
+                 :- deliver(R,t), {   position(R,C,t-1) :    position(P,C    ), isStation(P) } = 0.
+:- serves(R,P,t),   deliver(R,t),     position(R,C,t-1), not position(P,C    ), isStation(P).
+
+% - inertia ----------------------------------------------------------------------
+position(R,C,t) :- position(R,C,t-1), not    move(R,t), isRobot(R).
+position(S,C,t) :- position(S,C,t-1), not carried(S,t), isShelf(S).
+ carries(R,S,t) :- carries(R,S,t-1),  not putdown(R,t).
+
+% - (state) constraints -------------------------------------------------------------------
+ :- position(R, C, t-1), position(R, C',t), nextto(C,_,C'), R!=R',
+    position(R',C',t-1), position(R',C, t).
+
+% :- { position(R,C,t) : position(C)                                 } != 1, isRobot(R).
+ :- { position(R,C,t) : isRobot(R)                                  }  > 1, position(C).
+ :- { position(R,C,t) : carrying(R,t); position(S,C,t) : isShelf(S) }  > 1, position(C).
+
+% ================================================================================
+% AUXILIARIES
+
+move(R,t) :- move(R,_,t).
+
+carrying(R,t) :- carries(R,_,t).
+ carried(S,t) :- carries(_,S,t).

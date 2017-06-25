@@ -1,0 +1,7 @@
+#program check(t).
+
+:- highway(C), position(shelf(_),C,t).
+
+wait(R,t) :- not pickup(R, t), not putdown(R, t), not deliver(R, t), not move(R, t), isRobot(R).
+
+:- wait(R,t), position(R,C,t), highway(C).
