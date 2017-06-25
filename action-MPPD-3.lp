@@ -1,3 +1,4 @@
+
 #include "./input.lp".
 
 #const horizon=1.
@@ -42,12 +43,12 @@ position(S,C,T) :- position(S,C,T-1), not carries(_,S,T), isShelf(S), time(T).
  :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R!=R',
     position(R',C',T-1), position(R',C, T).
 
- :- { position(R,C,T) : isRobot(R)                                  }  > 1, position(C), time(T).
+ :- { position(R,C,T) : isRobot(R)                                   }  > 1, position(C), time(T).
  :- { position(R,C,T) : carries(R,_,T); position(S,C,T) : isShelf(S) }  > 1, position(C), time(T).
 %*
- :- { position(R,C,T) : position(C)                                 } != 1, isRobot(R), time(T).
- :- { position(R,C,T) ; position(R,C',T) : nextto(C,_,C')           } != 1, position(R,C,T-1), isRobot(R), time(T).
+ :- { position(R,C,T) : position(C)                                  } != 1, isRobot(R), time(T).
+ :- { position(R,C,T) ; position(R,C',T) : nextto(C,_,C')            } != 1, position(R,C,T-1), isRobot(R), time(T).
 
- :- { carries(R,S,T)  : isShelf(S)                                  }  > 1, isRobot(R), time(T).
- :- { carries(R,S,T)  : isRobot(R)                                  }  > 1, isShelf(S), time(T).
+ :- { carries(R,S,T)  : isShelf(S)                                   }  > 1, isRobot(R), time(T).
+ :- { carries(R,S,T)  : isRobot(R)                                   }  > 1, isShelf(S), time(T).
 *%
