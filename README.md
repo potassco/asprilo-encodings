@@ -65,13 +65,20 @@ Encodings for asprilo environments
 
 ## Examples
 
-   * Some warehouse layouts merged with orders can be found in the directory `examples`
-   * Here are some exemplary calls
-	 * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
+  * Some warehouse layouts merged with orders can be found in the directory `examples`
+  * Here are some exemplary calls
+	* `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
+	* `clingo  action-MPP-3.lp  strategy-MPP-3.lp  goal-MPP.lp show-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
+  * These examples produce plans ready for _asprilo_:
+      * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.`
+      * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. --out-ifs='\n'`
 
 ## _asprilo_ connectivity
 
-* The bash script **myasprilo** aims at
-    * combining compatible files in a systematic way
-    * interface with **asprilo**'s visualizer
-* **asprilo** is available at [github](https://github.com/potassco/asprilo)
+	* ~~The bash script **myasprilo** aims at~~
+      * ~~combining compatible files in a systematic way~~
+	  * ~~interface with **asprilo**'s visualizer~~
+	  * **broken**
+	* *Examples* connecting to _asprilo_ on the commandline
+	  * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. | head -n1 | visualizer -l examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp`
+	* **asprilo** is available at [github](https://github.com/potassco/asprilo)
