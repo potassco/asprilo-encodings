@@ -7,7 +7,7 @@ Encodings for asprilo environments
   * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
   * digits **2** and **3** indicated the arity of actions *pickup*, *putdown*, and *deliver*
   * file extensions *lp*, *ilp*, and *clp* stand for regular, incremental, and constraint logic programs
-  * omissions of such indicators ae treated liek wildcards
+  * omissions of such indicators are treated like wild-cards
 
 ## Compatibility
 
@@ -23,7 +23,7 @@ Encodings for asprilo environments
   * Keywords **input** and **output** precede files converting 
       * *asprilo* instances to the format used in action theories and 
       * the resulting plan into the format of *asprilo*
-  * *Example* **input.lp**, **outputM.lp**, **output-MPPD-2.ilp**, **output-MPPD-2.lp**, **output-MPPD-3.lp**
+  * *Example* **input.lp**, **output-M.lp**, **output-MPPD-2.ilp**, **output-MPPD-2.lp**, **output-MPPD-3.lp**
   
 ## Highways
 
@@ -33,24 +33,24 @@ Encodings for asprilo environments
 ## Goals
 
    * Keyword **goal** precedes files specifying goal conditions
-   * **Example** **goal.clp**, **goal.ilp**, **goal-M.lp**, **goal-MPPD.lp**, **goal-MPP.lp**
+   * *Example* **goal.clp**, **goal.ilp**, **goal-M.lp**, **goal-MPPD.lp**, **goal-MPP.lp**
 
 ## Quantities
 
    * Keyword **quantities** precedes files dealing with amounts of products
    * **Attention** This needs a constraint ASP solver like **clingcon**
-   * **Example** **quantities.clp**
+   * *Example* **quantities.clp**
 
 ## Strategies
 
    * Keyword **strategy** precedes files specifying strategies
-   * **Example** **strategy.ilp**, **strategy-MPP-3.lp**, **strategy-MPPD-2.lp**, **strategy-MPPD-3.lp**
-   * _Some stretegies may not work with all layouts!_
+   * *Example* **strategy.ilp**, **strategy-MPP-3.lp**, **strategy-MPPD-2.lp**, **strategy-MPPD-3.lp**
+   * _Some strategies may not work with all layouts!_
    
 ## Optimization
 
    * Keyword **optimization** precedes files specifying objective functions
-   * *Example* **optimization.lp**
+   * *Example* **optimization-2.ilp**, **optimization-2.lp**,  **optimization-3.ilp**,  **optimization-3.lp**
    * **experimental feature**
 
 ## Heuristics
