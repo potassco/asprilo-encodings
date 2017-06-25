@@ -13,6 +13,9 @@ deliRobot(R) :- isRobot(R), serves(R,_,T).
  :- deliver(R,T), {  pickup(R,T') : T' < T, time(T') } = 0.
  :- deliver(R,T), { putdown(R,T') : T' > T, time(T') } = 0.
  :- putdown(R,T), { deliver(R,T') : T' < T, time(T') } = 0.	
+%*
+ :-  pickup(R,T), { putdown(R,T') : T' > T, time(T') } = 0. 
+ :- putdown(R,T), {  pickup(R,T') : T' < T, time(T') } = 0.
 
-%:-    move(R,T), { deliver(R,T') : T'!= T, time(T') } = 0.
-
+ :-    move(R,T), { deliver(R,T') : T'!= T, time(T') } = 0.
+*%
