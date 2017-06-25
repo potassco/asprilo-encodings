@@ -1,7 +1,7 @@
 #show.
 %#show position/3.
 %#show serves/3.
-%#show carries/3.
+#show carries/3.
 
 #show move/3.
 #show deliver/3.
@@ -11,5 +11,6 @@
 %#show processed/1.
 %#show delivered/2.
 
-#show xxx/2.
+%#show xxx/1.
+%#show xxx/2.
 %#show yyy/3.
