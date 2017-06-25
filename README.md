@@ -72,7 +72,7 @@ Encodings for asprilo environments
   * These examples produce plans ready for _asprilo_:
       * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.`
       * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. --out-ifs='\n'`
-
+      * `clingo  action-MPP-3.lp  strategy-MPP-3.lp  goal-MPP.lp  output-MPP-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.` (this simulates a delivery action by including `compatibility-MPP+D-3.lp`)
 ## _asprilo_ connectivity
 
   * ~~The bash script **myasprilo** aims at~~

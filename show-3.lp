@@ -11,5 +11,5 @@
 %#show processed/1.
 %#show delivered/2.
 
-%#show xxx/3.
+#show xxx/2.
 %#show yyy/3.
