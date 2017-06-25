@@ -1,0 +1,20 @@
+
+#program step(t).
+
+%% :-  pickup(R,_,t), { deliver(R,_,T') : T' > t, time(T') } = 0. % external chaining, see below
+ :- deliver(R,_,t), {  pickup(R,_,T') : T' < t, T' > 0 } = 0.
+%% :- deliver(R,_,t), { putdown(R,_,T') : T' > t, time(T') } = 0. % external chaining, see below
+ :- putdown(R,_,t), { deliver(R,_,T') : T' < t, T' > 0 } = 0.	
+%% :-    move(R,_,t), { deliver(R,_,T') : T'!= t, time(T') } = 0.
+
+#external deliver(R,P,t+1) : isRobot(R), isStation(P).
+#external deliverAfter(t+1).
+deliverAfter(t) :- deliver(R,_,t+1).
+deliverAfter(t) :- deliverAfter(t+1).
+:- pickup(R,_,t), not deliverAfter(t). % works because pickup cannot be last action ;)
+
+#external putdown(R,S,t+1) : isRobot(R), isShelf(S).
+#external putdownAfter(t+1).
+putdownAfter(t) :- putdown(R,_,t+1).
+putdownAfter(t) :- putdownAfter(t+1).
+:- deliver(R,_,t), not putdownAfter(t). % works because deliver cannot be last action ;)
