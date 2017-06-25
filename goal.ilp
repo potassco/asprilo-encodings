@@ -8,5 +8,5 @@ processed(O,t) :- isOrder(O), delivered(O,A,t) : ordered(O,A).                  
 
 :- not processed(O,t), isOrder(O), query(t).
 
-:- carrying(R,t), isRobot(R), query(t).
+:- carries(R,_,t),                   isRobot(R), query(t).
 :- position(S,C), position(_,C,t), isStation(S), query(t).

@@ -1,12 +1,10 @@
 #show.
-#show position/3.
+%#show position/3.
 %#show serves/3.
-#show carries/3.
-%#show carried/2.
-%#show carrying/2.
+%#show carries/3.
 
-%#show move/3.
-%#show deliver/3.
+#show move/3.
+#show deliver/3.
 #show pickup/3.
 #show putdown/3.
 

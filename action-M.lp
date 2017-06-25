@@ -18,7 +18,7 @@ position(R,C,T) :- move(R,D,T),        position(R,C',T-1),     nextto(C',D,C).
                 :- move(R,D,T),        position(R,C ,T-1), not nextto(C ,D,_).
 
 % - inertia ---------------------------------------------------------------------
-position(R,C,T) :- position(R,C,T-1), not    move(R,T), isRobot(R), time(T).
+position(R,C,T) :- position(R,C,T-1), not move(R,_,T), isRobot(R), time(T).
 
 % - (state) constraints ---------------------------------------------------------
  :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R!=R',
@@ -29,7 +29,3 @@ position(R,C,T) :- position(R,C,T-1), not    move(R,T), isRobot(R), time(T).
  :- { position(R,C,T) : position(C)                                 } != 1, isRobot(R), time(T).
  :- { position(R,C,T) ; position(R,C',T) : nextto(C,_,C')           } != 1, position(R,C,T-1), isRobot(R), time(T).
 *%
-% ===============================================================================
-% AUXILIARIES
-
-move(R,T) :- move(R,_,T).

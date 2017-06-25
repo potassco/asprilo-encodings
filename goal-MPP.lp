@@ -8,5 +8,5 @@ processed(O  ) :- isOrder(O), delivered(O,A) : ordered(O,A).                    
 
 :- not processed(O), isOrder(O).
 
-:- carrying(R,horizon), isRobot(R).
+:- carries(R,_,horizon),                   isRobot(R).
 :- position(P,C), position(_,C,horizon), isStation(P).

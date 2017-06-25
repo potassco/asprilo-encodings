@@ -2,7 +2,6 @@
 % #show position/3.
 %#show serves/3.
 %#show carries/3.
-%#show carrying/2.
 
 #show move/3.
 #show deliver/2.
