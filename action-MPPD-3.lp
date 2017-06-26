@@ -21,13 +21,13 @@ position(R,C,T) :- move(R,D,T),        position(R,C',T-1),     nextto(C',D,C).
 % - pickup/3 --------------------------------------------------------------------
  carries(R,S,T) :- pickup(R,S,T),      position(R,C,T-1), position(S,C ,T-1).
                 :- pickup(R,S,T),       carries(R,_,T-1).
-                :- pickup(R,S,T),       carries(_,S,T-1).
+                :- pickup(R,S,T),       carries(_,S,T-1).                                                    % NEEDED!?
                 :- pickup(R,S,T),      position(R,C,T-1), position(S,C',T-1), C != C'.
 
 % - putdown/3 -------------------------------------------------------------------
-position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),  carries(R,S ,T-1).
-                :- putdown(R,S,T), not  carries(R,S,T-1).
-                :- putdown(R,S,T),     position(R,C,T  ), position(S,C',T  ), C != C'. % PERFORMANCE!
+position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),      carries(R,S ,T-1).
+                :- putdown(R,S,T),                        not  carries(R,S ,T-1).
+                :- putdown(R,S,T),     position(R,C,T  ),     position(S,C',T  ), C != C'.                   % PERFORMANCE!
 
 % - deliver/3 -------------------------------------------------------------------
   serves(R,P,T) :- deliver(R,P,T),     position(R,C,T-1), position(P,C ).

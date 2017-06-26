@@ -3,6 +3,7 @@
 
 
 
+
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
 nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
 
@@ -24,13 +25,13 @@ position(R,C,t) :- move(R,D,t),        position(R,C',t-1),     nextto(C',D,C).
                 :- pickup(R,S,t),      position(R,C,t-1), position(S,C',t-1), C != C'.
 
 % - putdown/3 -------------------------------------------------------------------
-position(S,C,t) :- putdown(R,S,t),     position(R,C,t-1),       carries(R,S,t-1).
-                :- putdown(R,S,t),                        not   carries(R,S,t-1).
-                :- putdown(R,S,t), not position(R,C,t-1),      position(S,C,t).
+position(S,C,t) :- putdown(R,S,t),     position(R,C,t-1),       carries(R,S ,t-1).
+                :- putdown(R,S,t),                        not   carries(R,S ,t-1).
+                :- putdown(R,S,t),     position(R,C,t  ),      position(S,C',t  ), C != C'.
 
 % - deliver/3 -------------------------------------------------------------------
   serves(R,P,t) :- deliver(R,P,t),     position(R,C,t-1), position(P,C ).
-                :- deliver(R,P,t), not  carries(R,_,t  ).
+                :- deliver(R,P,t), not  carries(R,_,t-1).
                 :- deliver(R,P,t),     position(R,C,t-1), position(P,C'), C != C'.
 
 % - inertia ---------------------------------------------------------------------
