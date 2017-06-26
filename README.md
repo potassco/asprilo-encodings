@@ -33,7 +33,7 @@ Encodings for asprilo environments
 ## Goals
 
    * Keyword **goal** precedes files specifying goal conditions
-   * *Example* **goal.clp**, **goal.ilp**, **goal-M.lp**, **goal-MPPD.lp**, **goal-MPP.lp**
+   * *Example* **goal.clp**, **goal-MPPD.ilp**, **goal-M.lp**, **goal-MPPD.lp**, (~~**goal-MPP.lp**~~ obsolete)
 
 ## Quantities
 
