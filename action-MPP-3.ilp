@@ -29,7 +29,7 @@ position(S,C,t) :- putdown(R,S,t),     position(R,C,t-1),       carries(R,S ,t-1
                 :- putdown(R,S,t),     position(R,C,t  ),      position(S,C',t  ), C != C'.
 
 % - serving ---------------------------------------------------------------------
-serves(R,S,P,t) :- position(R,C,t),     carries(R,S,t  ),      position(P,C).
+serves(R,P,t) :- position(R,C,t),      position(P,C).
 
 % - inertia ---------------------------------------------------------------------
 position(R,C,t) :- position(R,C,t-1), not    move(R,_,t), isRobot(R).

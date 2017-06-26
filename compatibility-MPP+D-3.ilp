@@ -1,5 +1,5 @@
 #program check(t).
 
- :- not serves(R,_,_,t-2), serves(R,_,_,t-1), { pickup(R,_,t); putdown(R,_,t); move(R,_,t) } > 0.
+ :- not serves(R,_,t-2), serves(R,_,t-1), { pickup(R,_,t); putdown(R,_,t); move(R,_,t) } > 0.
 
-deliver(R,P,t) :- not serves(R,_,P,t-2), serves(R,_,P,t-1).
+deliver(R,P,t) :- not serves(R,P,t-2), serves(R,P,t-1).
