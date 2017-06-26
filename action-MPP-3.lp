@@ -24,9 +24,9 @@ position(R,C,T) :- move(R,D,T),        position(R,C',T-1),     nextto(C',D,C).
                 :- pickup(R,S,T),      position(R,C,T-1), position(S,C',T-1), C != C'.
 
 % - putdown/3 -------------------------------------------------------------------
-position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),      carries(R,S,T-1).
-                :- putdown(R,S,T),                        not  carries(R,S,T-1).
-                :- putdown(R,S,T), not position(R,C,T-1),     position(S,C,T).
+position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),      carries(R,S ,T-1).
+                :- putdown(R,S,T),                        not  carries(R,S ,T-1).
+                :- putdown(R,S,T),     position(R,C,T  ),     position(S,C',T  ), C != C'.
 
 % - serving ---------------------------------------------------------------------
 serves(R,S,P,T) :- position(R,C,T),     carries(R,S,T  ),     position(P,C).
@@ -37,7 +37,7 @@ position(S,C,T) :- position(S,C,T-1), not carries(_,S,T), isShelf(S), time(T).
  carries(R,S,T) :-  carries(R,S,T-1), not putdown(R,_,T),             time(T).
 
 % - (state) constraints ---------------------------------------------------------
- :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R!=R',
+ :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R != R',
     position(R',C',T-1), position(R',C, T).
 
  :- { position(R,C,T) : isRobot(R)                                   }  > 1, position(C), time(T).
