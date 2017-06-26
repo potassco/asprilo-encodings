@@ -1,4 +1,5 @@
 #show.
+#show init/2.
 
 
 
@@ -6,3 +7,5 @@
 #show occurs(object(robot,R), action(pickup,()),  T) :  pickup(robot(R),  T).
 #show occurs(object(robot,R), action(putdown,()), T) : putdown(robot(R),  T).
 #show occurs(object(robot,R), action(deliver,()), T) : deliver(robot(R),  T).
+
+

@@ -1,6 +1,8 @@
 #show.
 #show init/2.
 
+#include "./compatibility-MPP+D-3.ilp".
+
 #program check(t).
 
 #show occurs(object(robot,R), action(move,D),     t) :    move(robot(R),D,t).

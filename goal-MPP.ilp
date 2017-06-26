@@ -1,0 +1,12 @@
+
+#program check(t).
+
+delivered(O,A,t) :- ordered(O,A), target(O,P), onShelf(A,S), serves(R,S,P,t).               % No resources
+delivered(O,A,t) :- delivered(O,A,t-1).
+
+processed(O,t) :- isOrder(O), delivered(O,A,t) : ordered(O,A).                              % No ordering
+
+:- not processed(O,t), isOrder(O), query(t).
+
+:- carries(R,_,t),                   isRobot(R), query(t).
+:- position(S,C), position(_,C,t), isStation(S), query(t).

@@ -1,3 +1,4 @@
+
 #include "./input.lp".
 
 #const horizon=1.
@@ -17,18 +18,18 @@ position(R,C,T) :- move(R,D,T),        position(R,C',T-1),     nextto(C',D,C).
                 :- move(R,D,T),        position(R,C ,T-1), not nextto(C ,D,_).
 
 % - pickup/3 --------------------------------------------------------------------
- carries(R,S,T) :- pickup(R,S,T),      position(R,C,T-1), position(S,C,T-1).
+ carries(R,S,T) :- pickup(R,S,T),      position(R,C,T-1), position(S,C ,T-1).
                 :- pickup(R,S,T),       carries(R,_,T-1).
                 :- pickup(R,S,T),       carries(_,S,T-1).
                 :- pickup(R,S,T),      position(R,C,T-1), position(S,C',T-1), C != C'.
 
 % - putdown/3 -------------------------------------------------------------------
-position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1), carries(R,S,T-1).
-                :- putdown(R,S,T), not  carries(R,S,T-1).
-                :- putdown(R,S,T), not position(R,C,T-1), position(S,C,T).
+position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),      carries(R,S,T-1).
+                :- putdown(R,S,T),                        not  carries(R,S,T-1).
+                :- putdown(R,S,T), not position(R,C,T-1),     position(S,C,T).
 
 % - serving ---------------------------------------------------------------------
-serves(R,S,P,T) :- position(R,C,T),     carries(R,S,T  ), position(P,C).
+serves(R,S,P,T) :- position(R,C,T),     carries(R,S,T  ),     position(P,C).
 
 % - inertia ---------------------------------------------------------------------
 position(R,C,T) :- position(R,C,T-1), not    move(R,_,T), isRobot(R), time(T).
@@ -39,12 +40,12 @@ position(S,C,T) :- position(S,C,T-1), not carries(_,S,T), isShelf(S), time(T).
  :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R!=R',
     position(R',C',T-1), position(R',C, T).
 
- :- { position(R,C,T) : isRobot(R)                                  }  > 1, position(C), time(T).
+ :- { position(R,C,T) : isRobot(R)                                   }  > 1, position(C), time(T).
  :- { position(R,C,T) : carries(R,_,T); position(S,C,T) : isShelf(S) }  > 1, position(C), time(T).
 %*
- :- { position(R,C,T) : position(C)                                 } != 1, isRobot(R), time(T).
- :- { position(R,C,T) ; position(R,C',T) : nextto(C,_,C')           } != 1, position(R,C,T-1), isRobot(R), time(T).
+ :- { position(R,C,T) : position(C)                                  } != 1, isRobot(R), time(T).
+ :- { position(R,C,T) ; position(R,C',T) : nextto(C,_,C')            } != 1, position(R,C,T-1), isRobot(R), time(T).
 
- :- { carries(R,S,T)  : isShelf(S)                                  }  > 1, isRobot(R), time(T).
- :- { carries(R,S,T)  : isRobot(R)                                  }  > 1, isShelf(S), time(T).
+ :- { carries(R,S,T)  : isShelf(S)                                   }  > 1, isRobot(R), time(T).
+ :- { carries(R,S,T)  : isRobot(R)                                   }  > 1, isShelf(S), time(T).
 *%

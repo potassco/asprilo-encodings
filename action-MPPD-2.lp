@@ -16,24 +16,24 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 
 % - move/3 ----------------------------------------------------------------------
    position(R,C,T) :- move(R,D,T),       position(R,C',T-1),     nextto(C',D,C).
-                   :- move(R,D,T),       position(R,C,T-1), not nextto(C,D,_ ).
+                   :- move(R,D,T),       position(R,C ,T-1), not nextto(C, D,_).
 
 % - pickup/2 --------------------------------------------------------------------
-    carries(R,S,T) :- pickup(R,T),       position(R,C,T-1),   position(S,C,T-1),  isShelf(S).
+    carries(R,S,T) :- pickup(R,T),       position(R,C,T-1),   position(S,C ,T-1),  isShelf(S).
                    :- pickup(R,T),        carries(R,_,T-1).
-                   :- pickup(R,T),       position(R,C,T-1), { position(S,C,T-1) : isShelf(S) } = 0.    % UNSPECIFIC
-:-  carries(R,S,T),   pickup(R,T),   not position(R,C,T-1),   position(S,C,T-1),  isShelf(S).
+                   :- pickup(R,T),       position(R,C,T-1), { position(S,C ,T-1) : isShelf(S) } = 0.        % UNSPECIFIC
+                   :- pickup(R,T),       position(R,C,T-1),   position(S,C',T-1), carries(R,S,T), C != C'.  % NEEDED?
 
 % - putdown/2 -------------------------------------------------------------------
-   position(S,C,T) :- putdown(R,T),     position(R,C,T-1), carries(R,S,T-1).
-                   :- putdown(R,T), not  carries(R,_,T-1).                                            % UNSPECIFIC
-:- position(S,C,T),   putdown(R,T), not position(R,C,T-1), carries(R,S,T-1).
+   position(S,C,T) :- putdown(R,T),     position(R,C,T-1),      carries(R,S,T-1).
+                   :- putdown(R,T), not  carries(R,_,T-1).                                                  % UNSPECIFIC
+                   :- putdown(R,T),     position(R,C,T  ),      carries(R,S,T-1), position(S,C',T), C != C'.% PERFORMANCE!
 
 % - deliver/2 -------------------------------------------------------------------
-     serves(R,P,T) :- deliver(R,T),     position(R,C,T-1),     position(P,C    ), isStation(P).
-                   :- deliver(R,T), not  carries(R,_,T  ).
-                   :- deliver(R,T), {   position(R,C,T-1) :    position(P,C    ), isStation(P) } = 0. % UNSPECIFIC
-:-   serves(R,P,T),   deliver(R,T),     position(R,C,T-1), not position(P,C    ), isStation(P).
+     serves(R,P,T) :- deliver(R,T),     position(R,C,T-1),  position(P,C ), isStation(P).
+                   :- deliver(R,T), not  carries(R,_,T-1).
+                   :- deliver(R,T),   { position(R,C,T-1) : position(P,C ), isStation(P) } = 0.             % UNSPECIFIC
+                   :- deliver(R,T),     position(R,C,T-1),  position(P,C'), serves(R,P,T), C != C'.         % NEEDED?
 
 % - inertia ---------------------------------------------------------------------
 position(R,C,T) :- position(R,C,T-1), not    move(R,_,T), isRobot(R), time(T).
@@ -41,7 +41,7 @@ position(S,C,T) :- position(S,C,T-1), not carries(_,S,T), isShelf(S), time(T).
  carries(R,S,T) :-  carries(R,S,T-1), not putdown(R,  T),             time(T).
 
 % - (state) constraints ---------------------------------------------------------
- :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R!=R',
+ :- position(R, C, T-1), position(R, C',T), nextto(C,_,C'), R != R',
     position(R',C',T-1), position(R',C, T).
 
  :- { position(R,C,T) : isRobot(R)                                   }  > 1, position(C), time(T).
