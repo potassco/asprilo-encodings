@@ -29,3 +29,5 @@
 * show mixed terms (action+quantity)
 * parallel deliver and picks
 * configuration of encodings
+* C!=C vs two not
+* amt(0) vs amt(N), N > 0
