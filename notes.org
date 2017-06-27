@@ -1,0 +1,31 @@
+* try first one robot, one order, then two etc
+  - different strategies
+* how to formalize "before" effecy=tively
+  - old predlp?
+  - sequence constraint
+* use assign effectively
+* why such a discrepancy
+  clingo -c horizon=18  aspilro.lp aspilro-output.lp x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1-THREE-ONLY.lp --stats
+  clingo -c horizon=18  aspilroOLD.lp aspilro-output.lp x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1-THREE-ONLY.lp --stats
+* test exits to highways
+* lazy grounding for inertial objects, eg unmoved shelves
+* hitting set
+  - shelfs covering all orders
+* do we have conditional effects
+* pretty printer for answer sets
+  - static
+  - states
+  - actions
+* lc2casp system?
+* frame axiom between selected points
+  - start(O,S), pickup(O,S),etc
+* strategy
+  - satisfy orders with sheld with enough products
+  - take maximum number of items
+* benchmark generation
+* tester program
+* student coordination
+* | viz ?
+* show mixed terms (action+quantity)
+* parallel deliver and picks
+* configuration of encodings

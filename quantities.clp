@@ -31,6 +31,7 @@ pick(A,O,  T) :- pick(A,O,_,T).
 :- not pick(A,  S,T), onShelf(A,S),               &sum{ amountOnShelf(A,S,T-1); -amountOnShelf(A,S,T)                         } != 0, time(T).
 :- not pick(A,O,  T),               ordered(O,A), &sum{ amountMissing(A,O,T-1); -amountMissing(A,O,T)                         } != 0, time(T). % >>> REPORT MAX!!! <<<
 :- not pick(A,O,S,T), onShelf(A,S), ordered(O,A), &sum{                                                 amountPicked(A,O,S,T) } != 0, time(T).
-
-% :-                    onShelf(A,S),               &sum{ amountOnShelf(A,S,T-1); -amountOnShelf(A,S,T)                         }  < 0, time(T).
-% :-                                  ordered(O,A), &sum{ amountMissing(A,O,T-1); -amountMissing(A,O,T)                         }  < 0, time(T).
+%*
+:-                    onShelf(A,S),               &sum{ amountOnShelf(A,S,T-1); -amountOnShelf(A,S,T)                         }  < 0, time(T).
+:-                                  ordered(O,A), &sum{ amountMissing(A,O,T-1); -amountMissing(A,O,T)                         }  < 0, time(T).
+*%
