@@ -9,10 +9,10 @@ deliRobot(R) :- isRobot(R), serves(R,_,T).
 :- move(R,_,T), not deliRobot(R).
 *%
 
- :-  pickup(R,S,T), { deliver(R,P,T') : T' > T, carries(R,S,T'), time(T') } = 0.
- :- deliver(R,P,T), {  pickup(R,S,T') : T' < T,                  time(T') } = 0, carries(R,S,T).
- :- deliver(R,P,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0, carries(R,S,T).
- :- putdown(R,S,T), { deliver(R,P,T') : T' < T, carries(R,S,T'), time(T') } = 0.	
+ :-  pickup(R,S,T), { deliver(R,_,T') : T' > T, carries(R,S,T'), time(T') } = 0.
+ :- deliver(R,_,T), {  pickup(R,S,T') : T' < T,                  time(T') } = 0, carries(R,S,T).
+ :- deliver(R,_,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0, carries(R,S,T).
+ :- putdown(R,S,T), { deliver(R,_,T') : T' < T, carries(R,S,T'), time(T') } = 0.
 
  :-  pickup(R,S,T), { putdown(R,S,T') : T' > T,                  time(T') } = 0. 
  :- putdown(R,S,T), {  pickup(R,S,T') : T' < T,                  time(T') } = 0.
