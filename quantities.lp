@@ -37,8 +37,6 @@ amountMissing(A,O, N ,T) :- not pick(A,O,_,T), ordered(O,A), amountMissing(A,O,N
 #show processed/1.
 #show processed/2.
 
-:- not deliver(robot(2),station(1),4).
-
 % clingo action-MPPD-3.lp strategy-MPPD-3.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=6 quantities.lp goal-MPPD.lp show-3.lp --out-ifs='\n'
 % clingo action-MPPD-3.lp strategy-MPPD-3.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=? quantities.lp goal-Q.lp    show-3.lp --out-ifs='\n'
 *%
