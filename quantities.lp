@@ -9,21 +9,21 @@ amountMissing(A,O,N,0) :- ordered(O,A,number(N)).
 amountOnShelf(A,S,N,0) :- onShelf(A,S,number(N)).
 
 
-{ amountPicked(A,O,S,0..NM,T) } = 1 :- ordered(O,A), onShelf(A,S), time(T), NM = #min { N : ordered(O,A,number(N)); M : onShelf(A,S,number(M)) }. % APPROXIMATION!
+maxPick(A,O,S,M) :- M = #min { N : ordered(O,A,number(N)); N' : onShelf(A,S,number(N')) }, ordered(O,A), onShelf(A,S).
 
-{ pick(A,O,S,T) : ordered(O,A), onShelf(A,S) } 1 :- time(T).  % pick one article at a time at one picking station (via order)
+{ pick(A,O,S,1..M,T) : ordered(O,A), onShelf(A,S),maxPick(A,O,S,M) } 1 :- time(T).
 
-:- pick(_,O,_,T), target(O,P), not serves(_,P,T).
-:- pick(A,O,S,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
-:- pick(A,O,S,T), amountOnShelf(A,S,N,T-1), amountPicked(A,O,S,M,T), N < M.
+:- pick(_,O,_,_,T), target(O,P), not serves(_,P,T).
+:- pick(A,O,S,_,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
+:- pick(A,O,S,M,T), amountOnShelf(A,S,N,T-1), N < M.
 
-amountOnShelf(A,S,N-M,T) :- pick(A,O,S,T), onShelf(A,S), amountOnShelf(A,S,  N,T-1), amountPicked(A,O,S,M,T), N >= M.
-amountMissing(A,O,N-M,T) :- pick(A,O,S,T), ordered(O,A), amountMissing(A,O,  N,T-1), amountPicked(A,O,S,M,T), N >= M.
-                         :- pick(A,O,S,T),                amountPicked(A,O,S,0,T  ).
+amountOnShelf(A,S,N-M,T) :- pick(A,O,S,M,T), onShelf(A,S), amountOnShelf(A,S,  N,T-1), N >= M.
+amountMissing(A,O,N-M,T) :- pick(A,O,S,M,T), ordered(O,A), amountMissing(A,O,  N,T-1), N >= M.
 
-amountOnShelf(A,S, N ,T) :- not pick(A,_,S,T), onShelf(A,S), amountOnShelf(A,S,N,T-1), time(T).
-amountMissing(A,O, N ,T) :- not pick(A,O,_,T), ordered(O,A), amountMissing(A,O,N,T-1), time(T).
- amountPicked(A,O,S,0,T) :- not pick(A,O,S,T), onShelf(A,S), ordered(O,A),             time(T).
+
+amountOnShelf(A,S, N ,T) :- not pick(A,_,S,_,T), onShelf(A,S), amountOnShelf(A,S,N,T-1), time(T).
+amountMissing(A,O, N ,T) :- not pick(A,O,_,_,T), ordered(O,A), amountMissing(A,O,N,T-1), time(T).
+
 
 %*
 #show.
