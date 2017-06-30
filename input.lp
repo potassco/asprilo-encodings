@@ -16,7 +16,7 @@ isProduct(product(A)) :- station(A).
 ordered(order(O),product(A)) :- init(object(order,O),          value(line,(A,_))).      % IGNORING QUANTITIES
  target(order(O),station(P)) :- init(object(order,O),          value(pickingStation,P)).
 
-onShelf(product(A),shelf(S)) :- init(object(product,A),        value(on,(S,_))).        % IGNORING QUANTITIES
+shelved(shelf(S),product(A)) :- init(object(product,A),        value(on,(S,_))).        % IGNORING QUANTITIES
 
 position(           (X,Y))   :- init(object(node,_),           value(at,(X,Y))).
 
