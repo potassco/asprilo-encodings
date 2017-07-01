@@ -1,11 +1,11 @@
 #include <csp>. 
 
 &dom{N..N}              = ordered(O,A,0) :- init(object(order,O),   value(line,(A,N))).
-&dom{0..ordered(O,A,0)} = ordered(O,A,T) :- time(T).
+&dom{0..ordered(O,A,0)} = ordered(O,A,T) :- ordered(O,A), time(T).
 &dom{N..N}              = shelved(S,A,0) :- init(object(product,A), value(on,  (S,N))).
-&dom{0..shelved(S,A,0)} = shelved(S,A,T) :- time(T).
+&dom{0..shelved(S,A,0)} = shelved(S,A,T) :- shelved(S,A), time(T).
 
-&dom{0..N}              =  process(A,O,S,T) :- ordered(O,A,number(N)), shelved(S,A), time(T).
+&dom{0..ordered(O,A,0)} = process(A,O,S,T) :- ordered(O,A), shelved(S,A), time(T).
 
 { process(A,O,S,T) : ordered(O,A), shelved(S,A) } 1 :- time(T). % process one article at a time at one processing station (via order)
 
