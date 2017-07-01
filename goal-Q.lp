@@ -4,8 +4,8 @@
 
 
 
-processed(O) :- isOrder(O), #sum { N : amountMissing(A,O,N,horizon), ordered(O,A) } = 0.
-processed(O,T) :- isOrder(O), #sum { N : amountMissing(A,O,N,T), ordered(O,A) } = 0, time(T).
+processed(O) :- isOrder(O), #sum { N : ordered(A,O,N,horizon), ordered(O,A) } = 0.
+
 
 :- not processed(O), isOrder(O).
 

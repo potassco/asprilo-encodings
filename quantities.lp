@@ -1,38 +1,37 @@
-% >>> addition to input.lp <<<
-ordered(order(O),product(A),number(N)) :- init(object(order,O),   value(line,(A,N))).
-onShelf(product(A),shelf(S),number(N)) :- init(object(product,A), value(on,  (S,N))).
 
 
 
-amountMissing(A,O,N,0) :- ordered(O,A,number(N)).
+ordered(order(O),product(A),N,0) :- init(object(order,O),   value(line,(A,N))).
 
-amountOnShelf(A,S,N,0) :- onShelf(A,S,number(N)).
-
-
-maxPick(A,O,S,M) :- M = #min { N : ordered(O,A,number(N)); N' : onShelf(A,S,number(N')) }, ordered(O,A), onShelf(A,S).
-
-{ pick(A,O,S,1..M,T) : ordered(O,A), onShelf(A,S),maxPick(A,O,S,M) } 1 :- time(T).
-
-:- pick(_,O,_,_,T), target(O,P), not serves(_,P,T).
-:- pick(A,O,S,_,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
-:- pick(A,O,S,M,T), amountOnShelf(A,S,N,T-1), N < M.
-
-amountOnShelf(A,S,N-M,T) :- pick(A,O,S,M,T), onShelf(A,S), amountOnShelf(A,S,  N,T-1), N >= M.
-amountMissing(A,O,N-M,T) :- pick(A,O,S,M,T), ordered(O,A), amountMissing(A,O,  N,T-1), N >= M.
+shelved(shelf(S),product(A),N,0) :- init(object(product,A), value(on,  (S,N))).
 
 
-amountOnShelf(A,S, N ,T) :- not pick(A,_,S,_,T), onShelf(A,S), amountOnShelf(A,S,N,T-1), time(T).
-amountMissing(A,O, N ,T) :- not pick(A,O,_,_,T), ordered(O,A), amountMissing(A,O,N,T-1), time(T).
+
+
+
+
+
+
+limit(A,O,S,M) :- M = #min { N : ordered(O,A,N); N' : shelved(S,A,N',0) }, ordered(O,A), shelved(S,A).
+
+{ process(A,O,S,1..M,T) : ordered(O,A), shelved(S,A), limit(A,O,S,M) } 1 :- time(T).
+
+:- process(_,O,_,_,T), target(O,P), not serves(_,P,T).
+:- process(A,O,S,_,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
+:- process(A,O,S,M,T), shelved(S,A,N,T-1), N < M.
+
+shelved(S,A,N-M,T) :- process(A,O,S,M,T), shelved(S,A,N,T-1), N >= M.
+ordered(O,A,N-M,T) :- process(A,O,S,M,T), ordered(O,A,N,T-1), N >= M.
+
+
+shelved(S,A,N,  T) :- not process(A,_,S,_,T), shelved(S,A,N,T-1), time(T).
+ordered(O,A,N,  T) :- not process(A,O,_,_,T), ordered(O,A,N,T-1), time(T).
 
 
 %*
 #show.
-#show pick/4.
+#show process/4.
 
-#show amountPicked/5.
-#show amountMissing/4.
-%#show amountOnShelf/4.
-% #show mispick/4.
 #show deliver/3.
 #show processed/1.
 #show processed/2.

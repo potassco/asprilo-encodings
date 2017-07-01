@@ -4,7 +4,7 @@
 
 % assign order to one or more robots, ie, bring one or more shelfs to a designated picking station, en bloc
 
-1 { assign(robot(R),S,T) : robot(R) } :- order(O'), O=order(O'), target(O,T), ordered(O,A), onShelf(A,S).
+1 { assign(robot(R),S,T) : robot(R) } :- order(O'), O=order(O'), target(O,T), ordered(O,A), shelved(S,A).
 
 :- assign(R,S,T), assign(R',S,T), R<R'.
 

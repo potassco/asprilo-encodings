@@ -1,8 +1,8 @@
 
 orderedProduct(A) :- ordered(O,A).
 
-{ covShelf(S) : ordered(_,A), onShelf(A,S) }.
-:- orderedProduct(A), { covShelf(S) : onShelf(A,S) } < 1.
+{ covShelf(S) : ordered(_,A), shelved(S,A) }.
+:- orderedProduct(A), { covShelf(S) : shelved(S,A) } < 1.
 
 % #minimize { 1,S : covShelf(S) }. % direct encoding (aka hitting set)?
 

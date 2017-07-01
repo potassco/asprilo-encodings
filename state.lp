@@ -73,7 +73,7 @@ carrying(R,T) :- carries(R,_,T).
 
 
 
-delivered(O,A) :- ordered(O,A), target(O,P), onShelf(A,S), serves(R,P,T), carries(R,S,T). % No time, no resources
+delivered(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,P,T), carries(R,S,T). % No time, no resources
 
 
 processed(O  ) :- isOrder(O), delivered(O,A) : ordered(O,A).                              % No ordering

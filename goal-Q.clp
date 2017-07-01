@@ -4,7 +4,7 @@
 
 
 
-processed(O) :- isOrder(O), &sum{ amountMissing(A,O,horizon) : ordered(O,A) } = 0.
+processed(O) :- isOrder(O), &sum{ ordered(A,O,horizon) : ordered(O,A) } = 0.
 
 :- not processed(O), isOrder(O).
 

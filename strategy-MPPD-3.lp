@@ -1,5 +1,5 @@
 
-candiShelf(S) :- ordered(_,A), onShelf(A,S).
+candiShelf(S) :- ordered(_,A), shelved(S,A).
 :- carries(R,S,T), not candiShelf(S).
 %*
 deliShelf(S) :- candiShelf(S), serves(R,S,T), carries(R,S,T).
