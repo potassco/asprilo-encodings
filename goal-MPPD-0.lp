@@ -1,7 +1,13 @@
-delivered(O,A) :- ordered(O,A), target(O,P), onShelf(A,S), serves(R,P,T), carries(R,S,T).   % No time, no resources
 
 
-processed(O  ) :- isOrder(O), delivered(O,A) : ordered(O,A).                                % No ordering
+process(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,P,T), carries(R,S,T).    % No time, no resources
+
+
+
+
+
+
+processed(O) :- isOrder(O), process(O,A) : ordered(O,A).                                   % No ordering
 
 :- not processed(O), isOrder(O).
 

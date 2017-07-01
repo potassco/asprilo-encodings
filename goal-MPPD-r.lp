@@ -1,15 +1,13 @@
 
-#const rate=1. % picking rate, 0 stands fro simultaneous
+#const rate=1.
 
-%% processed(O,A  ) :- rate=0, ordered(O,A), target(O,P), shelved(S,A), serves(R,P,T), carries(R,S,T).   % No time, no resources
+ { process(A,O,S,T) : ordered(O,A), shelved(S,A) } rate :- time(T).
 
-processed(O,A,T) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,P,T), carries(R,S,T).   % No time, no resources %% rate > 0
-
-:- { processed(O,A,T) : ordered(O,A) } > rate, rate>0, isOrder(O), time(T).
-
+:- process(_,O,_,T), target(O,P), not serves(_,P,T).
+:- process(A,O,S,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
 
 
-processed(O    ) :- isOrder(O), processed(O,A,_) : ordered(O,A).                                % No ordering
+processed(O) :- isOrder(O), process(A,O,_,_) : ordered(O,A).                               % No ordering
 
 :- not processed(O), isOrder(O).
 
