@@ -8,8 +8,10 @@
 #show pickup/3.
 #show putdown/3.
 
+#show processed/1.
 #show processed/2.
-#show delivered/2.
+#show ordered/4.
+#show ordered/4.
 
 %#show xxx/1.
 %#show xxx/2.
