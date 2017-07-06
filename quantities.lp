@@ -1,5 +1,5 @@
 
-#const rate=1. % not implemented
+% #const rate=1. % NOT IMPLEMENTED
 
 ordered(order(O),product(A),N,0) :- init(object(order,O),   value(line,(A,N))).
 
