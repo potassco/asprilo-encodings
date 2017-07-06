@@ -5,8 +5,9 @@ Encodings for asprilo environments
 ## Conventions
 
   * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
+  * letter **Q** indicates a treatment of quantities
   * digits **2** and **3** indicated the arity of actions *pickup*, *putdown*, and *deliver*
-  * file extensions *lp*, *ilp*, and *clp* stand for regular, incremental, and constraint logic programs
+  * file extensions *lp*, *ilp*, *clp*, and *iclp* stand for regular, incremental, constraint, and incremental constraint logic programs
   * omissions of such indicators are treated like wild-cards
 
 ## Compatibility
@@ -16,7 +17,7 @@ Encodings for asprilo environments
 ## Action theories
 
   * Keyword **action** precedes files containing action theories
-  * *Example* **action-M.lp**, **action-MPP-3.lp**, **action-MPPD-2.ilp**, **action-MPPD-2.lp**, **action-MPPD-3.lp**,
+  * *Example* **action-M.lp**, **action-MPPD-2.ilp**, **action-MPPD-2.lp**, **action-MPPD-3.lp**,
 
 ## Interface to *asprilo*
 
@@ -25,28 +26,32 @@ Encodings for asprilo environments
       * the resulting plan into the format of *asprilo*
   * *Example* **input.lp**, **output-M.lp**, **output-MPPD-2.ilp**, **output-MPPD-2.lp**, **output-MPPD-3.lp**
   
+## Goals
+
+   * Keyword **goal** precedes files specifying goal conditions
+   * Goals counting quantities are indicated with letter **Q** and include the corresponding encoding for quantities
+   * Goals with ending **0** and **r** indicate whether all products belonging to an order are processed simultaneously (**0**) or at rate **r**
+     (default is **1**)
+   * *Example* **goal-Q.clp**, **goal-MPPD.ilp**, **goal-M.lp**, **goal-MPPD.lp**
+
+## Quantities
+
+   * Keyword **quantities** precedes files dealing with amounts of products
+   * Similarly letter **Q** indicates quantities; now used with goals
+   * **Attention** This needs a constraint ASP solver like **clingcon**
+   * *Example* **quantities.lp**,  **quantities.clp**,  **quantities.ilp**,  **quantities.iclp**
+
+## Strategies
+
+   * Keyword **strategy** precedes files specifying strategies
+   * *Example* **strategy-MPPD-2.lp**, **strategy-MPPD-3.lp**
+   * _Some strategies may not work with all layouts!_
+   
 ## Highways
 
   * Keyword **highways** precedes files specifying conditions for places belonging to highways
   * *Example* **highways.ilp**, **highways.lp**,
 
-## Goals
-
-   * Keyword **goal** precedes files specifying goal conditions
-   * *Example* **goal.clp**, **goal-MPPD.ilp**, **goal-M.lp**, **goal-MPPD.lp**, (~~**goal-MPP.lp**~~ obsolete)
-
-## Quantities
-
-   * Keyword **quantities** precedes files dealing with amounts of products
-   * **Attention** This needs a constraint ASP solver like **clingcon**
-   * *Example* **quantities.clp**
-
-## Strategies
-
-   * Keyword **strategy** precedes files specifying strategies
-   * *Example* **strategy.ilp**, **strategy-MPP-3.lp**, **strategy-MPPD-2.lp**, **strategy-MPPD-3.lp**
-   * _Some strategies may not work with all layouts!_
-   
 ## Optimization
 
    * Keyword **optimization** precedes files specifying objective functions
@@ -55,7 +60,7 @@ Encodings for asprilo environments
 
 ## Heuristics
 
-   * Keyword **heuristic** precedes files specifying heuristics with **cling**'s `#heuristic` directive
+   * Keyword **heuristic** precedes files specifying heuristics with **clingo**'s `#heuristic` directive
    * *Example* **heuristic.ilp**, **heuristic.lp**
    * **experimental feature**
 
