@@ -121,12 +121,12 @@ init(object(node,62),value(at,(6,8))).
 init(object(node,63),value(at,(7,8))).
 init(object(node,64),value(at,(8,8))).
 init(object(order,1),value(line,(1,1))).
-init(object(order,1),value(pickingStation,1)).
+init(object(order,1),value(pickingStation,2)).
 init(object(order,2),value(line,(2,11))).
-init(object(order,2),value(pickingStation,2)).
+init(object(order,2),value(pickingStation,1)).
 init(object(order,3),value(line,(3,1))).
 init(object(order,3),value(pickingStation,1)).
-init(object(order,4),value(line,(1,1))).
+init(object(order,4),value(line,(1,2))).
 init(object(order,4),value(pickingStation,1)).
 init(object(pickingStation,1),value(at,(8,1))).
 init(object(pickingStation,2),value(at,(4,1))).
