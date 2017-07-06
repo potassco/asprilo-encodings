@@ -10,6 +10,7 @@
 % Number of orders:                 6
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % clingo action-MPPD-3.lp strategy-MPPD-3.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 quantities.lp goal-Q.lp show-3.lp --out-ifs='\n'
+% clingo action-MPPD-2.lp strategy-MPPD-2.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 quantities.lp goal-Q.lp
 
 #program base.
 
