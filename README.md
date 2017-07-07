@@ -71,6 +71,7 @@ Encodings for asprilo environments
 ## Examples
 
   * Some warehouse layouts merged with orders can be found in the directory `examples`
+    Some of them contain (uncommented) calls in their header
   * Here are some exemplary calls
 	* `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
 	* `clingo  action-MPP-3.lp  strategy-MPP-3.lp  goal-MPP.lp show-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
@@ -78,7 +79,7 @@ Encodings for asprilo environments
       * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.`
       * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. --out-ifs='\n'`
       * `clingo  action-MPP-3.lp  strategy-MPP-3.lp  goal-MPP.lp  output-MPP-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.` (this simulates a delivery action by including `compatibility-MPP+D-3.lp`)
-   * **Note** Some of the instances in `examples` contain (uncommented) calls
+   
    
 ## _asprilo_ connectivity
 
