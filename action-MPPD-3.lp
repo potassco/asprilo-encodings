@@ -14,6 +14,8 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
    putdown(R,S,T) : isShelf(S)   ;
    deliver(R,P,T) : isStation(P) } 1 :- isRobot(R), time(T).
 
+waiting(R,T) :- not pickup(R,_,T), not putdown(R,_,T), not deliver(R,_,T), not move(R,_,T), isRobot(R), time(T).
+
 % - move/3 ----------------------------------------------------------------------
 position(R,C,T) :- move(R,D,T),        position(R,C',T-1),     nextto(C',D,C).
                 :- move(R,D,T),        position(R,C ,T-1), not nextto(C ,D,_).
@@ -30,6 +32,7 @@ position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),      carries(R,S ,T-1)
                 :- putdown(R,S,T),     position(R,C,T  ),     position(S,C',T  ), C != C'.                   % PERFORMANCE!
 
 % - deliver/3 -------------------------------------------------------------------
+% serves(R,S,P,T) :- position(R,C,T), carries(R,S,T),  position(P,C), isStation(P).
   serves(R,P,T) :- deliver(R,P,T),     position(R,C,T-1), position(P,C ).
                 :- deliver(R,P,T), not  carries(R,_,T-1).
                 :- deliver(R,P,T),     position(R,C,T-1), position(P,C'), C != C'.

@@ -14,6 +14,8 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
    putdown(R,  T)                ;
    deliver(R,  T)                } 1 :- isRobot(R), time(T).
 
+waiting(R,T) :- not pickup(R,T), not putdown(R,T), not deliver(R,T), not move(R,_,T), isRobot(R), time(T).
+
 % - move/3 ----------------------------------------------------------------------
 position(R,C,T) :- move(R,D,T),      position(R,C',T-1),     nextto(C',D,C).
                 :- move(R,D,T),      position(R,C ,T-1), not nextto(C, D,_).
@@ -30,7 +32,8 @@ position(S,C,T) :- putdown(R,T),     position(R,C,T-1),                         
                 :- putdown(R,T),     position(R,C,T  ),   position(S,C',T  ),     carries(R,S,T-1), C != C'.  % PERFORMANCE!
 
 % - deliver/2 -------------------------------------------------------------------
-  serves(R,P,T) :- deliver(R,T),     position(R,C,T-1),   position(P,C ), isStation(P).
+% serves(R,S,P,T) :- position(R,C,T), carries(R,S,T),  position(P,C), isStation(P).
+serves(R,P,T) :- deliver(R,T),     position(R,C,T-1),   position(P,C ), isStation(P).
                 :- deliver(R,T), not  carries(R,_,T-1).
                 :- deliver(R,T),   { position(R,C,T-1) :  position(P,C ), isStation(P) } = 0.                 % UNSPECIFIC
                 :- deliver(R,T),     position(R,C,T-1),   position(P,C'), serves(R,P,T), C != C'.             % NEEDED?
