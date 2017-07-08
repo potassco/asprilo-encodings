@@ -1,6 +1,7 @@
 
 
 
+% process(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,T).    % No time, no resources
 process(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,P,T), carries(R,S,T).    % No time, no resources
 
 

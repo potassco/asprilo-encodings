@@ -4,6 +4,8 @@
 
  { process(A,O,S,T) : ordered(O,A), shelved(S,A) } rate :- time(T).
 
+% :- process(_,O,S,T), target(O,P), not serves(_,S,P,T).
+% :- process(_,O,S,T), target(O,P),     serves(R,S,P,T), not waiting(R,T).
 :- process(_,O,_,T), target(O,P), not serves(_,P,T).
 :- process(A,O,S,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
 

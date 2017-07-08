@@ -9,6 +9,8 @@ limit(A,O,S,M) :- M = #min { N : ordered(O,A,N,0); N' : shelved(S,A,N',0) }, ord
 
  { process(A,O,S,1..M,T) : ordered(O,A), shelved(S,A), limit(A,O,S,M) } 1 :- time(T).
 
+% :- process(_,O,S,_,T), target(O,P), not serves(_,S,P,T).
+% :- process(_,O,S,_,T), target(O,P),     serves(R,S,P,T), not waiting(R,T).
 :- process(_,O,_,_,T), target(O,P), not serves(_,P,T).
 :- process(A,O,S,_,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
 :- process(A,O,S,M,T), shelved(S,A,N,T-1), N < M.
