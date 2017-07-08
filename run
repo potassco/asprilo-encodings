@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CWD=$PWD
+
+DIR=/home/torsten/ASP/asprilo/instances/tiny_cases/4x4c/warehouse_x4_y4_n16_r3_s6_ps2_pr6_u12_o0_N50/merged
+SCALL="clingo action-MPPD-2.ilp goal-MPPD.ilp --stats"
+LOG="BENCH"
+
+for f in $DIR/*.lp
+do
+CALL="$SCALL $f"
+echo $CALL
+# echo $CALL >>$LOG.out 2>>$Log.err
+$CALL
+done
+
