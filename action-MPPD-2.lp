@@ -14,7 +14,7 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
    putdown(R,  T)                ;
    deliver(R,  T)                } 1 :- isRobot(R), time(T).
 
-waiting(R,T) :- not pickup(R,T), not putdown(R,T), not deliver(R,T), not move(R,_,T), isRobot(R), time(T).
+waits(R,T) :- not pickup(R,T), not putdown(R,T), not deliver(R,T), not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
 position(R,C,T) :- move(R,D,T),      position(R,C',T-1),     nextto(C',D,C).
