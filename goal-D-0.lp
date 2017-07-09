@@ -1,15 +1,10 @@
 
 
 
-
-processed(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,T).    % No time, no resources
-
+processed(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,T).
 
 
-
-
-
-processed(O) :- isOrder(O), processed(O,A) : ordered(O,A).                                   % No ordering
+processed(O) :- isOrder(O), processed(O,A) : ordered(O,A).
 
 :- not processed(O), isOrder(O).
 
