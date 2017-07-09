@@ -5,7 +5,7 @@
  { process(A,O,S,t) : ordered(O,A), shelved(S,A) } rate.
 
 :- process(_,O,S,t), target(O,P), not serves(_,S,P,t).
-:- process(_,O,S,t), target(O,P),     serves(R,S,P,t), not waits(R,S,t).
+:- process(_,O,S,t), target(O,P),     serves(R,S,P,t), not waits(R,t).
 
 processed(O,t) :- isOrder(O), process(A,O,_,_) : ordered(O,A).                            % No ordering
 
