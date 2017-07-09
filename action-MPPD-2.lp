@@ -1,4 +1,3 @@
-
 #include "./input.lp".
 
 #const horizon=1.
@@ -11,10 +10,9 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 
  {    move(R,D,T) : direction(D) ;
     pickup(R,  T)                ;
-   putdown(R,  T)                ;
-   deliver(R,  T)                } 1 :- isRobot(R), time(T).
+   putdown(R,  T)                } 1 :- isRobot(R), time(T).
 
-waits(R,T) :- not pickup(R,T), not putdown(R,T), not deliver(R,T), not move(R,_,T), isRobot(R), time(T).
+waits(R,T) :- not pickup(R,T), not putdown(R,T), not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
 position(R,C,T) :- move(R,D,T),      position(R,C',T-1),     nextto(C',D,C).
@@ -31,12 +29,8 @@ position(S,C,T) :- putdown(R,T),     position(R,C,T-1),                         
                 :- putdown(R,T),                                              not carries(R,_,T-1).           % UNSPECIFIC
                 :- putdown(R,T),     position(R,C,T  ),   position(S,C',T  ),     carries(R,S,T-1), C != C'.  % PERFORMANCE!
 
-% - deliver/2 -------------------------------------------------------------------
-% serves(R,S,P,T) :- position(R,C,T), carries(R,S,T),  position(P,C), isStation(P).
-serves(R,P,T) :- deliver(R,T),     position(R,C,T-1),   position(P,C ), isStation(P).
-                :- deliver(R,T), not  carries(R,_,T-1).
-                :- deliver(R,T),   { position(R,C,T-1) :  position(P,C ), isStation(P) } = 0.                 % UNSPECIFIC
-                :- deliver(R,T),     position(R,C,T-1),   position(P,C'), serves(R,P,T), C != C'.             % NEEDED?
+% - serves/4 --------------------------------------------------------------------
+serves(R,S,P,T) :- position(R,C,T), carries(R,S,T),  position(P,C), isStation(P).
 
 % - inertia ---------------------------------------------------------------------
 position(R,C,T) :- position(R,C,T-1), not    move(R,_,T), isRobot(R), time(T).
