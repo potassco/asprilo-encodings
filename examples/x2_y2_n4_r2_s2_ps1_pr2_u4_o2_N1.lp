@@ -10,10 +10,29 @@
 % Number of orders:                 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% clingcon action-MPPD-2.lp  strategy-MPPD-2.lp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7 goal-Q.clp
-% clingo   action-MPPD-2.lp  strategy-MPPD-2.lp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7 goal-Q.lp
-% clingo   action-MPPD-2.ilp strategy-MPPD-2.ilp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp              goal-Q.ilp
-% clingcon action-MPPD-2.ilp strategy-MPPD-2.ilp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp              goal-Q.iclp
+% clingo   action-MPP-2.lp  goal-D-0.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=5
+% clingo   action-MPP-3.lp  goal-D-0.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=5
+%
+% clingo   action-MPP-2.ilp goal-D-0.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-3.ilp goal-D-0.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+%
+% clingo   action-MPP-2.lp  goal-D-r.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingo   action-MPP-3.lp  goal-D-r.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+%
+% clingo   action-MPP-2.ilp goal-D-r.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-3.ilp goal-D-r.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+%
+% clingo   action-MPP-2.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingo   action-MPP-3.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+%
+% clingcon action-MPP-2.lp  goal-D-q.clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingcon action-MPP-3.lp  goal-D-q.clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+%
+% clingo   action-MPP-2.ilp goal-D-q.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-3.ilp goal-D-q.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+%
+% clingcon action-MPP-2.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
+% clingcon action-MPP-3.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
 
 #program base.
 

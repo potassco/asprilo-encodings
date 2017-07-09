@@ -12,8 +12,8 @@
 
  { process(A,O,S,t) : ordered(O,A), shelved(S,A) } 1. % process one article at a time at one processing station (via order)
 
-:- process(_,O,_,t), target(O,P), not serves(_,P,t).
-:- process(A,O,S,t), target(O,P),     serves(R,P,t), not carries(R,S,t).
+:- process(_,O,S,t), target(O,P), not serves(_,S,P,t).
+:- process(_,O,S,t), target(O,P),     serves(R,S,P,t), not waits(R,t).
 :- process(A,O,S,t), &sum{ shelved(S,A,t-1); -process(A,O,S,t) } < 0.
 
 :-     process(A,O,S,t), shelved(S,A),               &sum{  shelved(S,A,t); process(A,O,S,t) } != shelved(S,A,t-1).

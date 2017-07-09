@@ -1,0 +1,26 @@
+
+#program step(t).
+
+ :-  serves(_,S,P,t), #count { 1,A : ordered(O,A), target(O,P), shelved(S,A) } = 0.
+
+candiShelf(S) :- ordered(_,A), shelved(S,A).
+ :- carries(_,S,t), not candiShelf(S).
+
+ :-  serves(R,_,_,t), { pickup(R,    T') : T' < t, T' > 0 } = 0.
+ :- putdown(R,    t), { serves(R,_,_,T') : T' < t, T' > 0 } = 0.	
+
+%* >>> NOT YET ADAPTED <<<
+#external deliver(R,t+1)      : isRobot(R).
+#external deliverAfter(R,t+1) : isRobot(R).
+deliverAfter(R,t) :- deliver(R,t+1).
+deliverAfter(R,t) :- deliverAfter(R,t+1).
+:- pickup(R,t), not deliverAfter(R,t). % works because pickup cannot be last action ;)
+*%
+
+#external putdown(R,t+1)      : isRobot(R).
+#external putdownAfter(R,t+1) : isRobot(R).
+
+putdownAfter(R,t) :- putdown(R,t+1).
+putdownAfter(R,t) :- putdownAfter(R,t+1).
+
+:- serves(R,_,_,t), not putdownAfter(R,t). % works because pickup cannot be last action ;)

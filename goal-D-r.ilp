@@ -7,7 +7,7 @@
 :- process(_,O,S,t), target(O,P), not serves(_,S,P,t).
 :- process(_,O,S,t), target(O,P),     serves(R,S,P,t), not waits(R,t).
 
-processed(O,t) :- isOrder(O), process(A,O,_,_) : ordered(O,A).                            % No ordering
+processed(O,t) :- isOrder(O), process(A,O,_,_) : ordered(O,A).
 
 :- not processed(O,t), isOrder(O), query(t).
 

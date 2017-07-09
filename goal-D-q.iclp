@@ -1,11 +1,8 @@
-#include "./quantities.ilp".
+#include "./quantities.iclp".
 
 #program check(t).
 
-
-
-
-processed(O,t) :- isOrder(O), #sum { N : ordered(O,A,N,t), ordered(O,A) } = 0.
+processed(O,t) :- isOrder(O), &sum{ ordered(O,A,t) : ordered(O,A) } = 0.
 processed(O,t) :- processed(O,t-1).
 
 :- not processed(O,t), isOrder(O), query(t).

@@ -1,3 +1,4 @@
+% #const rate=1. % NOT IMPLEMENTED
 #include <csp>. 
 
 &dom{N..N} =   ordered(order(O),product(A),0) :- init(object(order,O),   value(line,(A,N))).
@@ -7,10 +8,10 @@
 
 &dom{0..N} = process(product(A),order(O),S,T) :- init(object(order,O),   value(line,(A,N))), shelved(S,product(A)), time(T).
 
- { process(A,O,S,T) : ordered(O,A), shelved(S,A) } 1 :- time(T). % process one article at a time at one processing station (via order)
+ { process(A,O,S,T) : ordered(O,A), shelved(S,A) } 1 :- time(T).
 
-:- process(_,O,_,T), target(O,P), not serves(_,P,T).
-:- process(A,O,S,T), target(O,P),     serves(R,P,T), not carries(R,S,T).
+:- process(_,O,S,T), target(O,P), not serves(_,S,P,T).
+:- process(_,O,S,T), target(O,P),     serves(R,S,P,T), not waits(R,T).
 :- process(A,O,S,T), &sum{ shelved(S,A,T-1); -process(A,O,S,T) } < 0.
 
 :-     process(A,O,S,T), shelved(S,A),               &sum{  shelved(S,A,T); process(A,O,S,T) } != shelved(S,A,T-1).
