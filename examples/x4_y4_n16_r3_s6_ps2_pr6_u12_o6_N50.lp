@@ -12,11 +12,15 @@
 % clingo action-MPPD-3.lp strategy-MPPD-3.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 quantities.lp goal-Q.lp show-3.lp --out-ifs='\n'
 % clingo action-MPPD-2.lp strategy-MPPD-2.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 quantities.lp goal-Q.lp
 %
-% clingo action-MPP-2.lp goal-D-r.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
-% clingo action-MPP-3.lp goal-D-r.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
-% clingo action-MPP-2.lp goal-D-r.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP-2.lp
-% clingo action-MPP-3.lp goal-D-r.lp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP-3.lp
-
+% clingo action-MPP-2.lp  goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
+% clingo action-MPP-3.lp  goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
+% clingo action-MPP-2.lp  goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP-2.lp
+% clingo action-MPP-3.lp  goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP-3.lp
+%
+% clingo action-MPP-2.ilp goal-D-r.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
+% clingo action-MPP-3.ilp goal-D-r.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
+% clingo action-MPP-2.ilp goal-D-r.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP-2.ilp
+% clingo action-MPP-3.ilp goal-D-r.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP-3.ilp
 #program base.
 
 % init
