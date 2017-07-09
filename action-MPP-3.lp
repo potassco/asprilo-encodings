@@ -15,19 +15,19 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 waits(R,T) :- not pickup(R,_,T), not putdown(R,_,T), not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
-position(R,C,T) :- move(R,D,T),        position(R,C',T-1),     nextto(C',D,C).
-                :- move(R,D,T),        position(R,C ,T-1), not nextto(C ,D,_).
+position(R,C,T) :- move(R,D,T),    position(R,C',T-1),     nextto(C',D,C).
+                :- move(R,D,T),    position(R,C ,T-1), not nextto(C, D,_).
 
 % - pickup/3 --------------------------------------------------------------------
- carries(R,S,T) :- pickup(R,S,T),      position(R,C,T-1), position(S,C ,T-1).
-                :- pickup(R,S,T),       carries(R,_,T-1).
-                :- pickup(R,S,T),       carries(_,S,T-1).                                                    % NEEDED!?
-                :- pickup(R,S,T),      position(R,C,T-1), position(S,C',T-1), C != C'.
+ carries(R,S,T) :- pickup(R,S,T),  position(R,C,T-1), position(S,C ,T-1).
+                :- pickup(R,S,T),   carries(R,_,T-1).
+                :- pickup(R,S,T),   carries(_,S,T-1).                                                    % NEEDED!?
+                :- pickup(R,S,T),  position(R,C,T-1), position(S,C',T-1), C != C'.
 
 % - putdown/3 -------------------------------------------------------------------
-position(S,C,T) :- putdown(R,S,T),     position(R,C,T-1),      carries(R,S ,T-1).
-                :- putdown(R,S,T),                        not  carries(R,S ,T-1).
-                :- putdown(R,S,T),     position(R,C,T  ),     position(S,C',T  ), C != C'.                   % PERFORMANCE!
+position(S,C,T) :- putdown(R,S,T), position(R,C,T-1),      carries(R,S ,T-1).
+                :- putdown(R,S,T),                    not  carries(R,S ,T-1).
+                :- putdown(R,S,T), position(R,C,T  ),     position(S,C',T  ), C != C'.                   % PERFORMANCE!
 
 % - serves/4 --------------------------------------------------------------------
 serves(R,S,P,T) :- position(R,C,T), carries(R,S,T),  position(P,C), isStation(P).

@@ -1,10 +1,10 @@
 
 #program check(t).
 
-processed(O,A,t) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,P,t), carries(R,S,t). % No resources
+processed(O,A,t) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,t).
 processed(O,A,t) :- processed(O,A,t-1).
 
-processed(O,  t) :- isOrder(O), processed(O,A,t) : ordered(O,A).                            % No ordering
+processed(O,  t) :- isOrder(O), processed(O,A,t) : ordered(O,A).
 
 :- not processed(O,t), isOrder(O), query(t).
 

@@ -15,19 +15,19 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 waits(R,T) :- not pickup(R,T), not putdown(R,T), not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
-position(R,C,T) :- move(R,D,T),      position(R,C',T-1),     nextto(C',D,C).
-                :- move(R,D,T),      position(R,C ,T-1), not nextto(C, D,_).
+position(R,C,T) :- move(R,D,T),    position(R,C',T-1),     nextto(C',D,C).
+                :- move(R,D,T),    position(R,C ,T-1), not nextto(C, D,_).
 
 % - pickup/2 --------------------------------------------------------------------
- carries(R,S,T) :- pickup(R,T),      position(R,C,T-1),   position(S,C ,T-1),  isShelf(S).
-                :- pickup(R,T),       carries(R,_,T-1).
-                :- pickup(R,T),      position(R,C,T-1), { position(S,C ,T-1) : isShelf(S) } = 0.              % UNSPECIFIC
-                :- pickup(R,T),      position(R,C,T-1),   position(S,C',T-1), carries(R,S,T  ), C != C'.      % NEEDED?
+ carries(R,S,T) :- pickup(R,T),    position(R,C,T-1),   position(S,C ,T-1),  isShelf(S).
+                :- pickup(R,T),     carries(R,_,T-1).
+                :- pickup(R,T),    position(R,C,T-1), { position(S,C ,T-1) : isShelf(S) } = 0.              % UNSPECIFIC
+                :- pickup(R,T),    position(R,C,T-1),   position(S,C',T-1), carries(R,S,T  ), C != C'.      % NEEDED?
 
 % - putdown/2 -------------------------------------------------------------------
-position(S,C,T) :- putdown(R,T),     position(R,C,T-1),                           carries(R,S,T-1).
-                :- putdown(R,T),                                              not carries(R,_,T-1).           % UNSPECIFIC
-                :- putdown(R,T),     position(R,C,T  ),   position(S,C',T  ),     carries(R,S,T-1), C != C'.  % PERFORMANCE!
+position(S,C,T) :- putdown(R,T),   position(R,C,T-1),                           carries(R,S,T-1).
+                :- putdown(R,T),                                            not carries(R,_,T-1).           % UNSPECIFIC
+                :- putdown(R,T),   position(R,C,T  ),   position(S,C',T  ),     carries(R,S,T-1), C != C'.  % PERFORMANCE!
 
 % - serves/4 --------------------------------------------------------------------
 serves(R,S,P,T) :- position(R,C,T), carries(R,S,T),  position(P,C), isStation(P).

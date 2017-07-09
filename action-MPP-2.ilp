@@ -1,5 +1,5 @@
-#include <incmode>.
 #include "./input.lp".
+#include <incmode>.
 
 
 
@@ -11,8 +11,9 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 
  {    move(R,D,t) : direction(D) ;
     pickup(R,  t)                ;
-   putdown(R,  t)                ;
-   deliver(R,  t)                } 1 :- isRobot(R).
+   putdown(R,  t)                } 1 :- isRobot(R).
+
+waits(R,t) :- not pickup(R,t), not putdown(R,t), not move(R,_,t), isRobot(R).
 
 % - move/3 ----------------------------------------------------------------------
 position(R,C,t) :- move(R,D,t),      position(R,C',t-1),     nextto(C',D,C).
@@ -29,11 +30,8 @@ position(S,C,t) :- putdown(R,t),     position(R,C,t-1),                         
                 :- putdown(R,t),                                              not carries(R,_,t-1).           % UNSPECIFIC
                 :- putdown(R,t),     position(R,C,t  ),   position(S,C',t  ),     carries(R,S,t-1), C != C'.  % PERFORMANCE?
 
-% - deliver/2 -------------------------------------------------------------------
-  serves(R,P,t) :- deliver(R,t),     position(R,C,t-1),   position(P,C ), isStation(P).
-                :- deliver(R,t), not  carries(R,_,t  ).
-                :- deliver(R,t), {   position(R,C,t-1) :  position(P,C ), isStation(P) } = 0.                 % UNSPECIFIC
-                :- deliver(R,t),     position(R,C,t-1),   position(P,C'), serves(R,P,t), C != C'.             % NEEDED?
+% - serves/4 --------------------------------------------------------------------
+serves(R,S,P,t) :- position(R,C,t), carries(R,S,t),  position(P,C), isStation(P).
 
 % - inertia ---------------------------------------------------------------------
 position(R,C,t) :- position(R,C,t-1), not    move(R,_,t), isRobot(R).
