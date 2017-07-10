@@ -13,6 +13,8 @@
 % COVER: covShelf(shelf(12)). covShelf(shelf(11)). covShelf(shelf(14)). covShelf(shelf(8)).
 % INC: clingo aspilro-inc.lp aspilro-output-inc.lp x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp aspilro-strategy-inc.lp --stats
 % myaspilro -l 22  -p -r -v x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp aspilro-strategy.lp 
+%
+% clingcon action-M.clp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp -c horizon=27 goal-M.clp
 
 #program base.
 

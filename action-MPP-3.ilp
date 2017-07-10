@@ -39,7 +39,7 @@ position(S,C,t) :- position(S,C,t-1), not carries(_,S,t), isShelf(S).
  carries(R,S,t) :-  carries(R,S,t-1), not putdown(R,_,t).
 
 % - (state) constraints ---------------------------------------------------------
- :- position(R, C, t-1), position(R, C',t), nextto(C,_,C'), R!=R',
+ :- position(R, C, t-1), position(R, C',t), nextto(C,_,C'), R != R',
     position(R',C',t-1), position(R',C, t).
 
  :- { position(R,C,t) : isRobot(R)                                   }  > 1, position(C).

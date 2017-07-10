@@ -1,0 +1,109 @@
+torsten@bono 2009:~/ASP/asprilo> clingo action-M.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18 goal-M.lp -q --stats
+clingo version 5.2.1
+Reading from action-M.lp ...
+Solving...
+SATISFIABLE
+
+Models       : 1+
+Calls        : 1
+Time         : 72.010s (Solving: 71.88s 1st Model: 71.88s Unsat: 0.00s)
+CPU Time     : 71.737s
+
+Choices      : 811913  
+Conflicts    : 573331   (Analyzed: 573331)
+Restarts     : 1187     (Average: 483.01 Last: 290)
+Model-Level  : 57.0    
+Problems     : 1        (Average Length: 0.00 Splits: 0)
+Lemmas       : 573331   (Deleted: 488021)
+  Binary     : 4387     (Ratio:   0.77%)
+  Ternary    : 9648     (Ratio:   1.68%)
+  Conflict   : 573331   (Average Length:  313.6 Ratio: 100.00%) 
+  Loop       : 0        (Average Length:    0.0 Ratio:   0.00%) 
+  Other      : 0        (Average Length:    0.0 Ratio:   0.00%) 
+Backjumps    : 573331   (Average:  1.35 Max:  95 Sum: 774382)
+  Executed   : 573331   (Average:  1.35 Max:  95 Sum: 774382 Ratio: 100.00%)
+  Bounded    : 0        (Average:  0.00 Max:   0 Sum:      0 Ratio:   0.00%)
+
+Rules        : 60796    (Original: 56642)
+  Choice     : 72      
+Atoms        : 5741    
+Bodies       : 41078    (Original: 36924)
+  Count      : 0        (Original: 871)
+Equivalences : 585      (Atom=Atom: 86 Body=Body: 72 Other: 427)
+Tight        : Yes
+Variables    : 22705    (Eliminated:    0 Frozen:    0)
+Constraints  : 101597   (Binary:  63.1% Ternary:  13.8% Other:  23.1%)
+
+torsten@bono 2010:~/ASP/asprilo> clingo action-M.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18 goal-M.lp -q --stats
+clingo version 5.2.1
+Reading from action-M.lp ...
+Solving...
+SATISFIABLE
+
+Models       : 1+
+Calls        : 1
+Time         : 140.460s (Solving: 140.33s 1st Model: 140.33s Unsat: 0.00s)
+CPU Time     : 139.930s
+
+Choices      : 1569282 
+Conflicts    : 1154749  (Analyzed: 1154749)
+Restarts     : 2211     (Average: 522.27 Last: 217)
+Model-Level  : 71.0    
+Problems     : 1        (Average Length: 0.00 Splits: 0)
+Lemmas       : 1154749  (Deleted: 1028741)
+  Binary     : 5556     (Ratio:   0.48%)
+  Ternary    : 12358    (Ratio:   1.07%)
+  Conflict   : 1154749  (Average Length:   59.4 Ratio: 100.00%) 
+  Loop       : 0        (Average Length:    0.0 Ratio:   0.00%) 
+  Other      : 0        (Average Length:    0.0 Ratio:   0.00%) 
+Backjumps    : 1154749  (Average:  1.30 Max:  99 Sum: 1498778)
+  Executed   : 1154749  (Average:  1.30 Max:  99 Sum: 1498778 Ratio: 100.00%)
+  Bounded    : 0        (Average:  0.00 Max:   0 Sum:      0 Ratio:   0.00%)
+
+Rules        : 57682    (Original: 53528)
+  Choice     : 72      
+Atoms        : 6928    
+Bodies       : 40293    (Original: 36139)
+  Count      : 0        (Original: 871)
+Equivalences : 3464     (Atom=Atom: 670 Body=Body: 1096 Other: 1698)
+Tight        : Yes
+Variables    : 20801    (Eliminated:    0 Frozen:    0)
+Constraints  : 93319    (Binary:  61.9% Ternary:  18.2% Other:  19.9%)
+
+torsten@bono 2010:~/ASP/asprilo> clingo action-M.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18 goal-M.lp -q --stats
+clingo version 5.2.1
+Reading from action-M.lp ...
+Solving...
+SATISFIABLE
+
+Models       : 1+
+Calls        : 1
+Time         : 146.077s (Solving: 145.95s 1st Model: 145.95s Unsat: 0.00s)
+CPU Time     : 145.530s
+
+Choices      : 1725399 
+Conflicts    : 1260518  (Analyzed: 1260518)
+Restarts     : 2378     (Average: 530.07 Last: 211)
+Model-Level  : 58.0    
+Problems     : 1        (Average Length: 0.00 Splits: 0)
+Lemmas       : 1260518  (Deleted: 1133373)
+  Binary     : 5183     (Ratio:   0.41%)
+  Ternary    : 13042    (Ratio:   1.03%)
+  Conflict   : 1260518  (Average Length:   55.9 Ratio: 100.00%) 
+  Loop       : 0        (Average Length:    0.0 Ratio:   0.00%) 
+  Other      : 0        (Average Length:    0.0 Ratio:   0.00%) 
+Backjumps    : 1260518  (Average:  1.30 Max: 106 Sum: 1644640)
+  Executed   : 1260518  (Average:  1.30 Max: 106 Sum: 1644640 Ratio: 100.00%)
+  Bounded    : 0        (Average:  0.00 Max:   0 Sum:      0 Ratio:   0.00%)
+
+Rules        : 55408    (Original: 51254)
+  Choice     : 72      
+Atoms        : 7634    
+Bodies       : 38019    (Original: 33865)
+  Count      : 0        (Original: 871)
+Equivalences : 4136     (Atom=Atom: 328 Body=Body: 286 Other: 3522)
+Tight        : Yes
+Variables    : 19310    (Eliminated:    0 Frozen:    0)
+Constraints  : 86019    (Binary:  60.4% Ternary:  18.6% Other:  21.1%)
+
+torsten@bono 2010:~/ASP/asprilo> 
