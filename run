@@ -5,7 +5,8 @@ CWD=$PWD
 # DIR=/home/torsten/ASP/asprilo/instances/tiny_cases/4x4c/warehouse_x4_y4_n16_r3_s6_ps2_pr6_u12_o0_N50/merged
 DIR=/home/torsten/ASP/asprilo/instances/standard_cases/4/warehouse_x10_y10_n100_r4_s12_ps3_pr3_u20_o0_N1/merged
 
-SCALL="clingo action-MPP-3.ilp goal-D-r.ilp --stats"
+# SCALL="clingo action-MPP-3.ilp goal-D-r.ilp --stats"
+SCALL="clingo action-MPP-3.ilp goal-D-0.ilp --stats"
 LOG="BENCH"
 
 for f in $DIR/*.lp
