@@ -15,6 +15,9 @@
 % clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-0.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
 % clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-r.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18
 %? clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-Q.lp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=29 quantities.lp
+%
+% clingcon action-M.clp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18 goal-M.clp
+% clingo   action-M.lp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18 goal-M.lp
 
 #program base.
 
