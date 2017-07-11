@@ -1,0 +1,12 @@
+
+#program check(t).
+
+processed1(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,(X,Y),0), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, isRobot(R).
+processed1(O,A,S,R,t) :- processed1(O,A,S,R,t-1), not processed2(O,A,S,R,t-1).
+processed2(O,A,S,R,t) :- ordered(O,A),  target(O,P), position(P,(X,Y)  ), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, processed1(O,A,S,R,t).
+processed2(O,A,S,R,t) :- processed2(O,A,S,R,t-1), not processed3(O,A,S,R,t-1).
+processed3(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,(X,Y),0), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, processed2(O,A,S,R,t).
+
+processed(O,t) :- isOrder(O), processed3(O,A,_,_,_) : ordered(O,A).
+
+:- not processed(O,t), isOrder(O), query(t).
