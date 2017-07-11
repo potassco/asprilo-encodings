@@ -1,0 +1,6 @@
+#show.
+#show init/2.
+
+#program check(t).
+
+#show occurs(object(robot,R), action(move,D),     t) :    move(robot(R),D,t).

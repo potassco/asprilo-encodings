@@ -1,14 +1,6 @@
 
 #program check(t).
 
-%*
-processed1(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,t).
-processed2(O,A,S,R,t) :- ordered(O,A),  target(O,P), position(P,C  ), position(R,C,t), processed1(O,A,S,R,T), T < t.
-processed3(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,t), processed2(O,A,S,R,T), T < t.
-
-processed(O,t) :- isOrder(O), processed3(O,A,_,_,_) : ordered(O,A).
-*%
-
 processed1(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,t).
 processed1(O,A,S,R,t) :- processed1(O,A,S,R,t-1), not processed2(O,A,S,R,t-1).
 processed2(O,A,S,R,t) :- ordered(O,A),  target(O,P), position(P,C  ), position(R,C,t), processed1(O,A,S,R,t).
@@ -16,7 +8,6 @@ processed2(O,A,S,R,t) :- processed2(O,A,S,R,t-1), not processed3(O,A,S,R,t-1).
 processed3(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,t), processed2(O,A,S,R,t).
 
 processed(O,t) :- isOrder(O), processed3(O,A,_,_,_) : ordered(O,A).
-
 
 :- not processed(O,t), isOrder(O), query(t).
 
