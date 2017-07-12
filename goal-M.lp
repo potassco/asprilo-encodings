@@ -1,14 +1,23 @@
 
-carries(R,S,  T) :-                     position(R,C,T), position(S,C,0), isRobot(R), isShelf(S).
-carries(R,S,  T) :- carries(R,S,  T-1), not serves(R,S,_,T),                        T <= horizon.
- serves(R,S,P,T) :- carries(R,S,  T-1), position(R,C,T), position(P,C),             isStation(P).
-returns(R,S,  T) :-  serves(R,S,_,T-1),                                             T <= horizon.
-returns(R,S,  T) :- returns(R,S,  T-1), not parked(R,S,T),                          T <= horizon.
- parked(R,S,  T) :- returns(R,S,  T-1), position(R,C,T), position(S,C,0).
+{ carries(R,S,  T) } :-                     position(R,C,T), position(S,C,0), isRobot(R), isShelf(S).
+  carries(R,S,  T)   :- carries(R,S,  T-1), not serves(R,S,_,T),                        T <= horizon.
+   serves(R,S,P,T)   :- carries(R,S,  T-1), position(R,C,T), position(P,C),             isStation(P).
+  returns(R,S,  T)   :-  serves(R,S,_,T-1),                                             T <= horizon.
+  returns(R,S,  T)   :- returns(R,S,  T-1), not parked(R,S,T),                          T <= horizon.
+   parked(R,S,  T)   :- returns(R,S,  T-1), position(R,C,T), position(S,C,0).
+   parked(R,S,  T)   :-  parked(R,S,  T-1), not carries(R,S,T),                         T <= horizon.
+
+:- carries(R,S,T), returns(R,S,  T).
+:- carries(R,S,T),  serves(R,S,_,T).
+:- carries(R,S,T),  parked(R,S,  T).
 
 :- isRobot(R), time(T), #count { S : carries(R,S,  T), isShelf(S);
                                  S :  serves(R,S,_,T), isShelf(S);
                                  S : returns(R,S,  T), isShelf(S) } > 1.
+:- isShelf(S), time(T), #count { R : carries(R,S,  T), isRobot(R);
+                                 R :  serves(R,S,_,T), isRobot(R);
+                                 R : returns(R,S,  T), isRobot(R) } > 1.
+
 
 :- isRobot(R), isShelf(S), isStation(P), #count { T : serves(R,S,P,T) } > 1.
                                   
