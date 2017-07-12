@@ -33,6 +33,8 @@
 %
 % clingcon action-MPP-2.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
 % clingcon action-MPP-3.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
+%
+% clingo   action-M.lp      goal-M.lp     examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=6 --out-ifs='\n'
 
 #program base.
 
