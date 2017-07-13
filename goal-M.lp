@@ -1,27 +1,24 @@
 
-   parked(  S,  0)   :-                                                                   isShelf(S).
-   parked(  S,  T)   :-  parked(  S,  T-1), not carries(_,S,T),                         T <= horizon.
+parking(S,C) :- position(S,C,0), not parking(S,C'), C != C', position(C'), isShelf(S). % default parking
+
+   parked(  S,  0)   :-                                                                              isShelf(S).
+   parked(  S,  T)   :-  parked(  S,  T-1), not carries(_,S,T),                                    T <= horizon.
    
-{ carries(R,S,  T) } :-  parked(  S,  T-1), position(R,C,T), position(S,C,0), isRobot(R), isShelf(S).
-  carries(R,S,  T)   :- carries(R,S,  T-1),                  not serves(R,S,_,T),       T <= horizon.
-   serves(R,S,P,T)   :- carries(R,S,  T-1), position(R,C,T), position(P,C),             isStation(P).
-  returns(R,S,  T)   :-  serves(R,S,_,T-1),                                             T <= horizon.
-  returns(R,S,  T)   :- returns(R,S,  T-1),                  not parked(S,T),           T <= horizon.
-   parked(  S,  T)   :- returns(R,S,  T-1), position(R,C,T), position(S,C,0).
+{ carries(R,S,  T) } :-  parked(  S,  T-1), position(R,C,T), parking(S,C),               isRobot(R), isShelf(S).
+  carries(R,S,  T)   :- carries(R,S,  T-1),                  not serves(R,S,_,T), not parked(S,T), T <= horizon.
+   serves(R,S,P,T)   :- carries(R,S,  T-1), position(R,C,T), position(P,C),                        isStation(P).
+  carries(R,S,  T)   :-  serves(R,S,_,T-1),                                                        T <= horizon.
+   parked(  S,  T)   :- carries(R,S,  T-1), position(R,C,T), parking(S,C).
 
-:- carries(R,S,T), returns(R,S,  T).
-:- carries(R,S,T),  serves(R,S,_,T).
-:- carries(R,S,T),  parked(  S,  T).
+:- carries(R,S,T),  serves(R,S,_,T).  % REDUNDANT?
+:- carries(R,S,T),  parked(  S,  T).  % REDUNDANT?
 
-:- isRobot(R), time(T), #count { S : carries(R,S,  T), isShelf(S);
-                                 S :  serves(R,S,_,T), isShelf(S);
-                                 S : returns(R,S,  T), isShelf(S) } > 1.
-:- isShelf(S), time(T), #count { R : carries(R,S,  T), isRobot(R);
-                                 R :  serves(R,S,_,T), isRobot(R);
-                                 R : returns(R,S,  T), isRobot(R) } > 1.
+:- isRobot(R), time(T), #count { S : carries(R,S,  T), isShelf(S) ;
+                                 S :  serves(R,S,_,T), isShelf(S) } > 1.
+:- isShelf(S), time(T), #count { R : carries(R,S,  T), isRobot(R) ;
+                                 R :  serves(R,S,_,T), isRobot(R) } > 1.
 
-
-:- isRobot(R), isShelf(S), isStation(P), #count { T : serves(R,S,P,T) } > 1.
+:- isRobot(R), isShelf(S), isStation(P), #count { T : serves(R,S,P,T) } > 1. % REDUNDANT?
                                   
 :- isShelf(S), not parked(S,horizon).
 
