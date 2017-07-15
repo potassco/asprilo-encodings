@@ -18,7 +18,7 @@ parking(S,C) :- position(S,C,0), not parking(S,C'), C != C', position(C'), isShe
 :- isShelf(S), time(T), #count { R : carries(R,S,  T), isRobot(R) ;
                                  R :  serves(R,S,_,T), isRobot(R) } > 1.
 
-:- isRobot(R), isShelf(S), isStation(P), #count { T : serves(R,S,P,T) } > 1. % REDUNDANT?
+:- isRobot(R), isShelf(S), isStation(P), #count { T : serves(R,S,P,T) } > 1. % STRATEGY?
                                   
 :- isShelf(S), not parked(S,horizon).
 
@@ -27,20 +27,12 @@ processed(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,_).
 processed(O) :- isOrder(O), processed(O,A) : ordered(O,A).
 :- not processed(O), isOrder(O).
 
-%*
+%* --- plain version ---
 processed(O,A) :- ordered(O,A), T < T', T'< T'',
                   shelved(S,A), position(S,C ,0), position(R,C, T  ), 
                    target(O,P), position(P,C'  ), position(R,C',T' ),
                                                   position(R,C ,T'').
 
 processed(O  ) :- isOrder(O), processed(O,A) : ordered(O,A).
-
-processed1(O,A,S,R,T) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,T).
-processed1(O,A,S,R,T) :- processed1(O,A,S,R,T-1), not processed2(O,A,S,R,T-1), T <= horizon.
-processed2(O,A,S,R,T) :- ordered(O,A),  target(O,P), position(P,C  ), position(R,C,T), processed1(O,A,S,R,T).
-processed2(O,A,S,R,T) :- processed2(O,A,S,R,T-1), not processed3(O,A,S,R,T-1), T <= horizon.
-processed3(O,A,S,R,T) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,T), processed2(O,A,S,R,T).
-
-processed(O  ) :- isOrder(O), processed3(O,A,_,_,_) : ordered(O,A).
 *%
 
