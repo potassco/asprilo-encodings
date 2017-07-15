@@ -34,7 +34,12 @@
 % clingcon action-MPP-2.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
 % clingcon action-MPP-3.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
 %
-% clingo   action-M.lp      goal-M.lp     examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=6 --out-ifs='\n'
+% clingo   action-M.lp      goal-M.lp     examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=6
+%
+% clingo   action-MPP-3.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7  \
+%          --outf=0 -V0 --out-atomf=%s. output-MPPD-3.lp | head -n1 | visualizer -t -
+% clingo   action-MPP-3.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7  \
+%          --outf=0 -V0 --out-atomf=%s. output-MPPD-3.lp | head -n1 | clingo ~/local/lib/asprilo/checker/encodings/default/checker.lp - 
 
 #program base.
 
