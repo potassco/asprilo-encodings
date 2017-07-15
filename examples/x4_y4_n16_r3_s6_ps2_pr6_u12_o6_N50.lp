@@ -24,6 +24,11 @@
 % clingo   action-MPP-3.lp  goal-D-q.lp   examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-3.lp
 % clingcon action-MPP-2.lp  goal-D-q.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-2.lp
 % clingcon action-MPP-3.lp  goal-D-q.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-3.lp
+%
+%%%%
+%
+% clingo action-M.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp goal-M.lp  -c horizon=11
+% clingo action-M.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp goal-M.ilp
 
 #program base.
 

@@ -14,7 +14,10 @@
 % INC: clingo aspilro-inc.lp aspilro-output-inc.lp x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp aspilro-strategy-inc.lp --stats
 % myaspilro -l 22  -p -r -v x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp aspilro-strategy.lp 
 %
-% clingcon action-M.clp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp -c horizon=27 goal-M.clp
+% clingcon action-M.clp  examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.clp -c horizon=27
+% clingo   action-M.ilp  examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.ilp 
+% clingcon action-M.iclp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.iclp 
+
 
 #program base.
 
