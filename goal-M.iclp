@@ -1,12 +1,31 @@
 
+parking(S,C) :- position(S,C,0), not parking(S,C'), C != C', position(C'), isShelf(S). % default parking
+
 #program check(t).
 
-processed1(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,(X,Y),0), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, isRobot(R).
-processed1(O,A,S,R,t) :- processed1(O,A,S,R,t-1), not processed2(O,A,S,R,t-1).
-processed2(O,A,S,R,t) :- ordered(O,A),  target(O,P), position(P,(X,Y)  ), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, processed1(O,A,S,R,t).
-processed2(O,A,S,R,t) :- processed2(O,A,S,R,t-1), not processed3(O,A,S,R,t-1).
-processed3(O,A,S,R,t) :- ordered(O,A), shelved(S,A), position(S,(X,Y),0), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, processed2(O,A,S,R,t).
+   parked(  S,  0)   :-                                                                                                             isShelf(S).
+   parked(  S,  t)   :-  parked(  S,  t-1), not carries(_,S,t).
+   
+{ carries(R,S,  t) } :-  parked(  S,  t-1), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y,  parking(S,(X,Y)), isRobot(R), isShelf(S).
+  carries(R,S,  t)   :- carries(R,S,  t-1), not serves(R,S,_,t), not parked(S,t).
+   serves(R,S,P,t)   :- carries(R,S,  t-1), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, position(P,(X,Y)),           isStation(P).
+  carries(R,S,  t)   :-  serves(R,S,_,t-1).
+   parked(  S,  t)   :- carries(R,S,  t-1), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y,  parking(S,(X,Y)).
 
-processed(O,t) :- isOrder(O), processed3(O,A,_,_,_) : ordered(O,A).
+:- carries(R,S,t),  serves(R,S,_,t).  % REDUNDANT?
+:- carries(R,S,t),  parked(  S,  t).  % REDUNDANT?
+
+:- isRobot(R), #count { S : carries(R,S,  t), isShelf(S) ;
+                        S :  serves(R,S,_,t), isShelf(S) } > 1.
+:- isShelf(S), #count { R : carries(R,S,  t), isRobot(R) ;
+                        R :  serves(R,S,_,t), isRobot(R) } > 1.
+
+:- serves(R,S,P,t), #count { T : serves(R,S,P,T), T < t } > 0. % STRATEGY?
+                                  
+:- isShelf(S), not parked(S,t), query(t).
+
+processed(O,A,t) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,t).
+
+processed(O,t) :- isOrder(O), processed(O,A,_) : ordered(O,A).
 
 :- not processed(O,t), isOrder(O), query(t).
