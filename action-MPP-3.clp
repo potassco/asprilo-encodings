@@ -13,11 +13,15 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
 
 &dom{X..X} = positionX(robot(R),0) :- init(object(robot,R), value(at,(X,_))).
 &dom{Y..Y} = positionY(robot(R),0) :- init(object(robot,R), value(at,(_,Y))).
-&dom{M..N} = positionX(      R ,T) :- minXposition(M), maxXposition(N), isRobot(R), time(T).
-&dom{M..N} = positionY(      R ,T) :- minYposition(M), maxYposition(N), isRobot(R), time(T).
 
 &dom{X..X} = positionX(shelf(S),0) :- init(object(shelf,S), value(at,(X,_))).
 &dom{Y..Y} = positionY(shelf(S),0) :- init(object(shelf,S), value(at,(_,Y))).
+
+
+
+&dom{M..N} = positionX(      R ,T) :- minXposition(M), maxXposition(N), isRobot(R), time(T).
+&dom{M..N} = positionY(      R ,T) :- minYposition(M), maxYposition(N), isRobot(R), time(T).
+
 &dom{M..N} = positionX(      S ,T) :- minXposition(M), maxXposition(N), isShelf(S), time(T).
 &dom{M..N} = positionY(      S ,T) :- minYposition(M), maxYposition(N), isShelf(S), time(T).
 
