@@ -22,7 +22,7 @@ position(R,C,T) :- move(R,D,T),    position(R,C',T-1),     nextto(C',D,C).
  carries(R,S,T) :- pickup(R,T),    position(R,C,T-1),   position(S,C ,T-1),  isShelf(S).
                 :- pickup(R,T),     carries(R,_,T-1).
                 :- pickup(R,T),    position(R,C,T-1), { position(S,C ,T-1) : isShelf(S) } = 0.              % UNSPECIFIC
-                :- pickup(R,T),    position(R,C,T-1),   position(S,C',T-1), carries(R,S,T  ), C != C'.      % NEEDED?
+                :- pickup(R,T),    position(R,C,T-1),   position(S,C',T-1), carries(R,S,T), C != C'.        % NEEDED?
 
 % - putdown/2 -------------------------------------------------------------------
 position(S,C,T) :- putdown(R,T),   position(R,C,T-1),                           carries(R,S,T-1).

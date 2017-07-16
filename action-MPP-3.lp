@@ -21,7 +21,7 @@ position(R,C,T) :- move(R,D,T),    position(R,C',T-1),     nextto(C',D,C).
 % - pickup/3 --------------------------------------------------------------------
  carries(R,S,T) :- pickup(R,S,T),  position(R,C,T-1), position(S,C ,T-1).
                 :- pickup(R,S,T),   carries(R,_,T-1).
-                :- pickup(R,S,T),   carries(_,S,T-1).                                                    % NEEDED!?
+                :- pickup(R,S,T),   carries(_,S,T-1).                                                    % NEEDED (position of two robots)!?
                 :- pickup(R,S,T),  position(R,C,T-1), position(S,C',T-1), C != C'.
 
 % - putdown/3 -------------------------------------------------------------------
