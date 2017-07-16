@@ -30,3 +30,6 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
 :- &sum { positionX(R ,T-1) } = positionX(R',T), &sum { positionY(R ,T-1) } = positionY(R',T),
    &sum { positionX(R',T-1) } = positionX(R ,T), &sum { positionY(R',T-1) } = positionY(R ,T),
    R != R', isRobot(R), isRobot(R'), time(T).
+
+:- &sum { positionX(R,   T) } = positionX(R',T), &sum { positionY(R,T)    } = positionY(R',T),
+   R  > R', isRobot(R), isRobot(R'), time(T).
