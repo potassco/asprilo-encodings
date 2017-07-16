@@ -9,10 +9,6 @@
 % Number of product units in total: 10
 % Number of orders:                 5
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CALL: clingo aspilro.lp aspilro-output.lp -c horizon=30 aspilro-strategy.lp --stats x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp cover.pl
-% COVER: covShelf(shelf(12)). covShelf(shelf(11)). covShelf(shelf(14)). covShelf(shelf(8)).
-% INC: clingo aspilro-inc.lp aspilro-output-inc.lp x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp aspilro-strategy-inc.lp --stats
-% myaspilro -l 22  -p -r -v x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp aspilro-strategy.lp 
 %
 % clingcon action-M.clp  examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.clp -c horizon=27
 % clingo   action-M.ilp  examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.ilp 

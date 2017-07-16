@@ -10,11 +10,14 @@
 % Number of orders:                 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-0.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
-% clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-r.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
-% clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-0.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
-% clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-r.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
+% [OLD] clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-0.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
+% [OLD] clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-r.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
+% [OLD] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-0.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
+% [OLD] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-r.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
 %
+% clingo   action-MPP-3.lp  goal-D-r.lp  output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
+% clingcon action-MPP-3.clp goal-D-r.clp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
+
 #program base.
 
 % init
