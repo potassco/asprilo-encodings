@@ -10,35 +10,38 @@
 % Number of orders:                 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% clingo   action-MPP-2.lp  goal-D-0.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=5
-% clingo   action-MPP-3.lp  goal-D-0.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=5
+% clingo   action-MPP-2.lp   goal-D-0.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=5
+% clingo   action-MPP-3.lp   goal-D-0.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=5
 %
-% clingo   action-MPP-2.ilp goal-D-0.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
-% clingo   action-MPP-3.ilp goal-D-0.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-2.ilp  goal-D-0.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-3.ilp  goal-D-0.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
 %
-% clingo   action-MPP-2.lp  goal-D-r.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
-% clingo   action-MPP-3.lp  goal-D-r.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingo   action-MPP-2.lp   goal-D-r.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingo   action-MPP-3.lp   goal-D-r.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
 %
-% clingo   action-MPP-2.ilp goal-D-r.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
-% clingo   action-MPP-3.ilp goal-D-r.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-2.ilp  goal-D-r.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-3.ilp  goal-D-r.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
 %
-% clingo   action-MPP-2.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
-% clingo   action-MPP-3.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingo   action-MPP-2.lp   goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingo   action-MPP-3.lp   goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
 %
-% clingcon action-MPP-2.lp  goal-D-q.clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
-% clingcon action-MPP-3.lp  goal-D-q.clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingcon action-MPP-2.lp   goal-D-q.clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
+% clingcon action-MPP-3.lp   goal-D-q.clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7
 %
-% clingo   action-MPP-2.ilp goal-D-q.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
-% clingo   action-MPP-3.ilp goal-D-q.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-2.ilp  goal-D-q.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
+% clingo   action-MPP-3.ilp  goal-D-q.ilp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
 %
-% clingcon action-MPP-2.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
-% clingcon action-MPP-3.ilp goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
+% clingcon action-MPP-2.ilp  goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
+% clingcon action-MPP-3.ilp  goal-D-q.iclp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp
 %
-% clingo   action-M.lp      goal-M.lp     examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=6
+% clingcon action-MPP-3.clp  goal-D-q.Clp  examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7 
+% clingcon action-MPP-3.iclp goal-D-q.iClp examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp 
 %
-% clingo   action-MPP-3.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7  \
+% clingo   action-M.lp       goal-M.lp     examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=6
+%
+% clingo   action-MPP-3.lp   goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7  \
 %          --outf=0 -V0 --out-atomf=%s. output-MPPD-3.lp | head -n1 | visualizer -t -
-% clingo   action-MPP-3.lp  goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7  \
+% clingo   action-MPP-3.lp   goal-D-q.lp   examples/x2_y2_n4_r2_s2_ps1_pr2_u4_o2_N1.lp -c horizon=7  \
 %          --outf=0 -V0 --out-atomf=%s. output-MPPD-3.lp | head -n1 | clingo ~/local/lib/asprilo/checker/encodings/default/checker.lp - 
 
 #program base.

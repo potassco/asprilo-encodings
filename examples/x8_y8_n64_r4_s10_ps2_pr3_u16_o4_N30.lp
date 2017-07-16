@@ -15,9 +15,10 @@
 % [OLD] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-0.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
 % [OLD] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-r.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19
 %
-% clingo   action-MPP-3.lp  goal-D-r.lp  output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
-% clingcon action-MPP-3.clp goal-D-r.clp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
-
+% clingo   action-MPP-3.lp   goal-D-r.lp   output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
+% clingcon action-MPP-3.clp  goal-D-r.clp  output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
+% clingo   action-MPP-3.ilp  goal-D-r.ilp  output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp
+% clingcon action-MPP-3.iclp goal-D-r.iclp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp
 #program base.
 
 % init

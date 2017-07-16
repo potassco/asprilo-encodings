@@ -1,6 +1,7 @@
 *~
-/trash
+trash
 config/
 instances/
 Misc/
 TAGS
+bench*
