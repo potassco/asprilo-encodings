@@ -2,13 +2,13 @@
 parking(S,C) :- position(S,C,0), not parking(S,C'), C != C', position(C'), isShelf(S). % default parking
 
    parked(  S,  0)   :-                                                                              isShelf(S).
-   parked(  S,  T)   :-  parked(  S,  T-1), not carries(_,S,T),                                    T <= horizon.
+   parked(  S,  T)   :-  parked(  S,  T-1), not carries(_,S,T),                                                  time(T).
    
-{ carries(R,S,  T) } :-  parked(  S,  T-1), position(R,C,T), parking(S,C),               isRobot(R), isShelf(S).
-  carries(R,S,  T)   :- carries(R,S,  T-1),                  not serves(R,S,_,T), not parked(S,T), T <= horizon.
-   serves(R,S,P,T)   :- carries(R,S,  T-1), position(R,C,T), position(P,C),                        isStation(P).
-  carries(R,S,  T)   :-  serves(R,S,_,T-1),                                                        T <= horizon.
-   parked(  S,  T)   :- carries(R,S,  T-1), position(R,C,T), parking(S,C).
+{ carries(R,S,  T) } :-  parked(  S,  T-1), position(R,C,T), parking(S,C),               isRobot(R), isShelf(S), time(T).
+  carries(R,S,  T)   :- carries(R,S,  T-1),                  not serves(R,S,_,T), not parked(S,T),               time(T).
+   serves(R,S,P,T)   :- carries(R,S,  T-1), position(R,C,T), position(P,C),                        isStation(P), time(T).
+  carries(R,S,  T)   :-  serves(R,S,_,T-1),                                                                      time(T).
+   parked(  S,  T)   :- carries(R,S,  T-1), position(R,C,T), parking(S,C),                                       time(T).
 
 :- carries(R,S,T),  serves(R,S,_,T).  % REDUNDANT?
 :- carries(R,S,T),  parked(  S,  T).  % REDUNDANT?
