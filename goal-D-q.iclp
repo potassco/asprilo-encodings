@@ -9,4 +9,3 @@ processed(O,t) :- processed(O,t-1).
 
 :- carries(R,_,t),                   isRobot(R), query(t).
 :- position(S,C), position(_,C,t), isStation(S), query(t).
-
