@@ -5,9 +5,14 @@ Encodings for asprilo environments
 ## Conventions
 
   * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
-  * letter **Q** indicates a treatment of quantities
-  * digits **2** and **3** indicated the arity of actions *pickup*, *putdown*, and *deliver*
+  * digits **2** and **3** indicated the arity of actions *pickup* and *putdown*
+	* **2** without shelf representation
+	* **3** with    shelf representation
+  * letters **0**, **r**, and **q** indicates the treatment of order lines during delivery
+	* This applies to all files preceded with **goal-**
   * file extensions *lp*, *ilp*, *clp*, and *iclp* stand for regular, incremental, constraint, and incremental constraint logic programs
+	* since integer variables are uses for *product quantities* and *robot and shelf positions*, I sometimes need auxiliary letters to disambiguate,
+	  eg a capital **C** stands for both usages, a mere **b** is like a **c** but applied to *positions*
   * omissions of such indicators are treated like wild-cards
 
 ## Compatibility
@@ -17,7 +22,12 @@ Encodings for asprilo environments
 ## Action theories
 
   * Keyword **action** precedes files containing action theories
-  * *Example* **action-M.lp**, **action-MPPD-2.ilp**, **action-MPPD-2.lp**, **action-MPPD-3.lp**,
+  * *Example* **action-M.lp**, **action-MPP-2.ilp**, **action-MPP-3.lp**, **action-MPP-3.iclp**, etc.
+
+## Goal conditions
+
+  * Keyword **goal** precedes files fixing goal conditions and in particular what constitutes a delivery
+  * as mentioned above, letters **0**, **r**, and **q** indicate the treatment of order lines during delivery
 
 ## Interface to *asprilo*
 
