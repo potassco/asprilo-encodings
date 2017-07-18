@@ -7,8 +7,8 @@ DIR=/home/torsten/ASP/asprilo/instances/standard_cases/4/warehouse_x10_y10_n100_
 
 # SCALL="clingo   action-MPP-3.ilp  goal-D-0.ilp  --stats"                    # benchme-MPP-3-ilp-D-0-ilp
 # SCALL="clingo   action-MPP-3.ilp  goal-D-r.ilp  --stats"                    # benchme-MPP-3-ilp-D-r-ilp
-SCALL="clingo   action-MPP-3.ilp  goal-D-q.ilp  --stats"                    # benchme-MPP-3-ilp-D-q-ilp
-# SCALL="clingcon action-MPP-3.ilp  goal-D-q.iclp --stats"                    # benchme-MPP-3-ilp-D-q-iclp
+# SCALL="clingo   action-MPP-3.ilp  goal-D-q.ilp  --stats"                    # benchme-MPP-3-ilp-D-q-ilp
+SCALL="clingcon action-MPP-3.ilp  goal-D-q.iclp --stats"                    # benchme-MPP-3-ilp-D-q-iclp
 #
 # SCALL="clingcon action-MPP-3.iclp goal-D-0.iclp --stats"                    # benchme-MPP-3-iclp-D-0-iclp
 # SCALL="clingcon action-MPP-3.iclp goal-D-r.iclp --stats"                    # benchme-MPP-3-iclp-D-r-iclp
