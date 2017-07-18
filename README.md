@@ -42,12 +42,12 @@ Encodings for asprilo environments
    * Goals counting quantities are indicated with letter **Q** and include the corresponding encoding for quantities
    * Goals with ending **0** and **r** indicate whether all products belonging to an order are processed simultaneously (**0**) or at rate **r**
      (default is **1**)
-   * *Example* **goal-Q.clp**, **goal-MPPD.ilp**, **goal-M.lp**, **goal-MPPD.lp**
+   * *Example* **goal-D-0.clp**, **goal-D-r.ilp**, **goal-M.lp**, **goal-D-q.lp**
 
 ## Quantities
 
    * Keyword **quantities** precedes files dealing with amounts of products
-   * Similarly letter **Q** indicates quantities; now used with goals
+   * Similarly letter **q** indicates quantities; now used with goals
    * **Attention** This needs a constraint ASP solver like **clingcon**
    * *Example* **quantities.lp**,  **quantities.clp**,  **quantities.ilp**,  **quantities.iclp**
 
