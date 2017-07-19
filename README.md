@@ -80,16 +80,13 @@ Encodings for asprilo environments
 
 ## Examples
 
-  * Some warehouse layouts merged with orders can be found in the directory `examples`
-    Some of them contain (uncommented) calls in their header
+  * Some warehouse layouts merged with orders can be found in the directory [`examples`](https://github.com/tortinator/asprilo/tree/master/examples)
+    Many of them contain (uncommented) calls in their header
   * Here are some exemplary calls
-	* `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`
-	* ~~`clingo  action-3.lp  strategy-MPP-3.lp  goal-MPP.lp show-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9`~~
-  * These examples produce plans ready for _asprilo_:
-      * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.`
-      * `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. --out-ifs='\n'`
-      * ~~`clingo  action-MPP-3.lp  strategy-MPP-3.lp  goal-MPP.lp  output-MPP-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s.` (this simulates a delivery action by including `compatibility-MPP+D-3.lp`)~~
-   
+	* `clingo action-MPP-2.lp strategy-MPP-2.lp goal-D-0.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
+  * To produce plans ready for _asprilo_ use *clingo* option 
+      * `--outf=0 -V0 --out-atomf=%s.` together with UNIX command `head -n1` to strip off the trailing (UN)SATISFIABLE
+  * Sometimes it is also nice to see an answer set as a single column, as done with *clingo* option `--out-ifs='\n'`   
    
 ## _asprilo_ connectivity
 
@@ -97,6 +94,6 @@ Encodings for asprilo environments
     * ~~combining compatible files in a systematic way~~
 	  * ~~interface with **asprilo**'s visualizer~~
 	  * **broken**
-  * *Examples* connecting to _asprilo_ on the commandline
-	* `clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD.lp output-MPPD-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=9 --outf=0 -V0 --out-atomf=%s. | head -n1 | visualizer -l examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp`
+  * *Examples* connecting to _asprilo_ on the command-line
+	* `clingo action-MPP-3.lp goal-D-0.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp  -c horizon=8 output-MPPD-3.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | asprilo-visualizer`
   * **asprilo** is available at [github](https://github.com/potassco/asprilo)
