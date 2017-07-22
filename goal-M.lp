@@ -26,13 +26,3 @@ processed(O,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,_).
 
 processed(O) :- isOrder(O), processed(O,A) : ordered(O,A).
 :- not processed(O), isOrder(O).
-
-%* --- plain version ---
-processed(O,A) :- ordered(O,A), T < T', T'< T'',
-                  shelved(S,A), position(S,C ,0), position(R,C, T  ), 
-                   target(O,P), position(P,C'  ), position(R,C',T' ),
-                                                  position(R,C ,T'').
-
-processed(O  ) :- isOrder(O), processed(O,A) : ordered(O,A).
-*%
-

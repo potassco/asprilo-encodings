@@ -1,0 +1,32 @@
+
+parking(S,C) :- position(S,C,0), not parking(S,C'), C != C', position(C'), isShelf(S). % default parking
+
+#program check(t).
+
+   parked(  S,  0)   :-                                                                                                     isShelf(S).
+   parked(  S,  t)   :-  parked(  S,  t-1), not carries(_,S,t).
+   
+{ carries(R,S,  t) } :-  parked(  S,  t-1), positionX(R,X,t), positionY(R,Y,t), parking(S,(X,Y)),               isRobot(R), isShelf(S).
+  carries(R,S,  t)   :- carries(R,S,  t-1),                                     not serves(R,S,_,t), not parked(S,t).
+   serves(R,S,P,t)   :- carries(R,S,  t-1), positionX(R,X,t), positionY(R,Y,t), position(P,(X,Y)),                        isStation(P).
+  carries(R,S,  t)   :-  serves(R,S,_,t-1).
+   parked(  S,  t)   :- carries(R,S,  t-1), positionX(R,X,t), positionY(R,Y,t), parking(S,(X,Y)).
+
+:- carries(R,S,t),  serves(R,S,_,t).  % REDUNDANT?
+:- carries(R,S,t),  parked(  S,  t).  % REDUNDANT?
+
+:- isRobot(R), #count { S : carries(R,S,  t), isShelf(S) ;
+                        S :  serves(R,S,_,t), isShelf(S) } > 1.
+:- isShelf(S), #count { R : carries(R,S,  t), isRobot(R) ;
+                        R :  serves(R,S,_,t), isRobot(R) } > 1.
+
+:- serves(R,S,P,t), #count { T : serves(R,S,P,T), T < t } > 0. % STRATEGY?
+% :- isRobot(R), isShelf(S), isStation(P), #count { t : serves(R,S,P,t) } > 1. % BAD ERROR MESSAGE!!!
+                                  
+:- isShelf(S), not parked(S,t), query(t). % NO ERROR MESSAGE: horizon !!!
+
+processed(O,A,t) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,_).
+
+processed(O,t) :- isOrder(O), processed(O,A,_) : ordered(O,A).
+
+:- not processed(O,t), isOrder(O), query(t).
