@@ -1,25 +1,16 @@
-%*
 #include "./input.lp".
 
+{ assign(R,S,P) } :- isRobot(R), isShelf(S), isStation(P).
 
-% assign order to one or more robots, ie, bring one or more shelfs to a designated picking station, en bloc
+:- ordered(O,A), #count { S : assign(_,S,P), shelved(S,A), target(O,P) } = 0.
 
-1 { assign(robot(R),S,T) : robot(R) } :- order(O'), O=order(O'), target(O,T), ordered(O,A), shelved(S,A).
+:- isShelf(S), #count{ R : assign(R,S,_) } > 1.                 % :- assign(R,S,P), assign(R',S,P), R<R'.
 
-:- assign(R,S,T), assign(R',S,T), R<R'.
 
-#maximize{1,R:assign(R,_,_)}.
+#minimize { 1@3,R,S   : assign(R,S,_) }.
+#minimize { 1@2,S     : assign(_,S,_) }.
+#maximize { 1@1,R     : assign(R,_,_) }.
+#minimize { 1@0,R,S,P : assign(R,S,P) }.
 
 #show assign/3.
-#show order/1.
-
-% How to solve incrementally several goals, viz checkpoints etc
-% Ho wto state even for one robot succinctly "before" constraints, or even "sequence"
-*%
-
-assign(robot(1),shelf(9),station(2)).
-assign(robot(2),shelf(8),station(1)).
-
-:- carries(R,S,T), not assign(R,S,_).
-:-  serves(R,P,T), not assign(R,_,P).
-:-      move(R,T), not assign(R,_,_).
+#show init/2.

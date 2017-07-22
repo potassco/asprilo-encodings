@@ -1,7 +1,3 @@
-% --------------------------------------------------------------------------------
-% CENTRAL CONTROL
-
-% 1 { assigned(robot(R),O,A) : robot(R) } :- ordered(O,A).
-% destination(O,C) :- target(O,P),  position(P,C).
-% checkpoint(O,C) :- ordered(O,A), shelved(S,A), position(S,C,T).
-
+:-    move(R,_,T), not assign(R,_,_).
+:-  pickup(R,S,T), not assign(R,S,_).
+:- putdown(R,S,T), not assign(R,S,_).
