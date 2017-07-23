@@ -14,6 +14,8 @@
 :- process(_,O,S,T), target(O,P),     serves(R,S,P,T), not waits(R,T).
 :- process(A,O,S,T), &sum{ shelved(S,A,T-1); -process(A,O,S,T) } < 0.
 
+:- process(A,O,_,T), &sum{ ordered(O,A,T-1) } = 0.
+
 :-     process(A,O,S,T), shelved(S,A),               &sum{  shelved(S,A,T); process(A,O,S,T) } != shelved(S,A,T-1).
 :-     process(A,O,S,T),               ordered(O,A), &sum{  ordered(O,A,T); process(A,O,S,T) } != ordered(O,A,T-1).
 
