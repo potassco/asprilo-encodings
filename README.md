@@ -5,8 +5,8 @@ Encodings for asprilo environments
 ## Conventions
 
   * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
-  * digits **2** and **3** indicated the arity of actions *pickup* and *putdown*
-	* **2** without shelf representation
+  * digits ~~**2** and~~ **3** indicated the arity of actions *pickup* and *putdown*
+	* ~~**2** without shelf representation~~ **declared legacy code**
 	* **3** with    shelf representation
   * letters **0**, **r**, and **q** indicates the treatment of order lines during delivery
 	* This applies to all files preceded with **goal-**
@@ -22,7 +22,7 @@ Encodings for asprilo environments
 ## Action theories
 
   * Keyword **action** precedes files containing action theories
-  * *Example* **action-M.lp**, **action-MPP-2.ilp**, **action-MPP-3.lp**, **action-MPP-3.iclp**, etc.
+  * *Example* **action-M.lp**, **action-MPP-3.lp**, **action-MPP-3.iclp**, etc.
 
 ## Goal conditions
 
@@ -34,7 +34,7 @@ Encodings for asprilo environments
   * Keywords **input** and **output** precede files converting 
       * *asprilo* instances to the format used in action theories and 
       * the resulting plan into the format of *asprilo*
-  * *Example* **input.lp**, **output-M.lp**, **output-MPPD-2.ilp**, **output-MPPD-2.lp**, **output-MPPD-3.lp**
+  * *Example* **input.lp**, **output-M.lp**, **output-MPPD-3.lp**
   
 ## Goals
 
@@ -54,7 +54,7 @@ Encodings for asprilo environments
 ## Strategies
 
    * Keyword **strategy** precedes files specifying strategies
-   * *Example* **strategy-MPPD-2.lp**, **strategy-MPPD-3.lp**
+   * *Example* **strategy-MPPD-3.lp**
    * _Some strategies may not work with all layouts!_
    
 ## Highways
@@ -65,7 +65,7 @@ Encodings for asprilo environments
 ## Optimization
 
    * Keyword **optimization** precedes files specifying objective functions
-   * *Example* **optimization-2.ilp**, **optimization-2.lp**,  **optimization-3.ilp**,  **optimization-3.lp**
+   * *Example* **optimization-3.ilp**,  **optimization-3.lp**
    * **experimental feature**
 
 ## Heuristics
@@ -83,7 +83,7 @@ Encodings for asprilo environments
   * Some warehouse layouts merged with orders can be found in the directory [`examples`](https://github.com/tortinator/asprilo/tree/master/examples)
     Many of them contain (uncommented) calls in their header
   * Here are some exemplary calls
-	* `clingo action-MPP-2.lp strategy-MPP-2.lp goal-D-0.lp show-2.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
+	* `clingo action-MPP-3.lp strategy-MPP-3.lp goal-D-0.lp show-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
   * To produce plans ready for _asprilo_ use *clingo* option 
       * `--outf=0 -V0 --out-atomf=%s.` together with UNIX command `head -n1` to strip off the trailing (UN)SATISFIABLE
   * Sometimes it is also nice to see an answer set as a single column, as done with *clingo* option `--out-ifs='\n'`   
