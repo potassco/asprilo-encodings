@@ -16,4 +16,4 @@
 %#show xxx/2.
 %#show yyy/3.
 
-&show { positionX/2; positionY/2 }.
+% &show { positionX/2; positionY/2 }.
