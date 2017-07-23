@@ -2,8 +2,7 @@
 
 #minimize{ 1@3,R,t :    move(R,_,t) ;
 	   1@3,R,t :  pickup(R,_,t) ;
- 	   1@3,R,t : putdown(R,_,t) ;
- 	   1@3,R,t : deliver(R,_,t) }.
+ 	   1@3,R,t : putdown(R,_,t) }.
 
 %*
 wait(R,t) :- not pickup(R,_,t), not putdown(R,_,t), not deliver(R,_,t), not move(R,_,t), isRobot(R).
