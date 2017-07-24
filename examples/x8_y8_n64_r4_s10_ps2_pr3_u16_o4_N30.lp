@@ -19,6 +19,9 @@
 % clingcon action-MPP-3.clp  goal-D-r.clp  output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp -c horizon=19  strategy-MPP-3.lp
 % clingo   action-MPP-3.ilp  goal-D-r.ilp  output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp
 % clingcon action-MPP-3.iclp goal-D-r.iclp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp
+%
+% clingo assign.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | \
+%        clingo action-MPP-3.lp goal-D-r.lp output-MPPD-3.lp -c horizon=20 control.lp - --outf=0 -V0 --out-atomf=%s. optimization-3.lp  --quiet=1,2,2 | head -n1 > PLAN-A-20
 #program base.
 
 % init
