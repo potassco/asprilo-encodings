@@ -1,0 +1,5 @@
+#program step(t).
+
+:-    move(R,_,t), not assign(R,_,_).
+:-  pickup(R,S,t), not assign(R,S,_).
+:- putdown(R,S,t), not assign(R,S,_).

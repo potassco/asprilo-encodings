@@ -22,6 +22,12 @@
 %
 % clingo assign.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | \
 %        clingo action-MPP-3.lp goal-D-r.lp output-MPPD-3.lp -c horizon=20 control.lp - --outf=0 -V0 --out-atomf=%s. optimization-3.lp  --quiet=1,2,2 | head -n1 > PLAN-A-20
+%
+% clingo action-MPP-3.lp goal-D-r.lp output-MPPD-3.lp -c horizon=19  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp
+% clingo action-MPP-3.lp goal-D-r.lp output-MPPD-3.lp -c horizon=19  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp strategy-MPP-3.lp
+% clingo assign.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N30.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo action-MPP-3.lp goal-D-r.lp output-MPPD-3.lp -c horizon=20 control.lp -
+%
+
 #program base.
 
 % init
