@@ -1,4 +1,4 @@
 
 
-:- highway(C), position(S,C,T), not carries(_,S,T), isShelf(S).
-:- waits(R,T), position(R,C,T), highway(C).
+:- highway(C), not carries(_,S,T), position(S,C,T), isShelf(S).
+:- highway(C),         waits(R,T), position(R,C,T).

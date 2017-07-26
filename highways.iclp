@@ -1,0 +1,5 @@
+#program step(t).
+
+:- highway((X,Y)), not carries(_,S,t), &sum { positionX(S,t) } = X, &sum { positionY(S,t) } = Y, isShelf(S).
+:- highway((X,Y)),         waits(R,t), &sum { positionX(R,t) } = X, &sum { positionY(R,t) } = Y, isRobot(R).
+

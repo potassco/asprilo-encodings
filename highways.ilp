@@ -1,5 +1,5 @@
-#program check(t).
+#program step(t).
 
-:- highway(C), position(shelf(_),C,t).
-:- waits(R,t), position(R,C,t), highway(C).
+:- highway(C), not carries(_,S,t), position(S,C,t), isShelf(S).
+:- highway(C),         waits(R,t), position(R,C,t).
 
