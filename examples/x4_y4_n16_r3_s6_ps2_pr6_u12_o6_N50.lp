@@ -38,7 +38,12 @@
 %
 % clingo action-M.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp goal-M.lp  -c horizon=11
 % clingo action-M.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp goal-M.ilp
-
+%
+%%%%
+%
+% clingo assign-q.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp              --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 |
+%        clingcon action-MPP-3.iclp goal-D-q.iblp control.ilp - output-MPPD-3.ilp --outf=0 -V0 --out-atomf=%s.               | head -n1 > PLUMPS
+%
 #program base.
 
 % init
