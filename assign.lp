@@ -4,7 +4,7 @@
 
 :- ordered(O,A), #count { S : assign(_,S,P), shelved(S,A), target(O,P) } = 0.
 
-:- isShelf(S), #count{ R : assign(R,S,_) } > 1.                 % :- assign(R,S,P), assign(R',S,P), R<R'.
+:- isShelf(S), #count{ R : assign(R,S,_) } > 1.                 % Too strong?? :- assign(R,S,P), assign(R',S,P), R<R'.
 
 
 #minimize { 1@4,R,S   : assign(R,S,_) }.
