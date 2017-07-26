@@ -7,7 +7,7 @@
 :- process(_,O,S,t), target(O,P), not serves(_,S,P,t).
 :- process(_,O,S,t), target(O,P),     serves(R,S,P,t), not waits(R,t).
 
-:- process(A,O,_,t), { process(A,O,_,T') : time(T'), T'<t } > 0.
+:- process(A,O,_,t), { process(A,O,_,T) : T=1..t-1 } > 0.
 
 processed(O,t) :- isOrder(O), process(A,O,_,_) : ordered(O,A).
 
