@@ -1,5 +1,14 @@
 #program step(t).
 
+:~    move(R,_,t), not assign(R,_,_). [1@100,R,t] % [1@100,R]
+:~  pickup(R,S,t), not assign(R,S,_). [1@100,R,t] % [1@100,R]
+:~ putdown(R,S,t), not assign(R,S,_). [1@100,R,t] % [1@100,R]
+
+:- process(_,O,S,  t), target(O,P), not assign(_,S,P).
+:- process(_,O,S,_,t), target(O,P), not assign(_,S,P).
+
+
+%* --------------------------------------------------
 :-    move(R,_,t), not assign(R,_,_), not fixer(R,t).
 :-  pickup(R,S,t), not assign(R,S,_), not fixer(R,t).
 :- putdown(R,S,t), not assign(R,S,_), not fixer(R,t).
@@ -9,4 +18,6 @@
 
 { fixer(R,t) } :- isRobot(R).
 
-#minimize{ 1@100,R,t : fixer(R,t) }.
+  #minimize{ 1@100,R,t : fixer(R,t) }.
+% #minimize{ 1@100,R   : fixer(R,t) }.
+   -------------------------------------------------- *%
