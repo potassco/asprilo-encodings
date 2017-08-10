@@ -4,12 +4,21 @@ Encodings for asprilo environments
 
 ## Conventions
 
+The encodings are grouped in two directories
+
+  * **mppd** contains fine-grained encodings dealing with *move*, *pickup*, *putdown*, and *deliver*
+    actions and distinguish *robots*, *shelves*, *stations*, etc and take robots carrying shelves into account for collision protection
+	
+  * **xapf** contains encodings addressing more abstract problems, like MAPF, TAPF, GTAPF, etc
+
+We adopt the following conventions:
+
   * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
-  * digits ~~**2** and~~ **3** indicated the arity of actions *pickup* and *putdown*
-	* ~~**2** without shelf representation~~ **declared legacy code**
-	* **3** with    shelf representation
-  * letters **0**, **r**, and **q** indicates the treatment of order lines during delivery
-	* This applies to all files preceded with **goal-**
+  * ~~digits **2** and **3** indicated the arity of actions *pickup* and *putdown*
+	* **2** without shelf representation
+	* **3** with    shelf representation~~
+  * letters **0**, **r**, and **q** indicate the treatment of order lines during delivery
+	* This applies to all files preceded with **goal-** in the **mppd** setting
   * file extensions *lp*, *ilp*, *clp*, and *iclp* stand for regular, incremental, constraint, and incremental constraint logic programs
 	* since integer variables are uses for *product quantities* and *robot and shelf positions*, I sometimes need auxiliary letters to disambiguate,
 	  eg a capital **C** stands for both usages, a mere **b** is like a **c** but applied to *positions*
@@ -22,7 +31,7 @@ Encodings for asprilo environments
 ## Action theories
 
   * Keyword **action** precedes files containing action theories
-  * *Example* **action-M.lp**, **action-MPP-3.lp**, **action-MPP-3.iclp**, etc.
+  * *Example* **action-M.lp**, **action-MPP.lp**, **action-MPP.iclp**, etc.
 
 ## Goal conditions
 
@@ -34,7 +43,7 @@ Encodings for asprilo environments
   * Keywords **input** and **output** precede files converting 
       * *asprilo* instances to the format used in action theories and 
       * the resulting plan into the format of *asprilo*
-  * *Example* **input.lp**, **output-M.lp**, **output-MPPD-3.lp**
+  * *Example* **input.lp**, **output-M.lp**, **output-MPPD.lp**
   
 ## Goals
 
@@ -54,7 +63,7 @@ Encodings for asprilo environments
 ## Strategies
 
    * Keyword **strategy** precedes files specifying strategies
-   * *Example* **strategy-MPPD-3.lp**
+   * *Example* **strategy-MPPD.lp**
    * _Some strategies may not work with all layouts!_
    
 ## Highways
@@ -65,7 +74,7 @@ Encodings for asprilo environments
 ## Optimization
 
    * Keyword **optimization** precedes files specifying objective functions
-   * *Example* **optimization-3.ilp**,  **optimization-3.lp**
+   * *Example* **optimization.ilp**,  **optimization.lp**
    * **experimental feature**
 
 ## Heuristics
@@ -83,17 +92,13 @@ Encodings for asprilo environments
   * Some warehouse layouts merged with orders can be found in the directory [`examples`](https://github.com/tortinator/asprilo/tree/master/examples)
     Many of them contain (uncommented) calls in their header
   * Here are some exemplary calls
-	* `clingo action-MPP-3.lp strategy-MPP-3.lp goal-D-0.lp show-3.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
+	* `clingo action-MPP.lp strategy-MPP.lp goal-D-0.lp show.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
   * To produce plans ready for _asprilo_ use *clingo* option 
       * `--outf=0 -V0 --out-atomf=%s.` together with UNIX command `head -n1` to strip off the trailing (UN)SATISFIABLE
   * Sometimes it is also nice to see an answer set as a single column, as done with *clingo* option `--out-ifs='\n'`   
    
 ## _asprilo_ connectivity
 
-  * ~~The bash script **myasprilo** aims at~~
-    * ~~combining compatible files in a systematic way~~
-	  * ~~interface with **asprilo**'s visualizer~~
-	  * **broken**
   * *Examples* connecting to _asprilo_ on the command-line
-	* `clingo action-MPP-3.lp goal-D-0.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp  -c horizon=8 output-MPPD-3.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | asprilo-visualizer`
+	* `clingo action-MPP.lp goal-D-0.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp  -c horizon=8 output-MPPD.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | asprilo-visualizer`
   * **asprilo** is available at [github](https://github.com/potassco/asprilo)
