@@ -1,4 +1,3 @@
-
 % NON-ANONYMOUS MAPF 
 
 :- robot(N), shelf(N), position(shelf(N),(X,_),0), not positionX(robot(N),X,horizon).
