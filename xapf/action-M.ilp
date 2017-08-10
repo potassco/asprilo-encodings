@@ -18,12 +18,15 @@ position(R,C,t) :- move(R,D,t), position(R,C',t-1),     nextto(C',D,C).
 % - inertia ---------------------------------------------------------------------
 position(R,C,t) :- position(R,C,t-1), not move(R,_,t), isRobot(R).
 
-% - (state) constraints ---------------------------------------------------------
- :- position(R, C, t-1), position(R, C',t), nextto(C,_,C'), R != R',
-    position(R',C',t-1), position(R',C, t).
+% - edge collision --------------------------------------------------------------
+moveto(C',C,t) :- nextto(C',D,C), position(R,C',t-1), move(R,D,t), position(R,C,t).
+ :- moveto(C',C,t), moveto(C,C',t).
 
- :- { position(R,C,t) : isRobot(R)                                   }  > 1, position(C).
+% - vertex collision ------------------------------------------------------------
+ :- { position(R,C,t) : isRobot(R) }  > 1, position(C).
+
+% - auxiliaries -----------------------------------------------------------------
 %*
- :- { position(R,C,t) : position(C)                                  } != 1, isRobot(R).
- :- { position(R,C,t) ; position(R,C',t) : nextto(C,_,C')            } != 1, position(R,C,t-1), isRobot(R).
+ :- { position(R,C,t) : position(C)                       } != 1, isRobot(R).
+ :- { position(R,C,t) ; position(R,C',t) : nextto(C,_,C') } != 1, position(R,C,t-1), isRobot(R).
 *%

@@ -3,7 +3,6 @@
 
 
 
-
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
 nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
 
@@ -35,19 +34,14 @@ serves(R,S,P,t) :- position(R,C,t), carries(R,S,t),  position(P,C), isStation(P)
 position(R,C,t) :- position(R,C,t-1), not    move(R,_,t), isRobot(R).
  carries(R,S,t) :-  carries(R,S,t-1), not putdown(R,_,t).
 
+% - (in)direct effects ----------------------------------------------------------
 position(S,C,t) :- position(R,C,t  ),     carries(R,S,t).
 position(S,C,t) :- position(S,C,t-1), not carries(_,S,t), isShelf(S).
 
-% - (state) constraints ---------------------------------------------------------
- :- position(R, C, t-1), position(R, C',t), nextto(C,_,C'), R != R',
-    position(R',C',t-1), position(R',C, t).
+% - edge collision --------------------------------------------------------------
+moveto(C',C,t) :- nextto(C',D,C), position(R,C',t-1), move(R,D,t), position(R,C,t).
+ :- moveto(C',C,t), moveto(C,C',t).
 
- :- { position(R,C,t) : isRobot(R)                                   }  > 1, position(C).
- :- { position(S,C,t) : isShelf(S)                                   }  > 1, position(C).
-%*
- :- { position(R,C,t) : position(C)                                  } != 1, isRobot(R).
- :- { position(R,C,t) ; position(R,C',t) : nextto(C,_,C')            } != 1, position(R,C,t-1), isRobot(R).
-
- :- { carries(R,S,t)  : isShelf(S)                                   }  > 1, isRobot(R).
- :- { carries(R,S,t)  : isRobot(R)                                   }  > 1, isShelf(S).
-*%
+% - vertex collision ------------------------------------------------------------
+ :- { position(R,C,t) : isRobot(R) }  > 1, position(C).
+ :- { position(S,C,t) : isShelf(S) }  > 1, position(C).

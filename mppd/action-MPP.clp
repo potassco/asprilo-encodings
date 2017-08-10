@@ -55,15 +55,17 @@ serves(R,S,P,T) :- carries(R,S,T), &sum { positionX(R,T) } = X,  &sum{ positionY
 
 carries(R,S,T) :- carries(R,S,T-1), not putdown(R,_,T), time(T).
 
+% - (in)direct effects ----------------------------------------------------------
  :-     carries(R,S,T), &sum { positionX(R,T  ) } != positionX(S,T),             time(T).
  :-     carries(R,S,T), &sum { positionY(R,T  ) } != positionY(S,T),             time(T).
  :- not carries(_,S,T), &sum { positionX(S,T-1) } != positionX(S,T), isShelf(S), time(T).
  :- not carries(_,S,T), &sum { positionY(S,T-1) } != positionY(S,T), isShelf(S), time(T).
 
-% - (state) constraints ---------------------------------------------------------
+% - edge collision --------------------------------------------------------------
 :- &sum { positionX(R ,T-1) } = positionX(R',T), &sum { positionY(R ,T-1) } = positionY(R',T),
    &sum { positionX(R',T-1) } = positionX(R ,T), &sum { positionY(R',T-1) } = positionY(R ,T), R != R', isRobot(R), isRobot(R'), time(T).
 
+% - vertex collision ------------------------------------------------------------
 :- &sum { positionX(R,T) } = positionX(R',T),
    &sum { positionY(R,T) } = positionY(R',T), R > R', isRobot(R), isRobot(R'), time(T).
 :- &sum { positionX(S,T) } = positionX(S',T),
