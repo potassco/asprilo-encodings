@@ -18,7 +18,7 @@ position(R,C,T) :- move(R,D,T), position(R,C',T-1),     nextto(C',D,C).
 position(R,C,T) :- position(R,C,T-1), not move(R,_,T), isRobot(R), time(T).
 
 % - edge collision --------------------------------------------------------------
-moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T), position(R,C,T).
+moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T).
  :- moveto(C',C,T), moveto(C,C',T).
 
 % - vertex collision ------------------------------------------------------------
