@@ -1,0 +1,6 @@
+
+% NON-ANONYMOUS MAPF 
+
+#program check(t).
+
+:- robot(N), shelf(N), position(shelf(N),C,0), not position(robot(N),C,t), query(t).

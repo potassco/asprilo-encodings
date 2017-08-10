@@ -10,39 +10,32 @@
 % Number of orders:                 6
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% clingo   action-MPP-2.lp   goal-D-0.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=11
-% clingcon action-MPP-3.clp  goal-D-0.clp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=11
+% clingcon mppd/action-MPP.clp  mppd/goal-D-0.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=11
 %
-% clingo   action-MPP-2.lp   goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
-% clingo   action-MPP-3.lp   goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
-% clingcon action-MPP-3.clp  goal-D-r.clp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
+% clingo   mppd/action-MPP.lp   mppd/goal-D-r.lp   examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
+% clingcon mppd/action-MPP.clp  mppd/goal-D-r.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13
 %
-% clingo   action-MPP-2.lp   goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP-2.lp
-% clingo   action-MPP-3.lp   goal-D-r.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP-3.lp
+% clingo   mppd/action-MPP.lp   mppd/goal-D-r.lp   examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=13 strategy-MPP.lp
 %
-% clingo   action-MPP-2.ilp  goal-D-r.ilp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
-% clingo   action-MPP-3.ilp  goal-D-r.ilp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
-% clingcon action-MPP-3.iclp goal-D-r.iclp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
+% clingo   mppd/action-MPP.ilp  mppd/goal-D-r.ilp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
+% clingcon mppd/action-MPP.iclp mppd/goal-D-r.iclp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
 %
-% clingo   action-MPP-2.ilp  goal-D-r.ilp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP-2.ilp
-% clingo   action-MPP-3.ilp  goal-D-r.ilp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP-3.ilp
-% clingcon action-MPP-3.iclp goal-D-r.iclp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP-3.ilp
+% clingo   mppd/action-MPP.ilp  mppd/goal-D-r.ilp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP.ilp
+% clingcon mppd/action-MPP.iclp mppd/goal-D-r.iclp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp strategy-MPP.ilp
 %
-% clingo   action-MPP-2.lp   goal-D-q.lp   examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-2.lp
-% clingo   action-MPP-3.lp   goal-D-q.lp   examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-3.lp
-% clingcon action-MPP-2.lp   goal-D-q.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-2.lp
-% clingcon action-MPP-3.lp   goal-D-q.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-3.lp
-% clingcon action-MPP-3.clp  goal-D-q.Clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP-3.lp
+% clingo   mppd/action-MPP.lp   mppd/goal-D-q.lp   examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP.lp
+% clingcon mppd/action-MPP.lp   mppd/goal-D-q.clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP.lp
+% clingcon mppd/action-MPP.clp  mppd/goal-D-q.Clp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=19 strategy-MPP.lp
 %
 %%%%
 %
-% clingo action-M.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp goal-M.lp  -c horizon=11
-% clingo action-M.ilp examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp goal-M.ilp
+% clingo xapf/action-M.lp       xapf/goal-M.lp     examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp -c horizon=11
+% clingo xapf/action-M.ilp      xapf/goal-M.ilp    examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp
 %
 %%%%
 %
 % clingo assign-q.lp  examples/x4_y4_n16_r3_s6_ps2_pr6_u12_o6_N50.lp              --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 |
-%        clingcon action-MPP-3.iclp goal-D-q.iblp control.ilp - output-MPPD-3.ilp --outf=0 -V0 --out-atomf=%s.               | head -n1 > PLUMPS
+%        clingcon mppd/action-MPP.iclp mppd/goal-D-q.iblp control.ilp - output-MPPD.ilp --outf=0 -V0 --out-atomf=%s.               | head -n1 > PLUMPS
 %
 #program base.
 

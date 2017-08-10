@@ -21,10 +21,10 @@
 % [old] clingo   action-M.ilp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.ilp
 % [old] clingcon action-M.iclp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.iclp
 %
-% clingo   action-M.lp   examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.lp  -c horizon=17
-% clingcon action-M.clp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.clp -c horizon=17
-% clingo   action-M.ilp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.ilp
-% clingcon action-M.iclp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.iclp
+% clingo   xapf/action-M.lp   xapf/goal-M.lp   examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
+% clingcon xapf/action-M.clp  xapf/goal-M.clp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
+% clingo   xapf/action-M.ilp  xapf/goal-M.ilp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp 
+% clingcon xapf/action-M.iclp xapf/goal-M.iclp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp 
 #program base.
 
 % init
