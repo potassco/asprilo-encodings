@@ -14,9 +14,9 @@ The encodings are grouped in two directories
 We adopt the following conventions:
 
   * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
-  * ~~digits **2** and **3** indicated the arity of actions *pickup* and *putdown*
-	* **2** without shelf representation
-	* **3** with    shelf representation~~
+  * ~~digits **2** and **3** indicated the arity of actions *pickup* and *putdown*~~
+	* ~~**2** without shelf representation~~
+	* ~~**3** with    shelf representation~~
   * letters **0**, **r**, and **q** indicate the treatment of order lines during delivery
 	* This applies to all files preceded with **goal-** in the **mppd** setting
   * file extensions *lp*, *ilp*, *clp*, and *iclp* stand for regular, incremental, constraint, and incremental constraint logic programs
