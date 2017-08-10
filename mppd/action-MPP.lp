@@ -39,7 +39,7 @@ position(S,C,T) :- position(R,C,T  ),     carries(R,S,T).
 position(S,C,T) :- position(S,C,T-1), not carries(_,S,T), isShelf(S), time(T).
 
 % - edge collision --------------------------------------------------------------
-moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T), position(R,C,T).
+moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T).
 :- moveto(C',C,T), moveto(C,C',T), C < C'.
 
 % - vertex collision ------------------------------------------------------------
