@@ -26,11 +26,18 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
  :- not move(R,(_,0),T), &sum { positionX(R,T-1)    } != positionX(R,T), isRobot(R), time(T).
  :- not move(R,(0,_),T), &sum { positionY(R,T-1)    } != positionY(R,T), isRobot(R), time(T).
 
-% - (state) constraints ---------------------------------------------------------
+% - edge collision --------------------------------------------------------------
+%*
 :- &sum { positionX(R ,T-1) } = positionX(R',T), &sum { positionY(R ,T-1) } = positionY(R',T),
    &sum { positionX(R',T-1) } = positionX(R ,T), &sum { positionY(R',T-1) } = positionY(R ,T),
    R != R', isRobot(R), isRobot(R'), time(T).
+*%
 
-:- &sum { positionX(R,   T) } = positionX(R',T), &sum { positionY(R,T)    } = positionY(R',T),
+moveto((X,Y),(X+D,Y  ),T) :- &sum { positionX(R,T-1) } = X, &sum { positionY(R,T-1) } = Y, move(R,(D,0),T), position((X,Y)).
+moveto((X,Y),(X  ,Y+D),T) :- &sum { positionX(R,T-1) } = X, &sum { positionY(R,T-1) } = Y, move(R,(0,D),T), position((X,Y)).
+ :- moveto(C',C,T), moveto(C,C',T).
+
+% - vertex collision ------------------------------------------------------------
+:- &sum { positionX(R,T) } = positionX(R',T), &sum { positionY(R,T) } = positionY(R',T),
    R  > R', isRobot(R), isRobot(R'), time(T).
 
