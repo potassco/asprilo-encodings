@@ -9,6 +9,11 @@
 % Number of product units in total: 32
 % Number of orders:                 8
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% clingo   xapf/action-M.lp    xapf/goal-m.lp    examples/x26_y26_n676_r5_s16_ps4_pr4_u32_o8_N50.lp -q --stats -c horizon=21
+% clingo   xapf/action-M-XY.lp xapf/goal-m-XY.lp examples/x26_y26_n676_r5_s16_ps4_pr4_u32_o8_N50.lp -q --stats -c horizon=21
+% clingcon xapf/action-M.clp   xapf/goal-m.clp   examples/x26_y26_n676_r5_s16_ps4_pr4_u32_o8_N50.lp -q --stats -c horizon=21
+
 #program base.
 
 % init
