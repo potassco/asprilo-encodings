@@ -9,6 +9,9 @@
 % Number of product units in total: 0
 % Number of orders:                 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% clingo   xapf/action-M.lp    xapf/goal-ms.lp    -c horizon=44 examples/x30_y30_n900_r10_s10_ps0_pr0_u0_o0_N1.lp --stats -q
+% clingo   xapf/action-M.lp    xapf/goal-m.lp     -c horizon=44 examples/x30_y30_n900_r10_s10_ps0_pr0_u0_o0_N1.lp --stats -q
 #program base.
 
 % init
