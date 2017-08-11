@@ -1,0 +1,9 @@
+% NON-ANONYMOUS MAPF 
+
+#program check(t).
+
+goal(N,t) :- robot(N), shelf(N), position(shelf(N),(X,Y),0), positionX(robot(N),X,t), positionY(robot(N),Y,t).
+
+:- goal(N,t-1), move(N,_,t).
+ 
+:- robot(N), shelf(N), not goal(N,t), query(t).
