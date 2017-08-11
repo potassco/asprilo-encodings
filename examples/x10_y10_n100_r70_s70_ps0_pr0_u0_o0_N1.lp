@@ -10,13 +10,13 @@
 % Number of orders:                 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% clingo   xapf/action-M.lp    xapf/goal-m.lp    -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
+% clingo   xapf/action-M.lp    xapf/goal-m.lp    -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q <<< rocks
 % clingo   xapf/action-M-XY.lp xapf/goal-m-XY.lp -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
 % clingcon xapf/action-M.clp   xapf/goal-m.clp   -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
 %
 % clingo   xapf/action-M.lp    xapf/goal-ms.lp   -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
 %
-% clingo   xapf/action-M.ilp   xapf/goal-m.ilp                 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
+% clingo   xapf/action-M.ilp   xapf/goal-m.ilp                 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q <<< really rocks
 % clingo   xapf/action-M.ilp   xapf/goal-ms.ilp                examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
 
 #program base.
