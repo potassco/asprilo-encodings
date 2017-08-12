@@ -1,9 +1,21 @@
 % NON-ANONYMOUS MAPF 
 
+#program base.
+
+distance(N,|X-X'|+|Y-Y'|) :- position(shelf(N),(X,Y),0), position(robot(N),(X',Y'),0).
+maxdistance(M) :- M = #max{ D : distance(_,D) }.
+
 #program check(t).
 
 goal(N,t) :- robot(N), shelf(N), position(shelf(N),C,0), position(robot(N),C,t).
 
-:- goal(N,t-1), move(N,_,t).
+% :- goal(N,t-1), move(N,_,t).
 
 :- robot(N), shelf(N), not goal(N,t), query(t).
+
+% #maximize { 1,N : goal(N,t), robot(N), shelf(N), query(t) }.
+
+:- #count { 1,T : move(robot(N),_,T), query(t) } < D, distance(N,D), robot(N), shelf(N).
+%% :- goal(N,t), distance(N,D), t<D.
+%% :- maxdistance(M), t < M, query(t).
+
