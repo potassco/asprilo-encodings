@@ -15,7 +15,7 @@
 % - SAT (really) sucks for -XY and clp
 % - -m and -ms indistinguishable for M/m.lp
 % INTERESTING:
-% - -ms constraint changes meaning in fixed/incremental setting
+% - -ms constraint changes impact in fixed/incremental setting
 %
 % clingo   xapf/action-M.lp    xapf/goal-m.lp    -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q <<< rocks
 % clingo   xapf/action-M-XY.lp xapf/goal-m-XY.lp -c horizon=16 examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q
