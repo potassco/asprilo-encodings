@@ -15,7 +15,7 @@ goal(N,t) :- robot(N), shelf(N), position(shelf(N),C,0), position(robot(N),C,t).
 
 % #maximize { 1,N : goal(N,t), robot(N), shelf(N), query(t) }.
 
-:- #count { 1,T : move(robot(N),_,T), query(t) } < D, distance(N,D), robot(N), shelf(N).
+:- #count { 1,T : move(robot(N),_,T) } < D, distance(N,D), robot(N), shelf(N), query(t).
 %% :- goal(N,t), distance(N,D), t<D.
 %% :- maxdistance(M), t < M, query(t).
 
