@@ -9,13 +9,14 @@ maxdistance(M) :- M = #max{ D : distance(_,D) }.
 
 goal(N,t) :- robot(N), shelf(N), position(shelf(N),C,0), position(robot(N),C,t).
 
-% :- goal(N,t-1), move(N,_,t).
-
 :- robot(N), shelf(N), not goal(N,t), query(t).
 
 % #maximize { 1,N : goal(N,t), robot(N), shelf(N), query(t) }.
 
-:- #count { 1,T : move(robot(N),_,T) } < D, distance(N,D), robot(N), shelf(N), query(t).
+%:- #count { 1,T : move(robot(N),_,T) } < D, distance(N,D), robot(N), shelf(N), query(t).
 %% :- goal(N,t), distance(N,D), t<D.
+%% :- goal(N,t-1), move(N,_,t).
 %% :- maxdistance(M), t < M, query(t).
 
+%% clingo   xapf/action-M.ilp    xapf/goal-ms.ilp    examples/x10_y10_n100_r70_s70_ps0_pr0_u0_o0_N1.lp --stats -q  --heuristic=domain
+%% #heuristic move(robot(N),D,t) : distance(N,M), maxdistance(X), direction(D). [X-M,init]
