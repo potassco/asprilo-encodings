@@ -21,6 +21,11 @@
 % [old] clingo   action-M.ilp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.ilp
 % [old] clingcon action-M.iclp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.iclp
 %
+% clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-r.ilp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 --stats 
+%        mppd/output-MPPD.ilp | head -n1 | visualizer
+% clingo control/assign.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/output-MPPD.ilp control/control.ilp - --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 --stats
+%        mppd/output-MPPD.ilp | head -n1 | visualizer
+%
 % clingo   xapf/action-M.lp   xapf/goal-M.lp   examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
 % clingcon xapf/action-M.clp  xapf/goal-M.clp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
 % clingo   xapf/action-M.ilp  xapf/goal-M.ilp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp 
