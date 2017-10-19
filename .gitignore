@@ -1,5 +1,6 @@
 *~
 *.png
+*.org
 trash
 screenlog*
 config/
