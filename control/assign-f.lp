@@ -17,5 +17,13 @@ distance(S,P,|X-X'|+|Y-Y'|) :- position(S,(X,Y),0), position(P,(X',Y')),   isShe
 
 #minimize { D+D'@0,R,S,P : assign(R,S,P), distance(R,S,D), distance(S,P,D') }.
 
+ignore(object(         robot,R),       P) :- init(object(  robot,R),              P), not assign(robot(R),_,_).
+ignore(object(pickingStation,S),       P) :- init(object(pickingStation,S),       P), not target(_,station(S)).
+
+ignore(object(product,A),value(on,(S,N))) :- init(object(product,A),value(on,(S,N))), not  assign(_,shelf(S),_).
+ignore(object(product,A),              P) :- init(object(product,A),              P), not ordered(_,product(A)).
+
+#show.
+#show init(X,Y) : init(X,Y), not ignore(X,Y).
+% #show ignore/2.
 #show assign/3.
-#show init/2.

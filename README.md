@@ -95,7 +95,9 @@ We adopt the following conventions:
 	* `clingo action-MPP.lp strategy-MPP.lp goal-D-0.lp show.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
   * To produce plans ready for _asprilo_ use *clingo* option 
       * `--outf=0 -V0 --out-atomf=%s.` together with UNIX command `head -n1` to strip off the trailing (UN)SATISFIABLE
-  * Sometimes it is also nice to see an answer set as a single column, as done with *clingo* option `--out-ifs='\n'`   
+      * or the included script `clingo1facts` (all facts in one line)
+  * Sometimes it is also nice to see an answer set as a single column, as done with *clingo* option `--out-ifs='\n'`
+	  * This is also done with script  `clingo2facts`
    
 ## _asprilo_ connectivity
 
