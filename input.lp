@@ -9,7 +9,7 @@ product(A)                   :- init(object(product,A),        _).
     isRobot(robot(R)) :- robot(R).
     isShelf(shelf(S)) :- shelf(S).
 isStation(station(T)) :- station(T).
-isProduct(product(A)) :- station(A).
+isProduct(product(A)) :- product(A).
     isOrder(order(O)) :- order(O).
 
   order(      O            ) :- init(object(order,O),          _).
