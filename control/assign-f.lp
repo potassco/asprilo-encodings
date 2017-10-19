@@ -23,6 +23,9 @@ ignore(object(pickingStation,S),       P) :- init(object(pickingStation,S),     
 ignore(object(product,A),value(on,(S,N))) :- init(object(product,A),value(on,(S,N))), not  assign(_,shelf(S),_).
 ignore(object(product,A),              P) :- init(object(product,A),              P), not ordered(_,product(A)).
 
+% BUGFIX
+ignore(object(highway,N),value(at,    C)) :- init(object(highway,N),value(at,    C)), init(object(pickingStation,_),value(at,C)).
+
 #show.
 #show init(X,Y) : init(X,Y), not ignore(X,Y).
 % #show ignore/2.
