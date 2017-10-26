@@ -1,6 +1,10 @@
-% NON-ANONYMOUS MAPF 
 
 #program check(t).
 
-:- robot(N), shelf(N), position(shelf(N),(X,_),0), &sum { positionX(robot(N),t) } != X, query(t).
-:- robot(N), shelf(N), position(shelf(N),(_,Y),0), &sum { positionY(robot(N),t) } != Y, query(t).
+processed(O,A,t) :- ordered(O,A), shelved(S,A), position(S,(X,Y),0),
+                    &sum { positionX(R,t) } = X, &sum { positionY(R,t) } = Y, isRobot(R).
+
+processed(O,  t) :- isOrder(O), processed(O,A,t) : ordered(O,A).
+
+:- not processed(O,t), isOrder(O), query(t).
+
