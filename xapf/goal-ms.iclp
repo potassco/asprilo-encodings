@@ -1,9 +1,0 @@
-% NON-ANONYMOUS MAPF 
-
-#program check(t).
-
-:- robot(N), shelf(N), position(shelf(N),(X,Y),0), &sum { positionX(robot(N),t) } = X, &sum { positionY(robot(N),t) } = Y, query(t).
-
-:- goal(N,t-1), move(N,_,t).
-
-:- robot(N), shelf(N), not goal(N,t), query(t).
