@@ -1,3 +1,7 @@
-% NON-ANONYMOUS MAPF 
 
-:- robot(N), shelf(N), position(shelf(N),C,0), not position(robot(N),C,horizon).
+
+processed(O,A) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,horizon), isRobot(R).
+
+processed(O) :- isOrder(O), processed(O,A) : ordered(O,A).
+
+:- not processed(O), isOrder(O).

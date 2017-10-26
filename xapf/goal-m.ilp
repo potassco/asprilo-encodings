@@ -1,5 +1,8 @@
-% NON-ANONYMOUS MAPF 
 
 #program check(t).
 
-:- robot(N), shelf(N), position(shelf(N),C,0), not position(robot(N),C,t), query(t).
+processed(O,A,t) :- ordered(O,A), shelved(S,A), position(S,C,0), position(R,C,t), isRobot(R).
+
+processed(O,  t) :- isOrder(O), processed(O,A,t) : ordered(O,A).
+
+:- not processed(O,t), isOrder(O), query(t).
