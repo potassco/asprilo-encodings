@@ -1,0 +1,13 @@
+#include "./input.lp".
+
+#program check(t).
+
+goal(R,N,t) :- goal(R,N,t-1).
+
+goal(R,1,t) :- go(R,C,1), position(R,C,t).
+goal(R,N,t) :- go(R,C,N), position(R,C,t), goal(R,N-1,t), N>1.
+
+:- not goal(R,N,t), query(t), go(R,_,N), not go(R,_,N+1).
+
+% #heuristic goal(R,C,N). [10-N,factor]
+
