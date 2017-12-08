@@ -16,7 +16,9 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
 &dom{M..N} = positionX(R,T) :- minXposition(M), maxXposition(N), isRobot(R), time(T).
 &dom{M..N} = positionY(R,T) :- minYposition(M), maxYposition(N), isRobot(R), time(T).
 
- { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+{ move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+
+waits(R,t) :- not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
  :-     move(R,(D,0),T), &sum { positionX(R,T-1); D } != positionX(R,T).

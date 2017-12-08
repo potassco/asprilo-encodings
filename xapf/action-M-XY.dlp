@@ -23,7 +23,9 @@ maxY(Max) :- Max = #max { Y : position((_,Y))}.
 dl_assign(posX(R,0),0,X) :- position(R,(X,_),0), isRobot(R).
 dl_assign(posY(R,0),0,Y) :- position(R,(_,Y),0), isRobot(R).
 
- { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+{ move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+
+waits(R,t) :- not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
 dl_lb(posX(R,T),Min) :- isRobot(R), time(T), minX(Min).

@@ -8,7 +8,9 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 
 
 
- { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+{ move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+
+waits(R,t) :- not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
 position(R,C,T) :- move(R,D,T), position(R,C',T-1),     nextto(C',D,C).
