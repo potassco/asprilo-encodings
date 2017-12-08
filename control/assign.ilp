@@ -1,5 +1,5 @@
 %*
-#include "./input.lp".
+#include "../input.lp".
 
 
 % assign order to one or more robots, ie, bring one or more shelfs to a designated picking station, en bloc

@@ -1,4 +1,4 @@
-#include "./input.lp".
+#include "../input.lp".
 #include <incmode>.
 
 
@@ -9,7 +9,9 @@ nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), positi
 
 #program step(t).
 
- { move(R,D,t) : direction(D) } 1 :- isRobot(R).
+{ move(R,D,t) : direction(D) } 1 :- isRobot(R).
+
+waits(R,t) :- not move(R,_,t), isRobot(R).
 
 % - move/3 ----------------------------------------------------------------------
 position(R,C,t) :- move(R,D,t), position(R,C',t-1),     nextto(C',D,C).

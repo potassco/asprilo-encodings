@@ -1,4 +1,4 @@
-#include "./input.lp".
+#include "../input.lp".
 
 
 #const horizon=1.
@@ -31,7 +31,9 @@ in_variable_range_domain(positionY(R,T),M,N)    :- minYposition(M), maxYposition
 
 :- not in_variable_range(V,M,N), in_variable_range_domain(V,M,N).
 
- { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+{ move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+
+waits(R,t) :- not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
 % :-     move(R,(D,0),T), &sum { positionX(R,T-1); D } != positionX(R,T).

@@ -1,4 +1,4 @@
-#include "./input.lp".
+#include "../input.lp".
 
 ordered(order(O),product(A),N) :- init(object(order,O),   value(line,(A,N))).
 shelved(shelf(S),product(A),N) :- init(object(product,A), value(on,  (S,N))).
