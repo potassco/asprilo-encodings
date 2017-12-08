@@ -14,8 +14,6 @@ positionY(R,Y,0) :- position(R,(_,Y),0), isRobot(R).
 
 { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
 
-waits(R,t) :- not move(R,_,T), isRobot(R), time(T).
-
 % - move/3 ----------------------------------------------------------------------
 positionX(R,X+D,T) :- move(R,(D,0),T), positionX(R,X,T-1), positionX(X+D).
 positionY(R,Y+D,T) :- move(R,(0,D),T), positionY(R,Y,T-1), positionY(Y+D).
