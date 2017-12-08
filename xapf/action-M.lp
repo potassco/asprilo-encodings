@@ -1,4 +1,4 @@
-#include "./input.lp".
+#include "../input.lp".
 
 #const horizon=1.
 time(1..horizon).

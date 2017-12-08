@@ -1,4 +1,4 @@
-#include "./input.lp".
+#include "../input.lp".
 
 #const max=1.
 

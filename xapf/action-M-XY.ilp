@@ -1,5 +1,5 @@
 #include <incmode>.
-#include "./input.lp".
+#include "../input.lp".
 
 
 

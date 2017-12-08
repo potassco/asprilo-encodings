@@ -1,4 +1,4 @@
-#include "./input.lp".
+#include "../input.lp".
 #include <csp>. 
 
 #const horizon=1.
