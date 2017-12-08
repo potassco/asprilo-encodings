@@ -21,8 +21,6 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
 
  { move(R,D,t) : direction(D) } 1 :- isRobot(R).
 
-waits(R,t) :- not move(R,_,t), isRobot(R).
-
 % - move/3 ----------------------------------------------------------------------
  :-     move(R,(D,0),t), &sum { positionX(R,t-1); D } != positionX(R,t).
  :-     move(R,(0,D),t), &sum { positionY(R,t-1); D } != positionY(R,t).

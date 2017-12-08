@@ -6,11 +6,7 @@ time(1..horizon).
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
 nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
 
-
-
 { move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
-
-waits(R,t) :- not move(R,_,T), isRobot(R), time(T).
 
 % - move/3 ----------------------------------------------------------------------
 position(R,C,T) :- move(R,D,T), position(R,C',T-1),     nextto(C',D,C).
