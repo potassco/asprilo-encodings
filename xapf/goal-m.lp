@@ -1,4 +1,6 @@
 
 
 
-:- ordered(O,A), not position(R,C,horizon) : shelved(S,A), position(S,C,0), isRobot(R).
+processed(A) :- ordered(O,A), shelved(S,A), isRobot(R), position(S,C,0), position(R,C,horizon).
+
+:- ordered(O,A), not processed(A).
