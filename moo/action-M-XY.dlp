@@ -10,7 +10,7 @@
 :- not &diff { X-Y } <=  V, dl_assign(X,Y,V).
 :- not &diff { Y-X } <= -V, dl_assign(X,Y,V).
 
-#const horizon=1.
+%#const horizon=1.
 time(1..horizon).
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
