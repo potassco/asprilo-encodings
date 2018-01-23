@@ -1,5 +1,5 @@
 #include "../input.lp".
-#include <csp>. 
+#include <csp>.
 
 #const horizon=1.
 time(1..horizon).
@@ -29,9 +29,8 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
 % - edge collision --------------------------------------------------------------
 :- &sum { positionX(R ,T-1) } = positionX(R',T), &sum { positionY(R ,T-1) } = positionY(R',T),
    &sum { positionX(R',T-1) } = positionX(R ,T), &sum { positionY(R',T-1) } = positionY(R ,T),
-   R != R', isRobot(R), isRobot(R'), time(T).
+   R  > R', isRobot(R), isRobot(R'), time(T).
 
 % - vertex collision ------------------------------------------------------------
 :- &sum { positionX(R,T) } = positionX(R',T), &sum { positionY(R,T) } = positionY(R',T),
    R  > R', isRobot(R), isRobot(R'), time(T).
-

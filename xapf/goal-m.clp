@@ -1,9 +1,7 @@
 
 
 
-processed(O,A) :- ordered(O,A), shelved(S,A), position(S,(X,Y),0),
-                  &sum { positionX(R,horizon) } = X, &sum { positionY(R,horizon) } = Y, isRobot(R).
+processed(A) :- ordered(O,A), shelved(S,A), isRobot(R), position(S,(X,Y),0),
+                &sum { positionX(R,horizon) } = X, &sum { positionY(R,horizon) } = Y.
 
-processed(O) :- isOrder(O), processed(O,A) : ordered(O,A).
-
-:- not processed(O), isOrder(O).
+:- ordered(O,A), not processed(A).
