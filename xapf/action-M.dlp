@@ -19,7 +19,7 @@ equal_difference_value(X,Y,V) :- &diff{ X - Y } <=         V, &diff{ Y - X } <= 
 % &dom{Y..Y} = positionY(R,0) :- position(R,(_,Y),0), isRobot(R).
 
 equal_variable_value_domain(positionX(R,0),X)      :- position(R,(X,_),0), isRobot(R).
-equal_variable_value_domain(positionY(R,0),Y)      :- position(R,(Y,_),0), isRobot(R).
+equal_variable_value_domain(positionY(R,0),Y)      :- position(R,(_,Y),0), isRobot(R).
 
 :- not equal_variable_value(X,V), equal_variable_value_domain(X,V).
 
