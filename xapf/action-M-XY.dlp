@@ -15,7 +15,7 @@ time(1..horizon).
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
 
-minX(Min) :- Min = #min { X : position((X,_))}. 
+minX(Min) :- Min = #min { X : position((X,_))}.
 maxX(Max) :- Max = #max { X : position((X,_))}.
 minY(Min) :- Min = #min { Y : position((_,Y))}.
 maxY(Max) :- Max = #max { Y : position((_,Y))}.
@@ -44,7 +44,7 @@ dl_assign(posY(R,T),posY(R,T-1),0) :- not move(R,(0,_),T), isRobot(R), time(T).
    &diff { posY(R,T)-posY(R',T-1) } <= 0, &diff { posY(R',T-1)-posY(R,T) } <= 0,
    &diff { posY(R,T-1)-posY(R',T) } <= 0, &diff { posY(R',T)-posY(R,T-1) } <= 0,
    R > R', isRobot(R), isRobot(R'), time(T).
-   
+
 % - vertex collision ------------------------------------------------------------
 :- &diff { posX(R,T)-posX(R',T) } <= 0, &diff { posX(R',T)-posX(R,T) } <= 0,
    &diff { posY(R,T)-posY(R',T) } <= 0, &diff { posY(R',T)-posY(R,T) } <= 0,

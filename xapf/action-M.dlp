@@ -53,9 +53,9 @@ equal_difference_value_domain(positionY(R,T-1),positionY(R,T),0) :- not move(R,(
 % - (state) constraints ---------------------------------------------------------
 % :- &sum { positionX(R ,T-1) } = positionX(R',T), &sum { positionY(R ,T-1) } = positionY(R',T),
 %    &sum { positionX(R',T-1) } = positionX(R ,T), &sum { positionY(R',T-1) } = positionY(R ,T),
-%    R != R', isRobot(R), isRobot(R'), time(T).
+%    R  > R', isRobot(R), isRobot(R'), time(T).
 
-:- R != R', isRobot(R), isRobot(R'), time(T),
+:- R  > R', isRobot(R), isRobot(R'), time(T),
    equal_variables(positionX(R ,T-1),positionX(R',T)),
    equal_variables(positionY(R ,T-1),positionY(R',T)),
    equal_variables(positionX(R',T-1),positionX(R ,T)),
@@ -63,8 +63,6 @@ equal_difference_value_domain(positionY(R,T-1),positionY(R,T),0) :- not move(R,(
 
 equal_variables_domain(positionX(R ,T-1),positionX(R',T)) :- R != R', isRobot(R), isRobot(R'), time(T).
 equal_variables_domain(positionY(R ,T-1),positionY(R',T)) :- R != R', isRobot(R), isRobot(R'), time(T).
-equal_variables_domain(positionX(R',T-1),positionX(R ,T)) :- R != R', isRobot(R), isRobot(R'), time(T).
-equal_variables_domain(positionY(R',T-1),positionY(R ,T)) :- R != R', isRobot(R), isRobot(R'), time(T).
 
 
 %:- &sum { positionX(R,   T) } = positionX(R',T), &sum { positionY(R,T)    } = positionY(R',T),
@@ -78,4 +76,3 @@ equal_variables_domain(positionX(R,T),positionX(R',T)) :- R  > R', isRobot(R), i
 equal_variables_domain(positionY(R,T),positionY(R',T)) :- R  > R', isRobot(R), isRobot(R'), time(T).
 
 equal_variables(X,Y) :- &diff{ X - Y } <= 0, &diff{ Y - X } <= 0, equal_variables_domain(X,Y).
-

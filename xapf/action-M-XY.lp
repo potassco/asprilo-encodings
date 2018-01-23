@@ -25,8 +25,8 @@ positionX(R,X,T) :- positionX(R,X,T-1), not move(R,(_,0),T), isRobot(R), time(T)
 positionY(R,Y,T) :- positionY(R,Y,T-1), not move(R,(0,_),T), isRobot(R), time(T).
 
 % - edge collision --------------------------------------------------------------
-moveto((X,Y),(X+D,Y  ),T) :- positionX(R,X,T-1), positionY(R,Y,T-1), move(R,(D,0),T).
-moveto((X,Y),(X  ,Y+D),T) :- positionX(R,X,T-1), positionY(R,Y,T-1), move(R,(0,D),T).
+moveto((X,Y),(X+D,Y  ),T) :- positionX(R,X,T-1), positionY(R,Y,T-1), move(R,(D,0),T), positionX(X+D).
+moveto((X,Y),(X  ,Y+D),T) :- positionX(R,X,T-1), positionY(R,Y,T-1), move(R,(0,D),T), positionY(Y+D).
  :- moveto(C',C,T), moveto(C,C',T).
 
 % - vertex collision ------------------------------------------------------------

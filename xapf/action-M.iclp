@@ -1,5 +1,5 @@
 #include "../input.lp".
-#include <csp>. 
+#include <csp>.
 #include <incmode>.
 
 
@@ -32,7 +32,7 @@ minYposition(M) :- M = #min { Y : position((_,Y))}.
 % - edge collision --------------------------------------------------------------
 :- &sum { positionX(R ,t-1) } = positionX(R',t), &sum { positionY(R ,t-1) } = positionY(R',t),
    &sum { positionX(R',t-1) } = positionX(R ,t), &sum { positionY(R',t-1) } = positionY(R ,t),
-   R != R', isRobot(R), isRobot(R').
+   R  > R', isRobot(R), isRobot(R').
 
 % - vertex collision ------------------------------------------------------------
 :- &sum { positionX(R,   t) } = positionX(R',t), &sum { positionY(R,t   ) } = positionY(R',t),
