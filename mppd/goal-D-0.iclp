@@ -11,9 +11,9 @@ processed(A,C,t) :- processed(A,C,t-1).
 
 :- ordered(O,A), target(O,P), position(P,C), not processed(A,C,t), query(t).
 
-:- carries(R,_,t), isRobot(R), query(t).
+:- carries(_,_,t), query(t).
 
-:- position(P,(X,Y)), isStation(P), isRobot(R), query(t),
+:- position(_,(X,Y)), isRobot(R), query(t),
    &sum { positionX(R,t) } = X, &sum { positionY(R,t) } = Y.
-:- position(P,(X,Y)), isStation(P), isShelf(S), query(t),
+:- position(_,(X,Y)), isShelf(S), query(t),
    &sum { positionX(S,t) } = X, &sum { positionY(S,t) } = Y.

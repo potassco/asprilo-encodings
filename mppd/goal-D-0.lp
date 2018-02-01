@@ -11,6 +11,6 @@ processed(A,C) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), positi
 
 :- ordered(O,A), target(O,P), position(P,C), not processed(A,C).
 
-:- carries(R,_,horizon), isRobot(R).
+:- carries(_,_,horizon).
 
-:- position(P,C), isStation(P), position(_,C,horizon).
+:- position(_,C), position(_,C,horizon).

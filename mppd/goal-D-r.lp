@@ -2,14 +2,16 @@
 
 toShelf(S,C) :- shelved(S,A), ordered(O,A), target(O,P), position(P,C).
 
+
+
  { process(A,O,C,T) : ordered(O,A), target(O,P), position(P,C) } rate :- time(T).
 
 processed(A,O,T) :- process(A,O,C,T).
 processed(A,O,T) :- processed(A,O,T-1), time(T).
 
-:- ordered(O,A), not processed(A,O,horizon).
-
 :- process(A,O,C,T), processed(A,O,T-1).
+
+
 
 process(A,C,T) :- process(A,O,C,T).
 
@@ -20,9 +22,13 @@ process(C,T) :- process(A,C,T).
 :- process(C,T), position(S,C,T-1), toShelf(S,C), not carries(_,S,T-1).
 :- process(C,T), position(R,C,T-1), isRobot(R), not waits(R,T).
 
-:- carries(R,_,horizon), isRobot(R).
 
-:- position(P,C), isStation(P), position(_,C,horizon).
+
+:- ordered(O,A), not processed(A,O,horizon).
+
+:- carries(_,_,horizon).
+
+:- position(_,C), position(_,C,horizon).
 
 % lexorder(A,O1,O2) :- ordered(O1,A), target(O1,P1), position(P1,C),
 %                      ordered(O2,A), target(O2,P2), position(P2,C), O1 < O2,

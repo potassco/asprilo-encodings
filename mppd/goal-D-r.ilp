@@ -1,17 +1,31 @@
 #const rate=1.
 
+toShelf(S,C) :- shelved(S,A), ordered(O,A), target(O,P), position(P,C).
+
+#program step(t).
+
+ { process(A,O,C,t) : ordered(O,A), target(O,P), position(P,C) } rate.
+
+processed(A,O,t) :- process(A,O,C,t).
+processed(A,O,t) :- processed(A,O,t-1).
+
+:- process(A,O,C,t), processed(A,O,t-1).
+
+
+
+process(A,C,t) :- process(A,O,C,t).
+
+:- process(A,C,t), not position(S,C,t-1) : shelved(S,A).
+
+process(C,t) :- process(A,C,t).
+
+:- process(C,t), position(S,C,t-1), toShelf(S,C), not carries(_,S,t-1).
+:- process(C,t), position(R,C,t-1), isRobot(R), not waits(R,t).
+
 #program check(t).
 
- { process(A,O,S,t) : ordered(O,A), shelved(S,A) } rate.
+:- ordered(O,A), not processed(A,O,t), query(t).
 
-:- process(_,O,S,t), target(O,P), not serves(_,S,P,t).
-:- process(_,O,S,t), target(O,P),     serves(R,S,P,t), not waits(R,t).
+:- carries(_,_,t), query(t).
 
-:- process(A,O,_,t), { process(A,O,_,T) : T=1..t-1 } > 0.
-
-processed(O,t) :- isOrder(O), process(A,O,_,_) : ordered(O,A).
-
-:- not processed(O,t), isOrder(O), query(t).
-
-:- carries(R,_,t),                   isRobot(R), query(t).
-:- position(S,C), position(_,C,t), isStation(S), query(t).
+:- position(_,C), position(_,C,t), query(t).

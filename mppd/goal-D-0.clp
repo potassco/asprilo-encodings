@@ -11,9 +11,9 @@ processed(A,C)     :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), po
 
 :- ordered(O,A), target(O,P), position(P,C), not processed(A,C).
 
-:- carries(R,_,horizon), isRobot(R).
+:- carries(_,_,horizon).
 
-:- position(P,(X,Y)), isStation(P), isRobot(R),
+:- position(_,(X,Y)), isRobot(R),
    &sum { positionX(R,horizon) } = X, &sum { positionY(R,horizon) } = Y.
-:- position(P,(X,Y)), isStation(P), isShelf(S),
+:- position(_,(X,Y)), isShelf(S),
    &sum { positionX(S,horizon) } = X, &sum { positionY(S,horizon) } = Y.
