@@ -1,12 +1,15 @@
 
 
 
-processed(P,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,_).
+processed(A,C) :- ordered(O,A), target(O,P), position(P,(X,Y)), shelved(S,A), time(T), not position(S,(X,Y),0),
+                  &sum { positionX(S,T) } = X, &sum{ positionY(S,T) } = Y.
+processed(A,C) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), position(S,C,0),
+                  carries(_,S,T).
 
 
 
 
-:- ordered(O,A), target(O,P), not processed(P,A).
+:- ordered(O,A), target(O,P), position(P,C), not processed(A,C).
 
 :- carries(R,_,horizon), isRobot(R).
 
