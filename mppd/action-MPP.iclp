@@ -1,6 +1,6 @@
 #include "../input.lp".
 #include <incmode>.
-#include <csp>. 
+#include <csp>.
 
 
 
@@ -11,19 +11,19 @@ minXposition(M) :- M = #min { X : position((X,_))}.
 maxYposition(M) :- M = #max { Y : position((_,Y))}.
 minYposition(M) :- M = #min { Y : position((_,Y))}.
 
-&dom{X..X} = positionX(robot(R),0) :- init(object(robot,R), value(at,(X,_))).
-&dom{Y..Y} = positionY(robot(R),0) :- init(object(robot,R), value(at,(_,Y))).
+&dom{X..X} = positionX(R,0) :- position(R,(X,_),0), isRobot(R).
+&dom{Y..Y} = positionY(R,0) :- position(R,(_,Y),0), isRobot(R).
 
-&dom{X..X} = positionX(shelf(S),0) :- init(object(shelf,S), value(at,(X,_))).
-&dom{Y..Y} = positionY(shelf(S),0) :- init(object(shelf,S), value(at,(_,Y))).
+&dom{X..X} = positionX(S,0) :- position(S,(X,_),0), isShelf(S).
+&dom{Y..Y} = positionY(S,0) :- position(S,(_,Y),0), isShelf(S).
 
 #program step(t).
 
-&dom{M..N} = positionX(      R ,t) :- minXposition(M), maxXposition(N), isRobot(R).
-&dom{M..N} = positionY(      R ,t) :- minYposition(M), maxYposition(N), isRobot(R).
+&dom{M..N} = positionX(R,t) :- minXposition(M), maxXposition(N), isRobot(R).
+&dom{M..N} = positionY(R,t) :- minYposition(M), maxYposition(N), isRobot(R).
 
-&dom{M..N} = positionX(      S ,t) :- minXposition(M), maxXposition(N), isShelf(S).
-&dom{M..N} = positionY(      S ,t) :- minYposition(M), maxYposition(N), isShelf(S).
+&dom{M..N} = positionX(S,t) :- minXposition(M), maxXposition(N), isShelf(S).
+&dom{M..N} = positionY(S,t) :- minYposition(M), maxYposition(N), isShelf(S).
 
  {    move(R,D,t) : direction(D) ;
     pickup(R,S,t) : isShelf(S)   ;
@@ -36,24 +36,23 @@ waits(R,t) :- not pickup(R,_,t), not putdown(R,_,t), not move(R,_,t), isRobot(R)
  :-     move(R,(0,D),t), &sum { positionY(R,t-1); D } != positionY(R,t).
 
 % - pickup/3 --------------------------------------------------------------------
- carries(R,S,t) :- pickup(R,S,t), &sum { positionX(R,t-1) }  = positionX(S,t-1),
-		                  &sum { positionY(R,t-1) }  = positionY(S,t-1).
+ carries(R,S,t) :- pickup(R,S,t).
                 :- pickup(R,S,t), carries(R,_,t-1).
                 :- pickup(R,S,t), carries(_,S,t-1).                                                      % NEEDED!?
                 :- pickup(R,S,t), &sum { positionX(R,t-1) } != positionX(S,t-1).
                 :- pickup(R,S,t), &sum { positionY(R,t-1) } != positionY(S,t-1).
 
 % - putdown/3 -------------------------------------------------------------------
-                :- putdown(R,S,t), not carries(R,S ,t-1).
+                :- putdown(R,S,t), not carries(R,S,t-1).
 
 % - serves/4 --------------------------------------------------------------------
-serves(R,S,P,t) :- carries(R,S,t), &sum { positionX(R,t) } = X,  &sum{ positionY(R,t) } = Y, position(P,(X,Y)), isStation(P).
+serves(R,S,P,t) :- carries(R,S,t), &sum { positionX(R,t) } = X, &sum{ positionY(R,t) } = Y, position(P,(X,Y)), isStation(P).
 
 % - inertia ---------------------------------------------------------------------
  :- not move(R,(_,0),t), &sum { positionX(R,t-1) } != positionX(R,t), isRobot(R).
  :- not move(R,(0,_),t), &sum { positionY(R,t-1) } != positionY(R,t), isRobot(R).
 
-carries(R,S,t) :- carries(R,S,t-1), not putdown(R,_,t).
+carries(R,S,t) :- carries(R,S,t-1), not putdown(R,S,t).
 
 % - (in)direct effects ----------------------------------------------------------
  :-     carries(R,S,t), &sum { positionX(R,t  ) } != positionX(S,t).
@@ -63,7 +62,8 @@ carries(R,S,t) :- carries(R,S,t-1), not putdown(R,_,t).
 
 % - edge collision --------------------------------------------------------------
 :- &sum { positionX(R ,t-1) } = positionX(R',t), &sum { positionY(R ,t-1) } = positionY(R',t),
-   &sum { positionX(R',t-1) } = positionX(R ,t), &sum { positionY(R',t-1) } = positionY(R ,t), R != R', isRobot(R), isRobot(R').
+   &sum { positionX(R',t-1) } = positionX(R ,t), &sum { positionY(R',t-1) } = positionY(R ,t),
+   R > R', isRobot(R), isRobot(R').
 
 % - vertex collision ------------------------------------------------------------
 :- &sum { positionX(R,t) } = positionX(R',t),
@@ -71,4 +71,6 @@ carries(R,S,t) :- carries(R,S,t-1), not putdown(R,_,t).
 :- &sum { positionX(S,t) } = positionX(S',t),
    &sum { positionY(S,t) } = positionY(S',t), S > S', isShelf(S), isShelf(S').
 
-
+% - auxiliaries -----------------------------------------------------------------
+ :- { carries(R,S,t) } > 1, isRobot(R).
+ :- { carries(R,S,t) } > 1, isShelf(S).

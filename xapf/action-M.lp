@@ -17,7 +17,10 @@ position(R,C,T) :- position(R,C,T-1), not move(R,_,T), isRobot(R), time(T).
 
 % - edge collision --------------------------------------------------------------
 moveto(C',C,T) :- nextto(C',D,C), position(R,C',T-1), move(R,D,T).
- :- moveto(C',C,T), moveto(C,C',T).
+ :- moveto(C',C,T), moveto(C,C',T), C < C'.
 
 % - vertex collision ------------------------------------------------------------
  :- { position(R,C,T) : isRobot(R) }  > 1, position(C), time(T).
+
+% - auxiliaries -----------------------------------------------------------------
+ :- { position(R,C,T) } != 1, isRobot(R), time(T).    % REDUNDANT but PERFORMANT?

@@ -27,11 +27,11 @@ positionY(R,Y,T) :- positionY(R,Y,T-1), not move(R,(0,_),T), isRobot(R), time(T)
 % - edge collision --------------------------------------------------------------
 moveto((X,Y),(X+D,Y  ),T) :- positionX(R,X,T-1), positionY(R,Y,T-1), move(R,(D,0),T), positionX(X+D).
 moveto((X,Y),(X  ,Y+D),T) :- positionX(R,X,T-1), positionY(R,Y,T-1), move(R,(0,D),T), positionY(Y+D).
- :- moveto(C',C,T), moveto(C,C',T).
+ :- moveto(C',C,T), moveto(C,C',T), C < C'.
 
 % - vertex collision ------------------------------------------------------------
  :- #count { R : isRobot(R), positionX(R,X,T), positionY(R,Y,T) }  > 1, position((X,Y)), time(T).
 
 % - auxiliaries -----------------------------------------------------------------
- :- { positionX(R,X,T) } > 1, isRobot(R), time(T). % REDUNDANT but PERFORMANT?
- :- { positionY(R,Y,T) } > 1, isRobot(R), time(T). % REDUNDANT but PERFORMANT?
+ :- { positionX(R,X,T) } != 1, isRobot(R), time(T).   % REDUNDANT but PERFORMANT?
+ :- { positionY(R,Y,T) } != 1, isRobot(R), time(T).   % REDUNDANT but PERFORMANT?
