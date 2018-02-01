@@ -1,10 +1,10 @@
 
 #program step(t).
 
-processed(A,C,t) :- ordered(O,A), target(O,P), position(P,(X,Y)), shelved(S,A), not position(S,(X,Y),0),
-                    &sum { positionX(S,t) } = X, &sum{ positionY(S,t) } = Y.
-processed(A,C,t) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), position(S,C,0),
-                    carries(_,S,t).
+processed(A,(X,Y),t) :- ordered(O,A), target(O,P), position(P,(X,Y)), shelved(S,A), not position(S,(X,Y),0),
+                        &sum { positionX(S,t) } = X, &sum{ positionY(S,t) } = Y.
+processed(A,C,t) :-     ordered(O,A), target(O,P), position(P,C), shelved(S,A), position(S,C,0),
+                        carries(_,S,t).
 processed(A,C,t) :- processed(A,C,t-1).
 
 #program check(t).
