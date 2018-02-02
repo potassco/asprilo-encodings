@@ -1,4 +1,6 @@
 
+instant(shelf(S)) :- position(shelf(S),C,0), position(_,C), strategy.
+
 
 
 processed(A,(X,Y)) :- ordered(O,A), target(O,P), position(P,(X,Y)), shelved(S,A), time(T), not position(S,(X,Y),0),
