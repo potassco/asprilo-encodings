@@ -1,30 +1,34 @@
 % #const rate=1. % NOT IMPLEMENTED
-#include <csp>. 
+#include <csp>.
 
-&dom{N..N} =   ordered(order(O),product(A),0) :- init(object(order,O),   value(line,(A,N))).
-&dom{0..N} =   ordered(order(O),product(A),T) :- init(object(order,O),   value(line,(A,N))), time(T).
-&dom{N..N} =   shelved(shelf(S),product(A),0) :- init(object(product,A), value(on,  (S,N))).
-&dom{0..N} =   shelved(shelf(S),product(A),T) :- init(object(product,A), value(on,  (S,N))), time(T).
+ordered(order(O),product(A),N) :- init(object(order,O),  value(line,(A,N))).
+shelved(shelf(S),product(A),N) :- init(object(product,A),value(on,  (S,N))), ordered(order(O),product(A)).
 
-&dom{0..N} = process(product(A),order(O),S,T) :- init(object(order,O),   value(line,(A,N))), shelved(S,product(A)), time(T).
+limit(A,O,S,(N+N'-|N-N'|)/2) :- ordered(O,A,N), shelved(S,A,N').
 
- { process(A,O,S,T) : ordered(O,A), shelved(S,A) } 1 :- time(T).
+&dom{N..N} =   ordered(O,A,0) :- ordered(O,A,N).
+&dom{N..N} =   shelved(S,A,0) :- shelved(S,A,N).
 
-:- process(_,O,S,T), target(O,P), not serves(_,S,P,T).
-:- process(_,O,S,T), target(O,P),     serves(R,S,P,T), not waits(R,T).
-:- process(A,O,S,T), &sum{ shelved(S,A,T-1); -process(A,O,S,T) } < 0.
 
-:- process(A,O,_,T), &sum{ ordered(O,A,T-1) } = 0.
 
-:-     process(A,O,S,T), shelved(S,A),               &sum{  shelved(S,A,T); process(A,O,S,T) } != shelved(S,A,T-1).
-:-     process(A,O,S,T),               ordered(O,A), &sum{  ordered(O,A,T); process(A,O,S,T) } != ordered(O,A,T-1).
+&dom{0..N} =   ordered(O,A,T) :- ordered(O,A,N), time(T).
+&dom{0..N} =   shelved(S,A,T) :- shelved(S,A,N), time(T).
 
-:- not process(A,_,S,T), shelved(S,A),               &sum{  shelved(S,A,T)                   } != shelved(S,A,T-1), time(T).
-:- not process(A,O,_,T),               ordered(O,A), &sum{  ordered(O,A,T)                   } != ordered(O,A,T-1), time(T).
+&dom{0..M} = process(A,O,S,T) :- limit(A,O,S,M), time(T).
 
-:-     process(A,O,S,T),                             &sum{                  process(A,O,S,T) }  = 0.
-:- not process(A,O,S,T), shelved(S,A), ordered(O,A), &sum{                  process(A,O,S,T) } != 0, time(T).
-%*
-:-                       shelved(S,A),               &sum{ shelved(S,A,T)                    }  > shelved(S,A,T-1), time(T).
-:-                                     ordered(O,A), &sum{ ordered(O,A,T)                    }  > ordered(O,A,T-1), time(T).
-*%
+process(A,O,S,T) :- limit(A,O,S,M), &sum { process(A,O,S,T) } > 0, time(T).
+
+process(O,S,T) :- process(_,O,S,T).
+
+process(S,T) :- process(_,S,T).
+
+:- { process(_,_,_,T) } > 1, time(T).
+
+:- ordered(O,A,N), &sum { ordered(O,A,T); process(A,O,S,T) : limit(A,O,S,M) } != ordered(O,A,T-1), time(T).
+:- shelved(S,A,N), &sum { shelved(S,A,T); process(A,O,S,T) : limit(A,O,S,M) } != shelved(S,A,T-1), time(T).
+
+:- process(O,S,T), target(O,P), position(P,(X,_)), &sum { positionX(S,T-1) } != X.
+:- process(O,S,T), target(O,P), position(P,(_,Y)), &sum { positionY(S,T-1) } != Y.
+
+:- process(S,T), not carries(_,S,T-1).
+:- process(S,T), carries(R,S,T-1), not waits(R,T).
