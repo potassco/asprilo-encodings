@@ -1,25 +1,28 @@
 strategy.
 
+candoShelf(S,P,C) :- shelved(S,A), ordered(O,A), target(O,P), position(P,C).
+candoShelf(S)     :- candoShelf(S,_,_).
+cannoShelf(S,C)   :- candoShelf(S), position(P,C), not candoShelf(S,P,C).
+
+candiShelf(S,P) :- candoShelf(S,P,C), not cannoShelf(S,C).
+candiShelf(S)   :- candiShelf(S,P), position(S,C,0), not cannoShelf(S,C).
+
 #program step(t).
 
- :- serves(_,S,P,t), not shelved(S,A) : ordered(O,A), target(O,P).
+ :- carries(_,S,t), not candiShelf(S).
 
-servesBefore(R,S,t) :- serves(R,S,_,t-1).
-servesBefore(R,S,t) :- servesBefore(R,S,t-1).
+ :- serves(_,S,P,t), candiShelf(S), not candiShelf(S,P).
 
-#external servesAfter(R,S,t+1) : isRobot(R), shelved(S,A), ordered(O,A), target(O,P).
-#external    serves(R,S,P,t+1) : isRobot(R), shelved(S,A), ordered(O,A), target(O,P).
+ :- move(R,_,t), not servesAfter(R,_,t), not serves(R,_,_,T) : T = 1..t.
+
+ :- pickup(R,S,t), not instant(S), not servesAfter(R,S,t).
+ :- serves(R,S,_,t), not instant(S), not pickup(R,S,T) : T = 1..t-1.
+
+ :- putdown(R,S,t), not serves(R,S,_,T) : T = 1..t-1.
+ :- putdown(R,S,t), not   pickup(R,S,T) : T = 1..t-1.
+
+#external servesAfter(R,S,t+1) : isRobot(R), candiShelf(S).
+#external    serves(R,S,P,t+1) : isRobot(R), candiShelf(S), candiShelf(S,P).
 
 servesAfter(R,S,t) :- serves(R,S,_,t+1).
 servesAfter(R,S,t) :- servesAfter(R,S,t+1).
-
-serves(R,S,t) :- serves(R,S,_,t).
-serves(R,S,t) :- servesBefore(R,S,t).
-serves(R,S,t) :- servesAfter(R,S,t).
-
- :- carries(R,S,t), not serves(R,S,t).
-
- :- move(R,_,t), not serves(R,_,t).
-
- :-  pickup(R,S,t), not servesAfter(R,S,t).
- :- putdown(R,S,t), not servesBefore(R,S,t).

@@ -29,7 +29,7 @@ position(R,C,t) :- move(R,D,t),        position(R,C',t-1),     nextto(C',D,C).
                 :- putdown(R,S,t), not carries(R,S ,t-1).
 
 % - serves/4 --------------------------------------------------------------------
-serves(R,S,P,t) :- position(R,C,t), carries(R,S,t), position(_,C), strategy.
+serves(R,S,P,t) :- position(R,C,t), carries(R,S,t), position(P,C), strategy.
 
 % - inertia ---------------------------------------------------------------------
 position(R,C,t) :- position(R,C,t-1), not    move(R,_,t), isRobot(R).
