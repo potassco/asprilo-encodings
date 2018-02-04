@@ -2,11 +2,8 @@
 
 
 
-processed(O) :- isOrder(O), #sum { N : ordered(O,A,N,horizon), ordered(O,A) } = 0.
+:- ordered(_,_,1,horizon).
 
+:- carries(_,_,horizon).
 
-:- not processed(O), isOrder(O).
-
-:- carries(R,_,horizon),                   isRobot(R).
-:- position(S,C), position(_,C,horizon), isStation(S).
-
+:- position(_,C), position(_,C,horizon).

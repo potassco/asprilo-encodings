@@ -1,19 +1,22 @@
+strategy.
 
- :- serves(_,S,P,_), #count { 1,A : ordered(O,A), target(O,P), shelved(S,A) } = 0.
+candoShelf(S,P,C) :- shelved(S,A), ordered(O,A), target(O,P), position(P,C).
+candoShelf(S)     :- candoShelf(S,_,_).
+cannoShelf(S,C)   :- candoShelf(S), position(P,C), not candoShelf(S,P,C).
 
-candiShelf(S) :- ordered(_,A), shelved(S,A).
+candiShelf(S,P) :- candoShelf(S,P,C), not cannoShelf(S,C).
+candiShelf(S)   :- candiShelf(S,P), position(S,C,0), not cannoShelf(S,C).
+
+
+
  :- carries(_,S,_), not candiShelf(S).
 
- :- carries(_,S,_), not serves(_,S,_,_).
+ :- serves(_,S,P,_), candiShelf(S), not candiShelf(S,P).
 
- :-    move(R,_,_), not serves(R,_,_,_).
- :-  pickup(R,S,_), not serves(R,S,_,_).
- :- putdown(R,S,_), not serves(R,S,_,_).
+ :- move(R,_,_), not serves(R,_,_,_).
 
- :-  pickup(R,S,  T), {  serves(R,S,_,T') : T' > T, time(T') } = 0.
- :-  serves(R,S,_,T), {  pickup(R,S,  T') : T' < T, time(T') } = 0.
- :-  serves(R,S,_,T), { putdown(R,S,  T') : T' > T, time(T') } = 0.
- :- putdown(R,S,  T), {  serves(R,S,_,T') : T' < T, time(T') } = 0.	
+ :- pickup(R,S,T), not instant(S), not serves(R,S,_,T') : time(T'), T' > T.
+ :- serves(R,S,_,T), not instant(S), not pickup(R,S,T') : time(T'), T' < T.
 
- :-  pickup(R,S,  T), { putdown(R,S,  T') : T' > T, time(T') } = 0. 
- :- putdown(R,S,  T), {  pickup(R,S,  T') : T' < T, time(T') } = 0.
+ :- putdown(R,S,T), not serves(R,S,_,T') : time(T'), T' < T.
+ :- putdown(R,S,T), not   pickup(R,S,T') : time(T'), T' < T.

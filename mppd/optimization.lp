@@ -8,4 +8,3 @@
 straight(R,T) :- move(R,D,T), move(R,D,T-1).
 #maximize{ 1@1,R,T : straight(R,T) }.
 *%
-

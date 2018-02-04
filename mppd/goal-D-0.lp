@@ -1,13 +1,18 @@
 
-
-
-processed(P,A) :- ordered(O,A), target(O,P), shelved(S,A), serves(R,S,P,_).
-
+instant(shelf(S)) :- position(shelf(S),C,0), position(_,C), strategy.
 
 
 
-:- ordered(O,A), target(O,P), not processed(P,A).
+processed(A,C) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), not position(S,C,0),
+                  position(S,C,T).
+processed(A,C) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), position(S,C,0),
+                  carries(_,S,T).
 
-:- carries(R,_,horizon), isRobot(R).
 
-:- position(P,C), isStation(P), position(_,C,horizon).
+
+
+:- ordered(O,A), target(O,P), position(P,C), not processed(A,C).
+
+:- carries(_,_,horizon).
+
+:- position(_,C), position(_,C,horizon).

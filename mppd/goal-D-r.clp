@@ -1,20 +1,34 @@
 #const rate=1.
 
+toShelf(S,C) :- shelved(S,A), ordered(O,A), target(O,P), position(P,C).
 
 
- { process(A,O,S,T) : ordered(O,A), shelved(S,A) } rate :- time(T).
 
-:- process(_,O,S,T), target(O,P), not serves(_,S,P,T).
-:- process(_,O,S,T), target(O,P),     serves(R,S,P,T), not waits(R,T).
+ { process(A,O,C,T) : ordered(O,A), target(O,P), position(P,C) } rate :- time(T).
 
-:- process(A,O,_,t), { process(A,O,_,T) : time(T), T<t } > 0.
+processed(A,O,T) :- process(A,O,C,T).
+processed(A,O,T) :- processed(A,O,T-1), time(T).
 
-processed(O) :- isOrder(O), process(A,O,_,_) : ordered(O,A).
+:- process(A,O,C,T), processed(A,O,T-1).
 
-:- not processed(O), isOrder(O).
+atShelf(S,(X,Y),T) :- toShelf(S,(X,Y)), time(T+1), &sum { positionX(S,T) } = X, &sum{ positionY(S,T) } = Y.
 
-:- carries(R,_,horizon),                   isRobot(R).
+process(A,C,T) :- process(A,O,C,T).
 
-:- &sum { positionX(R,horizon) } = X,
-   &sum { positionY(R,horizon) } = Y, position(P,(X,Y)), isStation(P), isRobot(R).
+:- process(A,C,T), not atShelf(S,C,T-1) : shelved(S,A).
 
+process(C,T) :- process(A,C,T).
+
+:- process(C,T), atShelf(S,C,T-1), not carries(_,S,T-1).
+:- process((X,Y),T), isRobot(R), &sum { positionX(R,T-1) } = X, &sum{ positionY(R,T-1) } = Y, not waits(R,T).
+
+
+
+:- ordered(O,A), not processed(A,O,horizon).
+
+:- carries(_,_,horizon).
+
+:- position(_,(X,Y)), isRobot(R),
+   &sum { positionX(R,horizon) } = X, &sum { positionY(R,horizon) } = Y.
+:- position(_,(X,Y)), isShelf(S),
+   &sum { positionX(S,horizon) } = X, &sum { positionY(S,horizon) } = Y.

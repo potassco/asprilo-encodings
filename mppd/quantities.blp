@@ -1,5 +1,5 @@
 % #const rate=1. % NOT IMPLEMENTED
-#include "./action-MPP.lp".
+#include "./action-MPP.clp".
 
 
 ordered(order(O),product(A),N) :- init(object(order,O),  value(line,(A,N))).
@@ -29,8 +29,8 @@ shelved(S,A,N-M,T) :- shelved(S,A,N,T-1), process(A,S,M,T), M < N.
 ordered(O,A,N,  T) :- ordered(O,A,N,T-1), not process(A,O,_,T), time(T).
 shelved(S,A,N,  T) :- shelved(S,A,N,T-1), not process(A,S,T), time(T).
 
-:- process(_,O,S,_,T), target(O,P), position(P,C), not position(S,C,T-1).
-
+:- process(_,O,S,_,T), target(O,P), position(P,(X,_)), &sum { positionX(S,T-1) } != X.
+:- process(_,O,S,_,T), target(O,P), position(P,(_,Y)), &sum { positionY(S,T-1) } != Y.
 
 :- process(S,T), not carries(_,S,T-1).
 :- process(S,T), carries(R,S,T-1), not waits(R,T).

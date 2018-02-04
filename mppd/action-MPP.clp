@@ -46,7 +46,7 @@ waits(R,T) :- not pickup(R,_,T), not putdown(R,_,T), not move(R,_,T), isRobot(R)
                 :- putdown(R,S,T), not carries(R,S,T-1).
 
 % - serves/4 --------------------------------------------------------------------
-serves(R,S,P,T) :- carries(R,S,T), &sum { positionX(R,T) } = X, &sum{ positionY(R,T) } = Y, position(P,(X,Y)), isStation(P).
+serves(R,S,P,T) :- carries(R,S,T), &sum { positionX(R,T) } = X, &sum{ positionY(R,T) } = Y, position(P,(X,Y)), strategy.
 
 % - inertia ---------------------------------------------------------------------
  :- not move(R,(_,0),T), &sum { positionX(R,T-1) } != positionX(R,T), isRobot(R), time(T).
