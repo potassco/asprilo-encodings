@@ -1,10 +1,16 @@
-% = MOO DOMAIN: INCREMENTAL BOOLEAN ENCODING WITH X/Y-COORDINATES SPLIT UP =========================
+% = MPPD DOMAIN: INCREMENTAL BOOLEAN ENCODING ======================================================
 
 % Move actions
 #include "./action-MPP.ilp".
 
 % Order fulfillment (Goal condition)
 #include "./goal-D-q.ilp".
+
+% Highway constraints
+#include "../control/highways.ilp".
+
+% Strategy
+#include "./strategy-MPP.ilp"
 
 % Output conversion
 #include "./output-MPPD.ilp".

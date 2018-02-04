@@ -1,4 +1,4 @@
-% = MOO DOMAIN: BOOLEAN ENCODING ===================================================================
+% = MPPD DOMAIN: BOOLEAN ENCODING ==================================================================
 
 % Move actions
 #include "./action-MPP.lp".
@@ -8,6 +8,9 @@
 
 % Highway constraints
 #include "../control/highways.lp".
+
+% Strategy
+#include "./strategy-MPP.lp"
 
 % Output conversion
 #include "./output-MPPD.lp".
