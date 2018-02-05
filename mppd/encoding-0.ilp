@@ -4,13 +4,10 @@
 #include "./action-MPP.ilp".
 
 % Order fulfillment (Goal condition)
-#include "./goal-D-q.ilp".
+#include "./goal-D-0.ilp".
 
 % Highway constraints
 #include "../control/highways.ilp".
-
-% Strategy
-#include "./strategy-MPP.ilp"
 
 % Output conversion
 #include "./output-MPPD.ilp".
