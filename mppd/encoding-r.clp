@@ -4,7 +4,7 @@
 #include "./action-MPP.clp".
 
 % Order fulfillment (Goal condition)
-#include "./goal-D-r.clp
+#include "./goal-D-r.clp".
 
 % Highway constraints
 #include "../control/highways.clp".
