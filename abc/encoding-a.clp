@@ -1,13 +1,13 @@
 % = MPPD DOMAIN: CLINGCON ENCODING =================================================================
 
 % Move actions
-#include "./action-MPP.iclp".
+#include "./action-MPP.clp".
 
 % Order fulfillment (Goal condition)
-#include "./goal-D-r.iclp".
+#include "./goal-D-a.Clp".
 
 % Highway constraints
-#include "../control/highways.iclp".
+#include "../control/highways.clp".
 
 % Output conversion
-#include "./output-MPPD.ilp".
+#include "./output-MPPD.lp".

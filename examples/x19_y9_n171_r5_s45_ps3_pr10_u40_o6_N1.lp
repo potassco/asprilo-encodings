@@ -10,8 +10,8 @@
 % Number of Product Units in Total: 40
 % Number of Orders:                 6
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% clingo examples/x19_y9_n171_r5_s45_ps3_pr10_u40_o6_N1.lp mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/strategy-MPP.ilp
-% clingo control/assign.lp examples/x19_y9_n171_r5_s45_ps3_pr10_u40_o6_N1.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/output-MPPD.ilp control/control.ilp - --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 mppd/output-MPPD.ilp | head -n1 | visualizer
+% clingo examples/x19_y9_n171_r5_s45_ps3_pr10_u40_o6_N1.lp mppd/action-MPP.ilp mppd/goal-D-b.ilp mppd/strategy-MPP.ilp
+% clingo control/assign.lp examples/x19_y9_n171_r5_s45_ps3_pr10_u40_o6_N1.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-b.ilp mppd/output-MPPD.ilp control/control.ilp - --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 mppd/output-MPPD.ilp | head -n1 | visualizer
 
 #program base.
 

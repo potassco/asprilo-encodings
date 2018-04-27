@@ -14,18 +14,18 @@
 % clingo   action-M.ilp  examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.ilp 
 % clingcon action-M.iclp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp goal-M.iclp 
 %
-% clingo   mppd/action-MPP.ilp   mppd/goal-D-r.ilp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp
-% clingo   mppd/action-MPP.ilp   mppd/goal-D-r.ilp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp mppd/strategy-MPP.ilp
+% clingo   mppd/action-MPP.ilp   mppd/goal-D-b.ilp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp
+% clingo   mppd/action-MPP.ilp   mppd/goal-D-b.ilp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp mppd/strategy-MPP.ilp
 %* clingo control/assign.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | \
-   clingo  mppd/action-MPP.ilp   mppd/goal-D-r.ilp    mppd/output-MPPD.ilp control/control.lp - --outf=0 -V0 --out-atomf=%s.                  --quiet=1,2,2 | head -n1
-   clingo  mppd/action-MPP.ilp   mppd/goal-D-r.ilp    mppd/output-MPPD.ilp control/control.lp - --outf=0 -V0 --out-atomf=%s. optimization.lp  --quiet=1,2,2 | head -n1
+   clingo  mppd/action-MPP.ilp   mppd/goal-D-b.ilp    mppd/output-MPPD.ilp control/control.lp - --outf=0 -V0 --out-atomf=%s.                  --quiet=1,2,2 | head -n1
+   clingo  mppd/action-MPP.ilp   mppd/goal-D-b.ilp    mppd/output-MPPD.ilp control/control.lp - --outf=0 -V0 --out-atomf=%s. optimization.lp  --quiet=1,2,2 | head -n1
 *%
 %
-% clingo   mppd/action-MPP.lp   mppd/goal-D-r.lp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp -c horizon=22
-% clingo   mppd/action-MPP.lp   mppd/goal-D-r.lp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp -c horizon=22 mppd/strategy-MPP.lp
+% clingo   mppd/action-MPP.lp   mppd/goal-D-b.lp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp -c horizon=22
+% clingo   mppd/action-MPP.lp   mppd/goal-D-b.lp   mppd/output-MPPD.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp -c horizon=22 mppd/strategy-MPP.lp
 %* clingo control/assign.lp examples/x10_y10_n100_r5_s20_ps6_pr5_u10_o5_N8.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | \
-   clingo  mppd/action-MPP.lp   mppd/goal-D-r.lp    mppd/output-MPPD.lp control/control.lp - --outf=0 -V0 --out-atomf=%s.                  --quiet=1,2,2  -c horizon=23 | head -n1
-   clingo  mppd/action-MPP.lp   mppd/goal-D-r.lp    mppd/output-MPPD.lp control/control.lp - --outf=0 -V0 --out-atomf=%s. optimization.lp  --quiet=1,2,2  -c horizon=23 | head -n1
+   clingo  mppd/action-MPP.lp   mppd/goal-D-b.lp    mppd/output-MPPD.lp control/control.lp - --outf=0 -V0 --out-atomf=%s.                  --quiet=1,2,2  -c horizon=23 | head -n1
+   clingo  mppd/action-MPP.lp   mppd/goal-D-b.lp    mppd/output-MPPD.lp control/control.lp - --outf=0 -V0 --out-atomf=%s. optimization.lp  --quiet=1,2,2  -c horizon=23 | head -n1
 *%
 #program base.
 

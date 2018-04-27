@@ -51,7 +51,7 @@ We adopt the following conventions:
    * Goals counting quantities are indicated with letter **Q** and include the corresponding encoding for quantities
    * Goals with ending **0** and **r** indicate whether all products belonging to an order are processed simultaneously (**0**) or at rate **r**
      (default is **1**)
-   * *Example* **goal-D-0.clp**, **goal-D-r.ilp**, **goal-M.lp**, **goal-D-q.lp**
+   * *Example* **goal-D-c.clp**, **goal-D-b.ilp**, **goal-M.lp**, **goal-D-a.lp**
 
 ## Quantities
 
@@ -92,7 +92,7 @@ We adopt the following conventions:
   * Some warehouse layouts merged with orders can be found in the directory [`examples`](https://github.com/tortinator/asprilo/tree/master/examples)
     Many of them contain (uncommented) calls in their header
   * Here are some exemplary calls
-	* `clingo action-MPP.lp strategy-MPP.lp goal-D-0.lp show.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
+	* `clingo action-MPP.lp strategy-MPP.lp goal-D-c.lp show.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
   * To produce plans ready for _asprilo_ use *clingo* option 
       * `--outf=0 -V0 --out-atomf=%s.` together with UNIX command `head -n1` to strip off the trailing (UN)SATISFIABLE
       * or the included script `clingo1facts` (all facts in one line)
@@ -102,5 +102,5 @@ We adopt the following conventions:
 ## _asprilo_ connectivity
 
   * *Examples* connecting to _asprilo_ on the command-line
-	* `clingo action-MPP.lp goal-D-0.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp  -c horizon=8 output-MPPD.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | asprilo-visualizer`
+	* `clingo action-MPP.lp goal-D-c.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp  -c horizon=8 output-MPPD.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | asprilo-visualizer`
   * **asprilo** is available at [github](https://github.com/potassco/asprilo)
