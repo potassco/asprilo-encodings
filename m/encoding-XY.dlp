@@ -1,0 +1,10 @@
+% = MOO DOMAIN: DIFFERENCE LOGIC ENCODING ===================================================================
+
+% Move actions
+#include "./action-M-XY.dlp".
+
+% Order fulfillment (Goal condition)
+#include "./goal-M-XY.dlp".
+
+% Output conversion
+#include "./output-M.lp".

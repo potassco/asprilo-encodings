@@ -1,4 +1,4 @@
-
+% - Control for Domains A,B,C -----------------------------------------------------------------------
 
 :-    move(R,_,_), not assign(R,_,_).
 :-  pickup(R,S,_), not assign(R,S,_).

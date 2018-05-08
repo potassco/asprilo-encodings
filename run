@@ -5,17 +5,17 @@ CWD=$PWD
 # DIR=/home/torsten/ASP/asprilo/instances/tiny_cases/4x4c/warehouse_x4_y4_n16_r3_s6_ps2_pr6_u12_o0_N50/merged
 DIR=/home/torsten/ASP/asprilo/instances/standard_cases/4/warehouse_x10_y10_n100_r4_s12_ps3_pr3_u20_o0_N1/merged
 
-# SCALL="clingo   action-MPP-3.ilp  goal-D-0.ilp  --stats"                    # benchme-MPP-3-ilp-D-0-ilp
-# SCALL="clingo   action-MPP-3.ilp  goal-D-r.ilp  --stats"                    # benchme-MPP-3-ilp-D-r-ilp
-# SCALL="clingo   action-MPP-3.ilp  goal-D-q.ilp  --stats"                    # benchme-MPP-3-ilp-D-q-ilp
-SCALL="clingcon action-MPP-3.ilp  goal-D-q.iclp --stats"                    # benchme-MPP-3-ilp-D-q-iclp
+# SCALL="clingo   action-MPP-3.ilp  goal-D-c.ilp  --stats"                    # benchme-MPP-3-ilp-D-c-ilp
+# SCALL="clingo   action-MPP-3.ilp  goal-D-b.ilp  --stats"                    # benchme-MPP-3-ilp-D-b-ilp
+# SCALL="clingo   action-MPP-3.ilp  goal-D-a.ilp  --stats"                    # benchme-MPP-3-ilp-D-a-ilp
+SCALL="clingcon action-MPP-3.ilp  goal-D-a.iclp --stats"                    # benchme-MPP-3-ilp-D-a-iclp
 #
-# SCALL="clingcon action-MPP-3.iclp goal-D-0.iclp --stats"                    # benchme-MPP-3-iclp-D-0-iclp
-# SCALL="clingcon action-MPP-3.iclp goal-D-r.iclp --stats"                    # benchme-MPP-3-iclp-D-r-iclp
-# SCALL="clingcon action-MPP-3.iclp goal-D-q.iblp --stats"                    # benchme-MPP-3-iclp-D-q-iblp
-# SCALL="clingcon action-MPP-3.iclp goal-D-q.iClp --stats"                    # benchme-MPP-3-iclp-D-q-iClp
+# SCALL="clingcon action-MPP-3.iclp goal-D-c.iclp --stats"                    # benchme-MPP-3-iclp-D-c-iclp
+# SCALL="clingcon action-MPP-3.iclp goal-D-b.iclp --stats"                    # benchme-MPP-3-iclp-D-b-iclp
+# SCALL="clingcon action-MPP-3.iclp goal-D-a.iblp --stats"                    # benchme-MPP-3-iclp-D-a-iblp
+# SCALL="clingcon action-MPP-3.iclp goal-D-a.iClp --stats"                    # benchme-MPP-3-iclp-D-a-iClp
 #
-# SCALL="clingcon action-MPP-3.ilp goal-D-r.ilp strategy-MPP-3.ilp --stats"  # benchme-MPP-3-ilp-D-r-ilp-strategy
+# SCALL="clingcon action-MPP-3.ilp goal-D-b.ilp strategy-MPP-3.ilp --stats"  # benchme-MPP-3-ilp-D-b-ilp-strategy
 LOG="BENCH"
 
 for f in $DIR/*.lp

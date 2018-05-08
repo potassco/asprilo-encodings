@@ -1,0 +1,10 @@
+% = MOO DOMAIN: INCREMENTAL BOOLEAN ENCODING WITH X/Y-COORDINATES SPLIT UP =========================
+
+% Move actions
+#include "./action-M-XY.ilp".
+
+% Order fulfillment (Goal condition)
+#include "./goal-M-XY.ilp".
+
+% Output conversion
+#include "./output-M.ilp".

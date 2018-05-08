@@ -1,0 +1,10 @@
+% = MOO DOMAIN: INCREMENTAL CLINGCON ENCODING ===================================================================
+
+% Move actions
+#include "./action-M.iclp".
+
+% Order fulfillment (Goal condition)
+#include "./goal-M.iclp".
+
+% Output conversion
+#include "./output-M.ilp".
