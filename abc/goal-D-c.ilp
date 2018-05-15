@@ -3,10 +3,11 @@ instant(shelf(S)) :- position(shelf(S),C,0), position(_,C), strategy.
 
 #program step(t).
 
-processed(A,C,t) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), not position(S,C,0),
+process(A,O,C,t) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), not position(S,C,0),
                     position(S,C,t).
-processed(A,C,t) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), position(S,C,0),
+process(A,O,C,t) :- ordered(O,A), target(O,P), position(P,C), shelved(S,A), position(S,C,0),
                     carries(_,S,t).
+processed(A,C,t) :- process(A,O,C,t).
 processed(A,C,t) :- processed(A,C,t-1).
 
 #program check(t).
