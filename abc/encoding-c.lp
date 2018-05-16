@@ -7,7 +7,7 @@
 #include "./goal-D-c.lp".
 
 % Highway constraints
-#include "../control/highways.lp".
+% #include "../control/highways.lp".
 
 % Output conversion
 #include "./output-MPPD.lp".
