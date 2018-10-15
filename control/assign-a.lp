@@ -5,7 +5,8 @@ shelved(shelf(S),product(A),N) :- init(object(product,A), value(on,  (S,N))).
 
 { assign(R,S,P) } :- isRobot(R), isShelf(S), isStation(P).
 
-:- ordered(O,A,N), #sum { M,S : assign(_,S,P), shelved(S,A,M), target(O,P) } < N.
+orderedAtStation(A, M, P) :- isProduct(A), isStation(P), M = #sum { N, O : ordered(O,A,N), target(O,P) }.
+:- orderedAtStation(A, M, P), #sum { N,S : assign(_,S,P), shelved(S,A,N) } < M.
 
 :- isShelf(S), #count{ R : assign(R,S,_) } > 1.                 % Too strong?? :- assign(R,S,P), assign(R',S,P), R<R'.
 
