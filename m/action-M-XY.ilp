@@ -1,0 +1,36 @@
+#include <incmode>.
+#include "../input.lp".
+
+direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
+
+positionX(Min..Max) :- Min = #min { X : position((X,_))}, Max = #max { X : position((X,_))}.
+positionY(Min..Max) :- Min = #min { Y : position((_,Y))}, Max = #max { Y : position((_,Y))}.
+
+positionX(R,X,0) :- position(R,(X,_),0), isRobot(R).
+positionY(R,Y,0) :- position(R,(_,Y),0), isRobot(R).
+
+#program step(t).
+
+{ move(R,D,t) : direction(D) } 1 :- isRobot(R).
+
+% - move/3 ----------------------------------------------------------------------
+positionX(R,X+D,t) :- move(R,(D,0),t), positionX(R,X,t-1), positionX(X+D).
+positionY(R,Y+D,t) :- move(R,(0,D),t), positionY(R,Y,t-1), positionY(Y+D).
+                   :- move(R,(D,0),t), positionX(R,X,t-1), not positionX(X+D).
+                   :- move(R,(0,D),t), positionY(R,Y,t-1), not positionY(Y+D).
+
+% - inertia ---------------------------------------------------------------------
+positionX(R,X,t) :- positionX(R,X,t-1), not move(R,(_,0),t), isRobot(R).
+positionY(R,Y,t) :- positionY(R,Y,t-1), not move(R,(0,_),t), isRobot(R).
+
+% - edge collision --------------------------------------------------------------
+moveto((X,Y),(X+D,Y  ),t) :- positionX(R,X,t-1), positionY(R,Y,t-1), move(R,(D,0),t), positionX(X+D).
+moveto((X,Y),(X  ,Y+D),t) :- positionX(R,X,t-1), positionY(R,Y,t-1), move(R,(0,D),t), positionY(Y+D).
+ :- moveto(C',C,t), moveto(C,C',t), C < C'.
+
+% - vertex collision ------------------------------------------------------------
+ :- #count { R : isRobot(R), positionX(R,X,t), positionY(R,Y,t) }  > 1, position((X,Y)).
+
+% - auxiliaries -----------------------------------------------------------------
+ :- { positionX(R,X,t) } != 1, isRobot(R).            % REDUNDANT but PERFORMANT?
+ :- { positionY(R,Y,t) } != 1, isRobot(R).            % REDUNDANT but PERFORMANT?

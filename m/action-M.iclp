@@ -1,0 +1,39 @@
+#include "../input.lp".
+#include <csp>.
+#include <incmode>.
+
+
+
+direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
+
+maxXposition(M) :- M = #max { X : position((X,_))}.
+minXposition(M) :- M = #min { X : position((X,_))}.
+maxYposition(M) :- M = #max { Y : position((_,Y))}.
+minYposition(M) :- M = #min { Y : position((_,Y))}.
+
+&dom{X..X} = positionX(robot(R),0) :- init(object(robot,R), value(at,(X,_))).
+&dom{Y..Y} = positionY(robot(R),0) :- init(object(robot,R), value(at,(_,Y))).
+
+#program step(t).
+
+&dom{M..N} = positionX(      R ,t) :- minXposition(M), maxXposition(N), isRobot(R).
+&dom{M..N} = positionY(      R ,t) :- minYposition(M), maxYposition(N), isRobot(R).
+
+ { move(R,D,t) : direction(D) } 1 :- isRobot(R).
+
+% - move/3 ----------------------------------------------------------------------
+ :-     move(R,(D,0),t), &sum { positionX(R,t-1); D } != positionX(R,t).
+ :-     move(R,(0,D),t), &sum { positionY(R,t-1); D } != positionY(R,t).
+
+% - inertia ---------------------------------------------------------------------
+ :- not move(R,(_,0),t), &sum { positionX(R,t-1)    } != positionX(R,t), isRobot(R).
+ :- not move(R,(0,_),t), &sum { positionY(R,t-1)    } != positionY(R,t), isRobot(R).
+
+% - edge collision --------------------------------------------------------------
+:- &sum { positionX(R ,t-1) } = positionX(R',t), &sum { positionY(R ,t-1) } = positionY(R',t),
+   &sum { positionX(R',t-1) } = positionX(R ,t), &sum { positionY(R',t-1) } = positionY(R ,t),
+   R  > R', isRobot(R), isRobot(R').
+
+% - vertex collision ------------------------------------------------------------
+:- &sum { positionX(R,   t) } = positionX(R',t), &sum { positionY(R,t   ) } = positionY(R',t),
+   R  > R', isRobot(R), isRobot(R').

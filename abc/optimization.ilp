@@ -1,0 +1,13 @@
+#program step(t).
+
+#minimize{ 1@3,R,t :    move(R,_,t) ;
+	   1@3,R,t :  pickup(R,_,t) ;
+ 	   1@3,R,t : putdown(R,_,t) }.
+
+%*
+waits(R,t) :- not pickup(R,_,t), not putdown(R,_,t), not deliver(R,_,t), not move(R,_,t), isRobot(R).
+#minimize{ 1@2,R,t : waits(R,t) }.
+
+straight(R,t) :- move(R,D,t), move(R,D,t-1).
+#maximize{ 1@1,R,t : straight(R,t) }.
+*%

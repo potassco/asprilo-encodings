@@ -1,0 +1,36 @@
+% #const rate=1. % NOT IMPLEMENTED
+#include "./action-MPP.iclp".
+
+
+ordered(order(O),product(A),N) :- init(object(order,O),  value(line,(A,N))).
+shelved(shelf(S),product(A),N) :- init(object(product,A),value(on,  (S,N))), ordered(order(O),product(A)).
+
+limit(A,O,S,(N+N'-|N-N'|)/2) :- ordered(O,A,N), shelved(S,A,N').
+
+&dom{N..N} =   ordered(O,A,0) :- ordered(O,A,N).
+&dom{N..N} =   shelved(S,A,0) :- shelved(S,A,N).
+
+#program step(t).
+
+&dom{0..N} =   ordered(O,A,t) :- ordered(O,A,N).
+&dom{0..N} =   shelved(S,A,t) :- shelved(S,A,N).
+
+&dom{0..M} = process(A,O,S,t) :- limit(A,O,S,M).
+
+process(A,O,S,t) :- limit(A,O,S,M), &sum { process(A,O,S,t) } > 0.
+
+process(O,S,t) :- process(_,O,S,t).
+
+process(S,t) :- process(_,S,t).
+
+:- { process(_,_,_,t) } > 1.
+
+:- ordered(O,A,N), &sum { ordered(O,A,t); process(A,O,S,t) : limit(A,O,S,M) } != ordered(O,A,t-1).
+:- shelved(S,A,N), &sum { shelved(S,A,t); process(A,O,S,t) : limit(A,O,S,M) } != shelved(S,A,t-1).
+
+
+:- process(O,S,t), target(O,P), position(P,(X,_)), &sum { positionX(S,t-1) } != X.
+:- process(O,S,t), target(O,P), position(P,(_,Y)), &sum { positionY(S,t-1) } != Y.
+
+:- process(S,t), not carries(_,S,t-1).
+:- process(S,t), carries(R,S,t-1), not waits(R,t).

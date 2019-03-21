@@ -1,106 +1,206 @@
-# asprilo
+# asprilo Encodings
 
-Encodings for asprilo environments
+## About
 
-## Conventions
+This is a collection of encodings for [asprilo](https://potassco.org/asprilo).
 
-The encodings are grouped in two directories
+## Directory Structure
 
-  * **mppd** contains fine-grained encodings dealing with *move*, *pickup*, *putdown*, and *deliver*
-    actions and distinguish *robots*, *shelves*, *stations*, etc and take robots carrying shelves into account for collision protection
-	
-  * **xapf** contains encodings addressing more abstract problems, like MAPF, TAPF, GTAPF, etc
+The encodings are grouped in three root directories wrt. their [problem domains](https://github.com/potassco/asprilo/specification):
 
-We adopt the following conventions:
+- `./abc` contains encoding for asprilo domains A, B and C
 
-  * letters **M**, **P**, **P**, and **D** stand for actions *move*, *pickup*, *putdown*, and *deliver*
-  * ~~digits **2** and **3** indicated the arity of actions *pickup* and *putdown*~~
-	* ~~**2** without shelf representation~~
-	* ~~**3** with    shelf representation~~
-  * letters **0**, **r**, and **q** indicate the treatment of order lines during delivery
-	* This applies to all files preceded with **goal-** in the **mppd** setting
-  * file extensions *lp*, *ilp*, *clp*, and *iclp* stand for regular, incremental, constraint, and incremental constraint logic programs
-	* since integer variables are uses for *product quantities* and *robot and shelf positions*, I sometimes need auxiliary letters to disambiguate,
-	  eg a capital **C** stands for both usages, a mere **b** is like a **c** but applied to *positions*
-  * omissions of such indicators are treated like wild-cards
+- `./m` contains encodings for asprilo domain M
 
-## Compatibility
+- `./control` contains encodings for supplementary features such as task assignment, highway constraints, etc. for all (some) asprilo domains
 
-  * compatibility is achieved by combing files with same (or similar) attributes
+## File Name Convention
 
-## Action theories
+We adopt the following name conventions for the encoding files:
 
-  * Keyword **action** precedes files containing action theories
-  * *Example* **action-M.lp**, **action-MPP.lp**, **action-MPP.iclp**, etc.
+-   For the base name of encoding files
 
-## Goal conditions
+    -   capital letters `M`, `P`, `P`, and `D` stand for actions **move**, **pickup**, **putdown**, and **deliver**
+    -   lower case suffixes `-c`, `-b`, and `-a` indicate the addressed problem domain
 
-  * Keyword **goal** precedes files fixing goal conditions and in particular what constitutes a delivery
-  * as mentioned above, letters **0**, **r**, and **q** indicate the treatment of order lines during delivery
+    -   specifically, this applies to all files matching
+        - `./abc/goal-D-{a,b,c}.*`
+        - `./control/control-{a,b,c,m}.*`
+        - `./control/assign-{a,bcm}.*`
+        - etc.
+-   File extensions `*.lp*`, `*.ilp`, `*.clp`, `*.iclp` and `*.dlp` stand for regular, incremental,
+    constraint, incremental constraint logic and difference logic programs, resp.
+    - sometimes we need to disambiguate further, e.g. we use capital `C` in `*.Clp` and `*``*.iClp` to
+      indicate that we use constraints for both robot & shelf positions and product quantities
+-   Omissions of such indicators are treated like wild-cards, i.e., general applicability
+-   Compatibility of encoding files is achieved by combing those with same (or similar) attributes.
 
-## Interface to *asprilo*
+## Interface to *asprilo* I/O Format
 
-  * Keywords **input** and **output** precede files converting 
-      * *asprilo* instances to the format used in action theories and 
-      * the resulting plan into the format of *asprilo*
-  * *Example* **input.lp**, **output-M.lp**, **output-MPPD.lp**
-  
-## Goals
+-   Files with base name prefix `input*` and `output*` handle I/O between asprilo and the encodings, e.g.
 
-   * Keyword **goal** precedes files specifying goal conditions
-   * Goals counting quantities are indicated with letter **Q** and include the corresponding encoding for quantities
-   * Goals with ending **0** and **r** indicate whether all products belonging to an order are processed simultaneously (**0**) or at rate **r**
-     (default is **1**)
-   * *Example* **goal-D-0.clp**, **goal-D-r.ilp**, **goal-M.lp**, **goal-D-q.lp**
+    ``` shell
+    ./input.lp
+    ./m/output-M.lp
+    ./m/output-M.ilp
+    ./abc/output-MPPD.ilp
+    ./abc/output-MPPD.lp
+    ...
+    ```
 
-## Quantities
+-   Specifically,
 
-   * Keyword **quantities** precedes files dealing with amounts of products
-   * Similarly letter **q** indicates quantities; now used with goals
-   * **Attention** This needs a constraint ASP solver like **clingcon**
-   * *Example* **quantities.lp**,  **quantities.clp**,  **quantities.ilp**,  **quantities.iclp**
+    - `input.lp` converts *asprilo* instances to the format used in action theories and
+    - `output*` files convert the resulting plan into the format of *asprilo*
+
+
+## Action Theory
+
+-   Files with base name prefix `action*` hold action theories, e.g.
+
+    ``` shell
+
+    ./m/action-M.lp
+    ./m/action-M.ilp
+    ./abc/action-MPP.ilp
+    ./abc/action-MPP.lp
+    ...
+    ```
+
+-   Encoded actions are **move**, **pickup**, and **put-down**.
+
+
+## Goal Conditions
+
+-   Files with base name prefix `goal*` hold goal conditions, e.g.
+
+    ``` shell
+    ./m/goal-M.ilp
+    ./m/goal-M.lp
+    ./abc/goal-D-a.lp
+    ./abc/goal-D-a.ilp
+    ./abc/goal-D-b.lp
+    ./abc/goal-D-b.ilp
+    ...
+    ```
+
+-   Except for asprilo domain M, they define what constitutes a **delivery** action indicated by capital letter `D` in the file names.
+-   Goal conditions depend on the asprilo domain and, hence, use in directory `.abc/` base name suffixes `*-a`, `*-b` `*-c` for distinction
+
+## Product Quantities
+
+-   Files with base name prefix `quantities*` deal with amounts of products, e.g
+
+    ``` shell
+    ./abc/quantities.clp
+    ./abc/quantities.iclp
+    ./abc/quantities.ilp
+    ./abc/quantities.lp
+    ```
+
+-   Goal condition encodings for domain A include quantity encodings fitting to their logic program type (`*.lp`, `*.ilp`, `.clp`, etc.)
 
 ## Strategies
 
-   * Keyword **strategy** precedes files specifying strategies
-   * *Example* **strategy-MPPD.lp**
-   * _Some strategies may not work with all layouts!_
-   
+-   Files with base name prefix `strategy` specify strategies, e.g.
+
+    ``` shell
+    ./abc/strategy-MPP.ilp
+    ./abc/strategy-MPP.lp
+    ```
+
+-   *Some strategies may not work with all layouts!*
+-   **Experimental feature!**
+
 ## Highways
 
-  * Keyword **highways** precedes files specifying conditions for places belonging to highways
-  * *Example* **highways.ilp**, **highways.lp**,
+-   Files with base name prefix `highways` specify conditions for highway gird nodes, e.g.
+
+    ``` shell
+    ./control/highways.lp
+    ./control/highways.ilp
+    ./control/highways.clp
+    ./control/highways.iclp
+    ```
 
 ## Optimization
 
-   * Keyword **optimization** precedes files specifying objective functions
-   * *Example* **optimization.ilp**,  **optimization.lp**
-   * **experimental feature**
+-   Files with base name prefix `optimization*` specify objective functions, e.g.
+
+    ``` shell
+    ./abc/optimization.lp
+    ./abc/optimization.ilp
+    ```
+
+-   **Experimental feature!**
 
 ## Heuristics
 
-   * Keyword **heuristic** precedes files specifying heuristics with **clingo**'s `#heuristic` directive
-   * *Example* **heuristic.ilp**, **heuristic.lp**
-   * **experimental feature**
+-   Files with base name prefix `heuristic*`  specifying heuristics with *clingo*'s `#heuristic` directive, e.g.
 
-## Auxiliaries
+    ``` shell
+    ./control/heuristic.lp
+    ./control/heuristic.ilp
+    ```
 
-  * files preceded with **show** provide `#show` statements for use with terminal output
+-   **Experimental feature!**
 
-## Examples
+## Encoding Shorthands
 
-  * Some warehouse layouts merged with orders can be found in the directory [`examples`](https://github.com/tortinator/asprilo/tree/master/examples)
-    Many of them contain (uncommented) calls in their header
-  * Here are some exemplary calls
-	* `clingo action-MPP.lp strategy-MPP.lp goal-D-0.lp show.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8`
-  * To produce plans ready for _asprilo_ use *clingo* option 
-      * `--outf=0 -V0 --out-atomf=%s.` together with UNIX command `head -n1` to strip off the trailing (UN)SATISFIABLE
-      * or the included script `clingo1facts` (all facts in one line)
-  * Sometimes it is also nice to see an answer set as a single column, as done with *clingo* option `--out-ifs='\n'`
-	  * This is also done with script  `clingo2facts`
-   
-## _asprilo_ connectivity
+-   Files with base name prefix `encoding*` provide shorthands to call matching action theory and goal encodings, e.g.
 
-  * *Examples* connecting to _asprilo_ on the command-line
-	* `clingo action-MPP.lp goal-D-0.lp examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp  -c horizon=8 output-MPPD.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | asprilo-visualizer`
-  * **asprilo** is available at [github](https://github.com/potassco/asprilo)
+    ``` shell
+    ./abc/encoding-a.lp
+    ./abc/encoding-a.ilp
+    ./abc/encoding-b.lp
+    ./abc/encoding-b.ilp
+    ./abc/encoding-c.lp
+    ./abc/encoding-c.ilp
+    ./m/encoding.lp
+    ./m/encoding.ilp
+    ...
+    ```
+
+-   This helps to shorten some calls (e.g. for benchmarking) and illustrate which encoding files fit together
+
+## Invocation Examples
+
+-   Some warehouse layouts merged with orders can be found in the directory
+    [`./examples`](./examples) Many of them contain (uncommented) calls in their header, e.g.
+
+
+    ``` shell
+    clingo action-MPP.lp strategy-MPP.lp goal-D-c.lp show.lp \
+           examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8
+    ```
+
+-   There are also auxiliary bash scripts that for a clean output of facts:
+    - ./`clingo1facts` to print only facts in one line
+    - ./ `clingo2facts` to additionally print each fact in a new line (`--out-ifs='\n'`)
+
+
+## *asprilo* Visualization
+
+You can display your instance and plan execution in the asprilo's visualizer on the command-line by running
+
+```shell
+clingo $OPTS $ENCODINGS --outf=0 -V0 --out-atomf=%s. | \
+head -n 1 | \
+$VIZUALIZER
+```
+
+where
+
+- `$ENCODINGS` holds your list of encoding file paths
+- `$OPTS` holds your clingo options
+- clingo options`--outf=0 -V0 --out-atomf=%s.` formats the output answer set in adherence to *asprilo*'s input format
+- UNIX command `head -n1` strips off the trailing `(UN)SATISFIABLE`
+- `$VIZUALIZER` holds the path to the asprilo visualizer script
+
+For example
+
+```shell
+clingo abc/{action-MPP.lp,goal-D-c.lp} examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8
+output-MPPD.lp --outf=0 -V0 --out-atomf=%s. | head -n1 | $VISUALIZER
+
+```

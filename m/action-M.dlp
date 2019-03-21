@@ -1,0 +1,78 @@
+#include "../input.lp".
+
+
+%#const horizon=1.
+time(1..horizon).
+
+direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
+
+maxXposition(M) :- M = #max { X : position((X,_))}.
+minXposition(M) :- M = #min { X : position((X,_))}.
+maxYposition(M) :- M = #max { Y : position((_,Y))}.
+minYposition(M) :- M = #min { Y : position((_,Y))}.
+
+    equal_variable_value(X,V) :- &diff{ 0 - X } <= V', V'=-V, &diff{ X - 0 } <=         V, equal_variable_value_domain(X,V).
+equal_difference_value(X,Y,V) :- &diff{ X - Y } <=         V, &diff{ Y - X } <= V', V'=-V, equal_difference_value_domain(X,Y,V).
+     in_variable_range(X,V,W) :- &diff{ 0 - X } <= V', V'=-V, &diff{ X - 0 } <=         W, in_variable_range_domain(X,V,W).
+
+% &dom{X..X} = positionX(R,0) :- position(R,(X,_),0), isRobot(R).
+% &dom{Y..Y} = positionY(R,0) :- position(R,(_,Y),0), isRobot(R).
+
+equal_variable_value_domain(positionX(R,0),X)      :- position(R,(X,_),0), isRobot(R).
+equal_variable_value_domain(positionY(R,0),Y)      :- position(R,(_,Y),0), isRobot(R).
+
+:- not equal_variable_value(X,V), equal_variable_value_domain(X,V).
+
+% &dom{M..N} = positionX(R,T) :- minXposition(M), maxXposition(N), isRobot(R), time(T).
+% &dom{M..N} = positionY(R,T) :- minYposition(M), maxYposition(N), isRobot(R), time(T).
+
+in_variable_range_domain(positionX(R,T),M,N)    :- minXposition(M), maxXposition(N), isRobot(R), time(T).
+in_variable_range_domain(positionY(R,T),M,N)    :- minYposition(M), maxYposition(N), isRobot(R), time(T).
+
+:- not in_variable_range(V,M,N), in_variable_range_domain(V,M,N).
+
+{ move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+
+% - move/3 ----------------------------------------------------------------------
+% :-     move(R,(D,0),T), &sum { positionX(R,T-1); D } != positionX(R,T).
+% :-     move(R,(0,D),T), &sum { positionY(R,T-1); D } != positionY(R,T).
+equal_difference_value_domain(positionX(R,T-1),positionX(R,T),-D) :-    move(R,(D,0),T).
+equal_difference_value_domain(positionY(R,T-1),positionY(R,T),-D) :-    move(R,(0,D),T).
+
+:- not equal_difference_value(X,Y,V), equal_difference_value_domain(X,Y,V).
+
+% - inertia ---------------------------------------------------------------------
+% :- not move(R,(_,0),T), &sum { positionX(R,T-1)    } != positionX(R,T), isRobot(R), time(T).
+% :- not move(R,(0,_),T), &sum { positionY(R,T-1)    } != positionY(R,T), isRobot(R), time(T).
+
+equal_difference_value_domain(positionX(R,T-1),positionX(R,T),0) :- not move(R,(_,0),T), isRobot(R), time(T).
+equal_difference_value_domain(positionY(R,T-1),positionY(R,T),0) :- not move(R,(0,_),T), isRobot(R), time(T).
+
+% :- not equal_difference_value(X,Y,V), equal_difference_value_domain(X,Y,V).
+
+% - (state) constraints ---------------------------------------------------------
+% :- &sum { positionX(R ,T-1) } = positionX(R',T), &sum { positionY(R ,T-1) } = positionY(R',T),
+%    &sum { positionX(R',T-1) } = positionX(R ,T), &sum { positionY(R',T-1) } = positionY(R ,T),
+%    R  > R', isRobot(R), isRobot(R'), time(T).
+
+:- R  > R', isRobot(R), isRobot(R'), time(T),
+   equal_variables(positionX(R ,T-1),positionX(R',T)),
+   equal_variables(positionY(R ,T-1),positionY(R',T)),
+   equal_variables(positionX(R',T-1),positionX(R ,T)),
+   equal_variables(positionY(R',T-1),positionY(R ,T)).
+
+equal_variables_domain(positionX(R ,T-1),positionX(R',T)) :- R != R', isRobot(R), isRobot(R'), time(T).
+equal_variables_domain(positionY(R ,T-1),positionY(R',T)) :- R != R', isRobot(R), isRobot(R'), time(T).
+
+
+%:- &sum { positionX(R,   T) } = positionX(R',T), &sum { positionY(R,T)    } = positionY(R',T),
+%   R  > R', isRobot(R), isRobot(R'), time(T).
+
+ :- R  > R', isRobot(R), isRobot(R'), time(T),
+    equal_variables(positionX(R,T),positionX(R',T)),
+    equal_variables(positionY(R,T),positionY(R',T)).
+
+equal_variables_domain(positionX(R,T),positionX(R',T)) :- R  > R', isRobot(R), isRobot(R'), time(T).
+equal_variables_domain(positionY(R,T),positionY(R',T)) :- R  > R', isRobot(R), isRobot(R'), time(T).
+
+equal_variables(X,Y) :- &diff{ X - Y } <= 0, &diff{ Y - X } <= 0, equal_variables_domain(X,Y).

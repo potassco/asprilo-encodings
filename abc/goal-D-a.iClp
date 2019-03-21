@@ -1,0 +1,12 @@
+#include "./quantities.iClp".
+
+#program check(t).
+
+:- ordered(O,A), &sum { ordered(O,A,t) } > 0, query(t).
+
+:- carries(_,_,t), query(t).
+
+:- position(_,(X,Y)), isRobot(R), query(t),
+   &sum { positionX(R,t) } = X, &sum { positionY(R,t) } = Y.
+:- position(_,(X,Y)), isShelf(S), query(t),
+   &sum { positionX(S,t) } = X, &sum { positionY(S,t) } = Y.

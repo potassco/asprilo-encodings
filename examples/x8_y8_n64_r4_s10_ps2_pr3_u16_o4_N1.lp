@@ -10,11 +10,11 @@
 % Number of orders:                 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% [old] clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-0.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
-% [old] clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-r.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18
-% [old] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-0.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
-% [old] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-r.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18
-% [old] ? clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-Q.lp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=29 quantities.lp
+% [old] clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-c.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
+% [old] clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-MPPD-b.lp output-MPPD-2.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18
+% [old] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-c.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=17
+% [old] clingo action-MPPD-3.lp strategy-MPPD-3.lp goal-MPPD-b.lp output-MPPD-3.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=18
+% [old] ? clingo action-MPPD-2.lp strategy-MPPD-2.lp goal-a.lp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp -c horizon=29 quantities.lp
 %
 % [old] clingo   action-M.lp   examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.lp  -c horizon=18
 % [old] clingcon action-M.clp  examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.clp -c horizon=18
@@ -22,13 +22,13 @@
 % [old] clingcon action-M.iclp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp goal-M.iclp
 %
 %*
-clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-r.ilp                                             --stats \
-clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/strategy-MPP.ilp                       --stats \
-clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/strategy-MPP.ilp mppd/optimization.ilp --stats \
+clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-b.ilp                                             --stats \
+clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-b.ilp mppd/strategy-MPP.ilp                       --stats \
+clingo examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp  mppd/action-MPP.ilp mppd/goal-D-b.ilp mppd/strategy-MPP.ilp mppd/optimization.ilp --stats \
         --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2  \
         mppd/output-MPPD.ilp | head -n1 | visualizer
 
-clingo control/assign.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/output-MPPD.ilp control/control.ilp - --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2                                     --stats
+clingo control/assign.lp examples/x8_y8_n64_r4_s10_ps2_pr3_u16_o4_N1.lp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-b.ilp mppd/output-MPPD.ilp control/control.ilp - --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2                                     --stats
         mppd/output-MPPD.ilp | head -n1 | visualizer
 *%
 %

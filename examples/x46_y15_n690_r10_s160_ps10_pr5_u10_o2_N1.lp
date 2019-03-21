@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % clingo control/assign.lp examples/x46_y15_n690_r10_s160_ps10_pr5_u10_o2_N1.lp --opt-strategy=usc
-% clingo control/assign.lp examples/x46_y15_n690_r10_s160_ps10_pr5_u10_o2_N1.lp --opt-strategy=usc  --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-r.ilp mppd/output-MPPD.ilp control/control.ilp -
+% clingo control/assign.lp examples/x46_y15_n690_r10_s160_ps10_pr5_u10_o2_N1.lp --opt-strategy=usc  --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | clingo mppd/action-MPP.ilp mppd/goal-D-b.ilp mppd/output-MPPD.ilp control/control.ilp -
 #program base.
 
 % init

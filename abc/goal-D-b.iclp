@@ -1,0 +1,34 @@
+#const rate=1.
+
+toShelf(S,C) :- shelved(S,A), ordered(O,A), target(O,P), position(P,C).
+
+#program step(t).
+
+ { process(A,O,C,t) : ordered(O,A), target(O,P), position(P,C) } rate.
+
+processed(A,O,t) :- process(A,O,C,t).
+processed(A,O,t) :- processed(A,O,t-1).
+
+:- process(A,O,C,t), processed(A,O,t-1).
+
+atShelf(S,(X,Y),t-1) :- toShelf(S,(X,Y)), &sum { positionX(S,t-1) } = X, &sum{ positionY(S,t-1) } = Y.
+
+process(A,C,t) :- process(A,O,C,t).
+
+:- process(A,C,t), not atShelf(S,C,t-1) : shelved(S,A).
+
+process(C,t) :- process(A,C,t).
+
+:- process(C,t), atShelf(S,C,t-1), not carries(_,S,t-1).
+:- process((X,Y),t), isRobot(R), &sum { positionX(R,t-1) } = X, &sum{ positionY(R,t-1) } = Y, not waits(R,t).
+
+#program check(t).
+
+:- ordered(O,A), not processed(A,O,t), query(t).
+
+:- carries(_,_,t), query(t).
+
+:- position(_,(X,Y)), isRobot(R), query(t),
+   &sum { positionX(R,t) } = X, &sum { positionY(R,t) } = Y.
+:- position(_,(X,Y)), isShelf(S), query(t),
+   &sum { positionX(S,t) } = X, &sum { positionY(S,t) } = Y.

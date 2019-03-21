@@ -1,0 +1,54 @@
+#include "../input.lp".
+
+%%% dl handling strict external %%%
+
+% Domain: x >= Min \land x <= max
+:- not &diff { 0-X } <= -Min, dl_lb(X,Min).
+:- not &diff { X-0 } <=  Max, dl_ub(X,Max).
+
+% X=Y+V -> X-Y<=V \land Y-X<=-V
+:- not &diff { X-Y } <=  V, dl_assign(X,Y,V).
+:- not &diff { Y-X } <= -V, dl_assign(X,Y,V).
+
+%#const horizon=1.
+time(1..horizon).
+
+direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
+
+minX(Min) :- Min = #min { X : position((X,_))}.
+maxX(Max) :- Max = #max { X : position((X,_))}.
+minY(Min) :- Min = #min { Y : position((_,Y))}.
+maxY(Max) :- Max = #max { Y : position((_,Y))}.
+
+dl_assign(posX(R,0),0,X) :- position(R,(X,_),0), isRobot(R).
+dl_assign(posY(R,0),0,Y) :- position(R,(_,Y),0), isRobot(R).
+
+{ move(R,D,T) : direction(D) } 1 :- isRobot(R), time(T).
+
+% - move/3 ----------------------------------------------------------------------
+dl_lb(posX(R,T),Min) :- isRobot(R), time(T), minX(Min).
+dl_ub(posX(R,T),Max) :- isRobot(R), time(T), maxX(Max).
+dl_lb(posY(R,T),Min) :- isRobot(R), time(T), minY(Min).
+dl_ub(posY(R,T),Max) :- isRobot(R), time(T), maxY(Max).
+dl_assign(posX(R,T),posX(R,T-1),D) :- move(R,(D,0),T).
+dl_assign(posY(R,T),posY(R,T-1),D) :- move(R,(0,D),T).
+
+% - inertia ---------------------------------------------------------------------
+dl_assign(posX(R,T),posX(R,T-1),0) :- not move(R,(_,0),T), isRobot(R), time(T).
+dl_assign(posY(R,T),posY(R,T-1),0) :- not move(R,(0,_),T), isRobot(R), time(T).
+
+% needs strict!!!
+% - edge collision --------------------------------------------------------------
+:- &diff { posX(R,T)-posX(R',T-1) } <= 0, &diff { posX(R',T-1)-posX(R,T) } <= 0,
+   &diff { posX(R,T-1)-posX(R',T) } <= 0, &diff { posX(R',T)-posX(R,T-1) } <= 0,
+   &diff { posY(R,T)-posY(R',T-1) } <= 0, &diff { posY(R',T-1)-posY(R,T) } <= 0,
+   &diff { posY(R,T-1)-posY(R',T) } <= 0, &diff { posY(R',T)-posY(R,T-1) } <= 0,
+   R > R', isRobot(R), isRobot(R'), time(T).
+
+% - vertex collision ------------------------------------------------------------
+:- &diff { posX(R,T)-posX(R',T) } <= 0, &diff { posX(R',T)-posX(R,T) } <= 0,
+   &diff { posY(R,T)-posY(R',T) } <= 0, &diff { posY(R',T)-posY(R,T) } <= 0,
+   R > R', isRobot(R), isRobot(R'), time(T).
+
+
+#show move/3.

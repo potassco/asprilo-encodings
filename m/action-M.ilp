@@ -1,0 +1,29 @@
+#include "../input.lp".
+#include <incmode>.
+
+
+
+
+direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
+nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
+
+#program step(t).
+
+{ move(R,D,t) : direction(D) } 1 :- isRobot(R).
+
+% - move/3 ----------------------------------------------------------------------
+position(R,C,t) :- move(R,D,t), position(R,C',t-1),     nextto(C',D,C).
+                :- move(R,D,t), position(R,C ,t-1), not nextto(C ,D,_).
+
+% - inertia ---------------------------------------------------------------------
+position(R,C,t) :- position(R,C,t-1), not move(R,_,t), isRobot(R).
+
+% - edge collision --------------------------------------------------------------
+moveto(C',C,t) :- nextto(C',D,C), position(R,C',t-1), move(R,D,t).
+ :- moveto(C',C,t), moveto(C,C',t), C < C'.
+
+% - vertex collision ------------------------------------------------------------
+ :- { position(R,C,t) : isRobot(R) }  > 1, position(C).
+
+% - auxiliaries -----------------------------------------------------------------
+ :- { position(R,C,t) } != 1, isRobot(R).             % REDUNDANT but PERFORMANT?

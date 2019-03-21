@@ -3,7 +3,7 @@
 %Grid size Y: 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% clingo action-MPP-3.ilp goal-D-r.ilp optimization-3.ilp barricade.lp output-MPPD-3.ilp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | visualizer
+% clingo action-MPP-3.ilp goal-D-b.ilp optimization-3.ilp barricade.lp output-MPPD-3.ilp --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2 | head -n1 | visualizer
 % clingo assign.lp barricade.lp
 
 

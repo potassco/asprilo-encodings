@@ -1,0 +1,7 @@
+
+#program check(t).
+
+processed(A,R,t) :- ordered(O,A), shelved(S,A), isRobot(R), position(S,(X,Y),0),
+                  positionX(R,X,t), positionY(R,Y,t).
+
+:- ordered(O,A), not processed(A,_,t), query(t).

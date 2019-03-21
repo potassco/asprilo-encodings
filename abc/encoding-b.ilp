@@ -1,0 +1,13 @@
+% = MPPD DOMAIN: INCREMENTAL BOOLEAN ENCODING ======================================================
+
+% Move actions
+#include "./action-MPP.ilp".
+
+% Order fulfillment (Goal condition)
+#include "./goal-D-b.ilp".
+
+% Highway constraints
+% #include "../control/highways.ilp".
+
+% Output conversion
+#include "./output-MPPD.ilp".

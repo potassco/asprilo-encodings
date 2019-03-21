@@ -1,0 +1,7 @@
+% - Control for Domain M ---------------------------------------------------------------------------
+
+#program step(t).
+
+:- move(R,_,t), not assign(R,_,_).
+
+:- processed(A,R,t), shelved(S,A), not assign(R,S,_).

@@ -1,8 +1,0 @@
-#program step(t).
-
-:-    move(R,_,t), not assign(R,_,_).
-:-  pickup(R,S,t), not assign(R,S,_).
-:- putdown(R,S,t), not assign(R,S,_).
-
-:- process(_,O,S,  t), target(O,P), not assign(_,S,P).
-:- process(_,O,S,_,t), target(O,P), not assign(_,S,P).

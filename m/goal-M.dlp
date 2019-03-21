@@ -1,0 +1,7 @@
+processed(A,R) :- ordered(O,A), shelved(S,A), isRobot(R), position(S,(X,Y),0),
+                   &diff { positionX(R,horizon)-0 } <= X, &diff { 0-positionX(R,horizon) } <= -X,
+                   &diff { positionY(R,horizon)-0 } <= Y, &diff { 0-positionY(R,horizon) } <= -Y.
+processed(A)   :- processed(A,R).
+
+
+:- ordered(O,A), not processed(A).
