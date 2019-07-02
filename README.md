@@ -170,7 +170,7 @@ We adopt the following name conventions for the encoding files:
 
 
     ``` shell
-    clingo action-MPP.lp strategy-MPP.lp goal-D-c.lp show.lp \
+    clingo abc/{action-MPP.lp,strategy-MPP.lp,goal-D-c.lp,output-MPPD.lp} \
            examples/x4_y4_n16_r2_s3_ps1_pr2_u4_o2_N1.lp -c horizon=8
     ```
 
