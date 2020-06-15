@@ -3,9 +3,8 @@
 #const max=1.
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
-tonext(N,(X+X',Y+Y')) :-      node(N,(X,Y)),     direction((X',  Y')),
-                         not highway((X,Y)), not highway((X+X',Y+Y')).
-nextto(N,N')          :- tonext(N,C'), node(N',C').
+nextto(N,N') :-      node(N,(X,Y)),     node(N',(X+X',Y+Y')), direction((X',Y')),
+                not highway((X,Y)), not highway((X+X',Y+Y')).
 
 node(N,C) :- init(object(node,N), value(at,C)).
 node(N) :- node(N,_).

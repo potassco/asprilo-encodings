@@ -4,8 +4,7 @@
 
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
-tonext((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')).
-nextto(C,D,C')                    :- tonext(C,D,C'), position(C').
+nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
 
 % hole(C) :- highway(C), #count { C' : nextto(C,D,C'), highway(C'), direction(D) } > 2.
 hole(C) :- highway(C), nextto(C,(X',Y'),C'), highway(C'), nextto(C,(X'',Y''),C''), highway(C''), X'*X''+Y'*Y''=0.
