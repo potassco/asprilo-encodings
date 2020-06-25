@@ -4,9 +4,8 @@
 time(1..horizon).
 
 direction((X,Y)) :- X=-1..1, Y=-1..1, |X+Y|=1.
-nextto((X,Y),(X',Y'),(X+X',Y+Y')) :- position((X,Y)), direction((X',Y')), position((X+X',Y+Y')).
-
-
+nextto((X,Y),(DX,DY),(X',Y')) :- direction((DX,DY)), position((X,Y)), position((X',Y')),
+                                 (X,Y)=(X'-DX,Y'-DY), (X',Y')=(X+DX,Y+DY).
 
  {    move(R,D,T) : direction(D) ;
     pickup(R,  T)                ;
