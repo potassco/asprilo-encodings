@@ -1,5 +1,4 @@
 #include "../input.lp".
-#include <csp>.
 
 %#const horizon=1.
 time(1..horizon).
