@@ -1,6 +1,5 @@
 % #const rate=1. % NOT IMPLEMENTED
 #include "./action-MPP.lp".
-#include <csp>.
 
 ordered(order(O),product(A),N) :- init(object(order,O),  value(line,(A,N))).
 shelved(shelf(S),product(A),N) :- init(object(product,A),value(on,  (S,N))), ordered(order(O),product(A)).

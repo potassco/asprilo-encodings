@@ -1,4 +1,4 @@
-#include "./quantities.iClp".
+#include "./quantities.icclp".
 
 #program check(t).
 
